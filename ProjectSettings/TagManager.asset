@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Sword
+  - Shield
+  - Boss
+  - Ball
+  - Boss_Body
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -87,7 +87,7 @@ public class BossControll : MonoBehaviour
             IsFall_Down = true;
         }
 
-        if (IsFall_Down)
+        if (ball_Repal.GetIsHit())
         {
             Transform myTransform = this.transform;
  

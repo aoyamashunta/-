@@ -99,7 +99,7 @@ public class Ball_Repal : MonoBehaviour
         //SphereがPlaneと衝突している場合
         if (collision.gameObject.name == "Boss_Body_Cen")
         {
-            //Debug.Log("ボスにダメージ");
+            Debug.Log("ボスにダメージ");
             IsHit = true;
             Destroy(this.gameObject);
         }
