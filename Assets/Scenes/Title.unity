@@ -317,7 +317,7 @@ PrefabInstance:
     - target: {fileID: 6571562431595439536, guid: b932fb711aabd5544ba9a1d3ef02c018, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: f738ee3ecdc05594c99316c4b42edbc0, type: 2}
+      objectReference: {fileID: 9100000, guid: 224c1ed2df1a79d4e8830c49ce8ac240, type: 2}
     - target: {fileID: 7178714543459084822, guid: b932fb711aabd5544ba9a1d3ef02c018, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -386,16 +386,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468727224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0757813, y: 1.075, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00000035795}
+  m_LocalScale: {x: 19.828665, y: 11.263637, z: 1}
   m_Children: []
   m_Father: {fileID: 2002438844}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1800, y: 1000}
+  m_AnchoredPosition: {x: 0.000018025, y: -0.00001084}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468727226
 MonoBehaviour:
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8584906, g: 0.77345145, b: 0.77345145, a: 1}
+  m_Color: {r: 0.8396226, g: 0.74061054, b: 0.74061054, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
