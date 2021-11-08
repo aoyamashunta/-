@@ -1824,10 +1824,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5d4c46dd3692e49aacf59c979e90d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dush: 1
+  Min: 8
+  Max: 12
   JumpPower: 700
   Attack_PlayerUp: 1
-  SordParticle: {fileID: 0}
-  ShieldParticle: {fileID: 0}
+  MaxHP: 20
+  WakeUp_MaxTime: 5
+  Invincible_MaxFlame: 5
+  SordParticle: {fileID: 6583758234745778531, guid: 2814a931fd0032641b76892cb881d20e, type: 3}
+  ShieldParticle: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
+  DushEffect: {fileID: 9134655361694970591, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
 --- !u!1 &6225098340585854840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2314,7 +2321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebfc1521fdb99c649a9cae3e56146c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsBoss_Damage: 0
 --- !u!65 &2504521513943299913
 BoxCollider:
   m_ObjectHideFlags: 0

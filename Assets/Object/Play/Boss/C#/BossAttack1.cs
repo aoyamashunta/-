@@ -29,8 +29,10 @@ public class BossAttack1 : MonoBehaviour
 
 
     //Šp“x
+    //0‹A180‹‚ðŒðŒÝ‚É‘Å‚Â
     [Header("”­ŽË’e‚ÌŠp“x")]
     public float BulletWayAxis = 0f;
+    bool IsChange = false;
 
 
     //ŽŸ’e‚Ì”­ŽËŠÔŠu
@@ -81,13 +83,31 @@ public class BossAttack1 : MonoBehaviour
 
                 WaveNumber += 1;
 
+                ChangeAxis();
+
                 if(WaveNumber >= WaveMax)
                 {
                     IsStart = false;
+                    IsChange = false;
+                    BulletWayAxis = 180f;
                     NowTime = time;
                     WaveNumber = 0;
                 }
             }
+        }
+    }
+
+    void ChangeAxis()
+    {
+        if(!IsChange)
+        {
+            BulletWayAxis = 0f;
+            IsChange = true;
+        }
+        else if(IsChange)
+        {
+            BulletWayAxis = 180f;
+            IsChange = false;
         }
     }
 

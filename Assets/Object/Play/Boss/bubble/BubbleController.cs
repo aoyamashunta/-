@@ -6,11 +6,15 @@ public class BubbleController : MonoBehaviour
 {
     //弾速
     [Header("弾速")]
-    [Range(5f, 20f)]public float Speed = 10f;
+    [Range(5f, 20f)]public float Reserve_Speed = 10f;
     [Range(1f, 30f)]public float TopSpeed = 15f;
+    [Range(1f, 30f)]public float Homing_Speed = 15f;
 
     float speed = 0f;
     float ChangeFlame = 0f;
+
+    [Header("範囲距離")]
+    public float dis = 5f;
 
     //消滅タイム
     [Header("消滅タイム")]
@@ -29,10 +33,18 @@ public class BubbleController : MonoBehaviour
     //ボス用変数
     protected GameObject Boss;
 
+    protected GameObject Player;
+
+    //準備前後（停止まで）
+    bool IsStart = false;
+
+    //ホーミング
+    bool IsHoming = false;
 
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
+
 
         //生成時に進行方向を決める
         if(Boss != null)
@@ -40,43 +52,113 @@ public class BubbleController : MonoBehaviour
             forward = Boss.transform.forward;
         }
 
-        speed = Speed;
+        speed = Reserve_Speed;
+
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
+        //移動前
+        if(!IsStart && !IsHoming)
+        {
+            Reserve();
+        }
+
+        Range_Player();
+
+        //ホーミング
+        if(IsStart && !IsHoming)
+        {
+            No_Homing();
+        }
+        else if(IsStart && IsHoming)
+        {
+            Homing();
+        }
+
+        //消滅
+        Delete();
+    
+    }
+
+    //準備
+    void Reserve()
+    {
         float minus = Random.Range(0.1f, 0.25f);
 
-        //移動
-        if(Speed >= 0f && ChangeFlame < 50)
+        if (Reserve_Speed >= 0f && ChangeFlame < 50)
         {
-            
+
             speed = speed - minus;
 
-            if(speed < 0f)
+            if (speed < 0f)
             {
                 speed = 0f;
 
                 ChangeFlame++;
 
-                if(ChangeFlame >= 50)
+                if (ChangeFlame >= 50)
                 {
                     ChangeFlame = 50f;
                     speed = TopSpeed;
+                    IsStart = true;
                 }
             }
         }
-
-
         rb.velocity = forwardAxis * forward * speed;
+    }
 
-        //消滅
+    //ホーミング無
+    void No_Homing()
+    {
+        rb.velocity = forwardAxis * forward * speed;
+    }
+
+    //ホーミングあり
+    void Homing()
+    {
+        transform.position = Vector3.MoveTowards (this.transform.position,new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z), speed * Time.deltaTime);
+    }
+
+    //範囲内取得
+    void Range_Player()
+    {
+        if(IsStart){
+            Vector3 Target = Player.transform.position;
+            float distance = Vector3.Distance(Target, this.transform.position);
+
+            if(distance < dis)
+            {
+                IsHoming = true;
+                speed = Homing_Speed;
+            }
+            else
+            {
+                IsHoming = false;
+                speed = TopSpeed;
+            }
+        }
+    }
+
+    //削除
+    void Delete()
+    {
         time -= Time.deltaTime;
         if(time <= 0f)
         {
             Destroy(this.gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Player.GetComponent<PlayerControll>().Damage();
+        }
+    }
+
 
     //キャラクター情報の渡す
     public void SetCharacterobject(GameObject character)
@@ -89,4 +171,5 @@ public class BubbleController : MonoBehaviour
     {
         this.forwardAxis = axis;
     }
+
 }

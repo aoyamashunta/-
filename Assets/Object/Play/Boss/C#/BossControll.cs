@@ -14,21 +14,37 @@ public class BossControll : MonoBehaviour
     BossAttack2 bossAttack2 = default;
     BossAttack3 bossAttack3 = default;
 
+    GameObject Dice = default;
+    DiceValue diceValue = default;
+
     Animator animator = default;
 
-    //落下
-    bool IsFall_Down = false;
     //ダメージ可能状態
     bool IsDamageable_State = false;
+
+    [Header("上昇距離")]
+    public float UP_Fall = 3f;
 
     [Header("落下距離")]
     public float Down_Fall = 5f;
 
-    GameObject Ball = default;
-    Ball_Repal ball_Repal = default;
+    [Header("体力")]
+    public int MaxHP = 20;
+    int HP;
+    bool IsDamage = false;
 
-    GameObject Sword = default;
-    Sword_Controll sword_Controll = default;
+    bool IsHit = false;
+    bool IsWake_Up = false;
+
+    [Header("ダメージ時の無敵")]
+    float flame = 0f;
+    public float Invincible_MaxFlame = 5f;
+
+    [Header("復帰時間")]
+    public float Wake_Up_Time = 0f;
+    public float Max_Wake_Time = 10f;
+
+    //bool IsDead = false;
 
     void Start()
     {
@@ -36,13 +52,12 @@ public class BossControll : MonoBehaviour
         bossAttack2 = this.GetComponent<BossAttack2>();
         bossAttack3 = this.GetComponent<BossAttack3>();
 
+        Dice = GameObject.FindGameObjectWithTag("Dice");
+        diceValue = Dice.GetComponent<DiceValue>();
+
         animator = this.GetComponent<Animator>();
 
-        Ball = GameObject.FindGameObjectWithTag("Ball");
-        ball_Repal = Ball.GetComponent<Ball_Repal>();
-
-        Sword = GameObject.FindGameObjectWithTag("Sword");
-        sword_Controll = Sword.GetComponent<Sword_Controll>();
+        HP = MaxHP;
     }
 
 
@@ -55,52 +70,64 @@ public class BossControll : MonoBehaviour
         }
 
         //攻撃パターン
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (diceValue.GetNumber() == 1 || diceValue.GetNumber() == 4)
         {
             bossAttack1.IsStart = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if(diceValue.GetNumber() == 2 || diceValue.GetNumber() == 5)
         {
             bossAttack2.IsStart = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if(diceValue.GetNumber() == 3 || diceValue.GetNumber() == 6)
         {
             bossAttack3.IsStart = true;
         }
 
+        diceValue.Ini_Number();
 
-        Hit();
+        Fall_Down();
 
-        Damage();
 
+        Down_Time();
+
+        Wake_Up();
+
+        Invincible();
     }
 
     void LateUpdate()
     {
-        animator.SetBool("IsDown", IsDamageable_State);
+        animator.SetBool("IsDamage", IsDamage);
     }
 
-    void Hit()
+    //接触
+    public void Hit()
     {
-        if (ball_Repal.GetIsHit())
-        {
-            IsFall_Down = true;
-        }
+        IsHit = true;
+    }
 
-        if (ball_Repal.GetIsHit())
+    public bool GetHit()
+    {
+        return IsHit;
+    }
+
+    //落下
+    void Fall_Down()
+    {
+        if (IsHit)
         {
             Transform myTransform = this.transform;
- 
+
             // 座標を取得
             Vector3 pos = myTransform.position;
- 
-            if(pos.y <= -Down_Fall)
+
+            if (pos.y <= -Down_Fall)
             {
                 pos.y = -Down_Fall;
 
                 IsDamageable_State = true;
             }
-            else if(pos.y >= -Down_Fall)
+            else if (pos.y > -Down_Fall)
             {
                 pos.y -= 0.1f;
             }
@@ -109,13 +136,73 @@ public class BossControll : MonoBehaviour
         }
     }
 
-    //ダメージ計算
-    void Damage()
+        //ダメージ計算
+    public void Damage()
     {
-        if (sword_Controll.GetIsBoss_Damage() && IsDamageable_State)
+        if(IsHit && IsDamageable_State && !IsDamage) IsDamage = true;
+        if(IsDamage)
         {
-            Debug.Log("ダメージ");
-            sword_Controll.IsBoss_Damage = false;
+            HP = HP - 1;
         }
+        Debug.Log("BossHP:"+HP);
+    }
+
+    void Invincible()
+    {
+        if (IsDamage)
+        {
+            flame++;
+
+            if(flame >= Invincible_MaxFlame)
+            {
+                flame = 0f;
+                IsDamage = false;
+                Debug.Log("解除");
+            }
+        }
+    }
+
+    //ダウン時、復帰まで
+    void Down_Time()
+    {
+        if(IsHit && IsDamageable_State && !IsWake_Up)
+        {
+            Wake_Up_Time += Time.deltaTime;
+
+            if(Wake_Up_Time >= Max_Wake_Time)
+            {
+                IsWake_Up = true;
+                Wake_Up_Time = 0;
+            }
+        }
+    }
+
+    //起きる
+    void Wake_Up()
+    {
+        if (IsWake_Up && IsHit && IsDamageable_State)
+        {
+            Transform myTransform = this.transform;
+
+            // 座標を取得
+            Vector3 pos = myTransform.position;
+
+            pos.y = -UP_Fall;
+
+            myTransform.position = pos;  // 座標を設定
+
+            IsWake_Up = false;
+            IsHit = false;
+            IsDamageable_State = false;
+        }
+    }
+
+    public bool GetIsDamage()
+    {
+        return IsDamage;
+    }
+    public int GetCurrentHP()
+    {
+        return HP;
     }
 }

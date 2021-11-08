@@ -8,7 +8,7 @@ public class DiceControll : MonoBehaviour
     float nowPosi;
 
     [Header("í èÌéûÉÇÅ[Éh")]
-    public bool IsNormal;
+    public bool IsNormal = false;
 
     [Header("í‚é~")]
     public bool IsStop = false;
@@ -30,8 +30,17 @@ public class DiceControll : MonoBehaviour
 
     [Header("èâä˙èÛë‘Ç÷à⁄çs")]
     public float flame = 0f;
-    [SerializeField] private float Maxflame = 100f;
+    [SerializeField] private float MaxFlame = 100f;
 
+    [Header("í‚é~èÛë‘Ç÷ÇÃà⁄çs")]
+    [SerializeField] private float StopFlame = 100f;
+
+
+    [Header("Effect")]
+    public GameObject Effect = default;
+    public GameObject EffectPos = default;
+
+    GameObject InstantEffect = default;
 
     GameObject Boss;
     BossControll bossControll;
@@ -51,8 +60,6 @@ public class DiceControll : MonoBehaviour
     void Update()
     {
         IsNormal = bossControll.IsDice;
-
-        
 
         Normal();
         Throw();
@@ -76,15 +83,20 @@ public class DiceControll : MonoBehaviour
 
     void Throw()
     {
-        if(!IsNormal)
+        if(!IsNormal && !IsStop)
         {
+            flame++;
+
             FixedSpeed          = ThrowFixedSpeed;
 
             //è„â∫â^ìÆ
             transform.position = new Vector3(transform.position.x, nowPosi + Mathf.PingPong(Time.time/3, 0.3f), transform.position.z);
 
-            if(Input.GetKeyDown(KeyCode.Backspace))
+            //í‚é~
+            if(flame >= StopFlame)
             {
+                flame = 0f;
+                CreateEffect();
                 IsStop = true;
             }
         }
@@ -96,8 +108,10 @@ public class DiceControll : MonoBehaviour
         {
             flame++;
 
-            if(flame >= Maxflame)
+            if(flame >= MaxFlame)
             {
+                DeleteEffect();
+
                 IsStop = false;
                 bossControll.IsDice = true;
 
@@ -138,5 +152,16 @@ public class DiceControll : MonoBehaviour
                 }
             }
         }
+    }
+
+    void CreateEffect()
+    {
+        //Effectê∂ê¨
+        InstantEffect = Instantiate(Effect, EffectPos.transform.position, Quaternion.identity);
+    }
+
+    void DeleteEffect()
+    {
+        Destroy(InstantEffect);
     }
 }

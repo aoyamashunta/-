@@ -6,53 +6,81 @@ public class PlayerControll : MonoBehaviour
 {
     float Horizontal;
     float Vertical;
-    Rigidbody rb;
+    Rigidbody rb = default;
 
     [Space]
  
     float moveSpeed = 8f;
+    [Header("移動速度")]
+    public float Dush = 1f;
+    public float Min = 8f;
+    public float Max = 12f;
 
     [Header("ジャンプ時の処理")]
     public float JumpPower = 500f;
     public float Attack_PlayerUp = 5f;
     bool IsJumping_ComboStop = false;
 
-    bool IsWalk = false;
-    bool IsSprint = false;
-    bool IsAttack = false;
-    bool IsJump = false;
+    [Header("体力")]
+    public int MaxHP = 20;
+    int HP;
+    bool IsDamage = false;
+
+    [Header("復帰")]
+    public float WakeUp_MaxTime = 5f;
+    float WakeUp_Time = 0f;
+
+    [Header("無敵")]
+    public float Invincible_MaxFlame = 5f;
+    float Invincible_Flame = 0f;
+    bool IsInvincible = false;
 
     //攻撃のタイプ
     int AttackType = 0;
 
-    Animator anim;
+    [Header("Effect")]
+    [Space]
+    public ParticleSystem SordParticle = default;
 
     [Space]
-    public ParticleSystem SordParticle;
+    public ParticleSystem ShieldParticle = default;
 
     [Space]
-    public ParticleSystem ShieldParticle;
+    public ParticleSystem DushEffect = default;
 
+
+    Animator anim = default;
 
     //アニメーション再生フラグ
-    bool Normal_Attack1;
-    bool Normal_Attack2;
-    bool Normal_Shild_Attack1;
+    bool Normal_Attack1 = false;
+    bool Normal_Attack2 = false;
+    bool Normal_Shild_Attack1 = false;
 
-    bool Jumping_Attack1;
-    bool Jumping_Attack2;
-    bool Jumping_Attack3;
-    bool Jumping_Attack4;
+    bool Jumping_Attack1 = false;
+    bool Jumping_Attack2 = false;
+    bool Jumping_Attack3 = false;
+    bool Jumping_Attack4 = false;
 
+    bool Idel = false;
+    bool Jump_Motion = false;
+
+    //各種フラグ
+    bool IsWalk = false;
+    bool IsSprint = false;
+    bool IsAttack = false;
+    bool IsJump = false;
     bool IsAttack_Motion = false;
  
     void Start() {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+
+        HP = MaxHP;
     }
  
     void Update() {
         //移動
+
         if(!IsAttack){
             Move();
             Sprint();
@@ -63,13 +91,18 @@ public class PlayerControll : MonoBehaviour
 
         Jump();
 
+
+        //ダメージ後の処理
+        Wake_Up();
+        Invincible();
+
         //描画
         Effect();
     }
 
     void Move()
     {
-        if(!GetIsAttack_Motion())    
+        if(!GetIsAttack_Motion() && !IsDamage)    
         {
             Horizontal = Input.GetAxisRaw("L_Stick_H");
             Vertical = Input.GetAxisRaw("L_Stick_V");
@@ -92,10 +125,14 @@ public class PlayerControll : MonoBehaviour
             if (Input.GetKey("joystick button 4"))
             {
                 IsSprint = true;
+            
+                moveSpeed = Max;
             }
             else
             {
                 IsSprint = false;
+
+                moveSpeed = Min;
             }
         }
         else
@@ -105,24 +142,25 @@ public class PlayerControll : MonoBehaviour
 
         if (IsSprint)
         {
-            moveSpeed = 12f;
+            //DushEffect再生
+            if (!DushEffect.isEmitting)
+            {
+                DushEffect.Play();
+            }
         }
-        else
+        else if(!IsSprint)
         {
-            moveSpeed = 8f;
+            //DushEffect停止
+            if (DushEffect.isEmitting)
+            {
+                DushEffect.Stop();
+            }
         }
     }
  
     void Attack()
     {
         Input_Attack();
-
-        if (!IsAttack)
-        {
-            AttackType = 0;
-        }
-
-        //Debug.Log("IsAttack:"+IsAttack);
     }
     void Input_Attack()
     {
@@ -173,6 +211,12 @@ public class PlayerControll : MonoBehaviour
 
         if (IsJump)
         {
+            //DushEffect停止
+            if (DushEffect.isEmitting)
+            {
+                DushEffect.Stop();
+            }
+
             IsWalk = false;
             IsSprint = false;
         }
@@ -204,6 +248,44 @@ public class PlayerControll : MonoBehaviour
         }
     }
 
+    public void Damage()
+    {
+        if(!IsInvincible)IsDamage = true;
+        if(IsDamage)HP = HP - 1;
+    }
+
+    void Wake_Up()
+    {
+        if (IsDamage)
+        {
+            WakeUp_Time += Time.deltaTime;
+
+            moveSpeed = 0f;
+
+            if(WakeUp_Time >= WakeUp_MaxTime)
+            {
+                IsDamage = false;
+                WakeUp_Time = 0f;
+
+                IsInvincible = true;
+            }
+        }
+    }
+
+    void Invincible()
+    {
+        if (IsInvincible)
+        {
+            Invincible_Flame++;
+
+            if(Invincible_Flame >= Invincible_MaxFlame)
+            {
+                Invincible_Flame = 0f;
+                IsInvincible = false;
+            }
+        }
+    }
+
     //アニメ―ション
     void LateUpdate()
     {
@@ -217,7 +299,8 @@ public class PlayerControll : MonoBehaviour
         Jumping_Attack3 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack3");
         Jumping_Attack4 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack4");
 
-
+        Idel = anim.GetCurrentAnimatorStateInfo(0).IsName("Idel");
+        Jump_Motion = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump");
 
         anim.SetBool("Walk", IsWalk);
         anim.SetBool("Sprint", IsSprint);
@@ -228,25 +311,33 @@ public class PlayerControll : MonoBehaviour
         if(IsAttack)anim.SetTrigger("Attack");
         anim.SetInteger("AttackType", AttackType);
 
+
         //通常攻撃処理
+        if (AttackType != 0 && Idel)
+        {
+            AttackType = 0;
+            IsAttack = false;
+        }
         //通常攻撃時の移動速度の減少
         if (Normal_Attack1 || Normal_Attack2 || Normal_Shild_Attack1)
         {
-            moveSpeed = 1f;
+            moveSpeed = Dush;
 
             IsWalk = false;
             IsSprint = false;
         }
         //ジャンプ攻撃処理
+        if(AttackType != 0 && Jump_Motion)
+        {
+            AttackType = 0;
+            IsAttack = false;
+        }
         //攻撃時の移動速度の減少
         else if(Jumping_Attack1 || Jumping_Attack2 || Jumping_Attack3 || Jumping_Attack4)
         {
-            moveSpeed = 1f;
+            moveSpeed = Dush;
         }
-        else
-        {
-            moveSpeed = 8f;
-        }
+
 
         //ジャンプ攻撃時の上昇
         if (Jumping_Attack1 || Jumping_Attack2 || Jumping_Attack3 || Jumping_Attack4)
@@ -307,5 +398,14 @@ public class PlayerControll : MonoBehaviour
         }
 
         return IsAttack_Motion;
+    }
+
+    public bool GetIsDamage()
+    {
+        return IsDamage;
+    }
+    public int GetCurrentHP()
+    {
+        return HP;
     }
 }

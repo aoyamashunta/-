@@ -8,19 +8,21 @@ public class Sword_Controll : MonoBehaviour
     GameObject Player;
     PlayerControll playerControll;
 
-    //Bossにダメージを与える
-    public bool IsBoss_Damage = false;
+    GameObject Boss;
+
 
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         playerControll = Player.GetComponent<PlayerControll>();
+
+        Boss = GameObject.FindGameObjectWithTag("Boss");
     }
 
 
     void Update()
     {
-        
+
     }
 
     //アニメーションで敵の待機モーションで攻撃後抜けて、再び接触して攻撃が入ってしまう。
@@ -29,27 +31,9 @@ public class Sword_Controll : MonoBehaviour
     {
         if(collision.gameObject.name == "Boss" && playerControll.GetIsAttack_Motion())
         {
-            IsBoss_Damage = true;
+            Boss.GetComponent<BossControll>().Damage();
 
-            Debug.Log("接触");
-        }
-    }
-
-    public bool GetIsBoss_Damage()
-    {
-        return IsBoss_Damage;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.name == "Boss" && playerControll.GetIsAttack_Motion())
-        {
-            if (IsBoss_Damage)
-            {
-                IsBoss_Damage = false;
-
-                Debug.Log("接触終了");
-            }
+            //Debug.Log("接触");
         }
     }
 }

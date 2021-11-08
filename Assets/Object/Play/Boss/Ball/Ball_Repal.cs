@@ -8,12 +8,13 @@ public class Ball_Repal : MonoBehaviour
     Shield_Controll shield_Controll = default;
 
     GameObject Boss = default;
+    GameObject BOSS = default;
 
     GameObject Player = default;
     PlayerControll playerControll = default;
 
     bool IsThrow = false;
-    bool IsHit = false;
+    public bool IsHit = false;
 
     Vector3 Ball_Pos = default;
     Vector3 Boss_Pos = default;
@@ -27,12 +28,25 @@ public class Ball_Repal : MonoBehaviour
 
     public float Center_Ratio = 0.50f;
 
+    float PlayerAngle = 0f;
+    bool IsTurn = false;
+
+    [Header("Effect")]
+    public GameObject Effect_Player = default;
+    GameObject InstantEffect_Player = default;
+    Vector3 HitPost_Player = default;
+
+    public GameObject Effect_Boss = default;
+    GameObject InstantEffect_Boss = default;
+    Vector3 HitPos_Boss = default;
+
     void Start()
     {
         Shield = GameObject.FindGameObjectWithTag("Shield");
         shield_Controll = Shield.GetComponent<Shield_Controll>();
 
         Boss = GameObject.FindGameObjectWithTag("Boss_Body");
+        BOSS = GameObject.FindGameObjectWithTag("Boss");
 
         Player = GameObject.FindGameObjectWithTag("Player");
         playerControll = Player.GetComponent<PlayerControll>();
@@ -43,6 +57,21 @@ public class Ball_Repal : MonoBehaviour
     {
         if (IsRepel && !IsThrow)
         {
+            PlayerAngle = Player.transform.eulerAngles.y * (Mathf.PI / 180.0f);
+
+            //Debug.Log("Angle:"+PlayerAngle);
+
+            if(PlayerAngle >= 0 && PlayerAngle <= 3.14)
+            {
+                //Debug.Log("右");
+                IsTurn = false;
+            }
+            else if(PlayerAngle >= 3.14 && PlayerAngle <= 6.3)
+            {
+                //Debug.Log("左");
+                IsTurn = true;
+            }
+
             IsThrow = true;
 
             Ball_Pos = this.transform.position;
@@ -54,6 +83,12 @@ public class Ball_Repal : MonoBehaviour
         {
             StartThrow(this.gameObject, L_R_Height, Ball_Pos, Boss_Pos, Frame);
         }
+
+        if (IsHit)
+        {
+            BOSS.GetComponent<BossControll>().Hit();
+            Destroy(this.gameObject);
+        }
     }
 
     //ベジェ曲線を用いたカーブ
@@ -63,8 +98,10 @@ public class Ball_Repal : MonoBehaviour
     public void StartThrow(GameObject Target,float height,Vector3 start,Vector3 end,float duration)
     {
         //中心点
-        Vector3 half = end - start * Center_Ratio + start;//(0.5は0~1の中心)
-        half.x -= Vector3.up.y + height;
+        Vector3 half = end - start * Center_Ratio + start;//(0.5は0~1の中心
+
+        if(IsTurn)          half.x -= Vector3.up.y + height;
+        else if(!IsTurn)    half.x += Vector3.up.y + height;
 
         StartCoroutine(LerpThrow(Target, start, half, end, duration));
     }
@@ -94,27 +131,44 @@ public class Ball_Repal : MonoBehaviour
         return Vector3.Lerp(a, b, t);
     }
 
-    private void OnTriggerStay(Collider collision){
+
+    private void OnTriggerEnter(Collider collision){
  
         //SphereがPlaneと衝突している場合
         if (collision.gameObject.name == "Boss_Body_Cen")
         {
-            Debug.Log("ボスにダメージ");
+            //Effect
+            HitPos_Boss = collision.ClosestPointOnBounds(this.transform.position);
+            CreateEffect_Boss(HitPos_Boss);
+
             IsHit = true;
-            Destroy(this.gameObject);
         }
 
         if (collision.CompareTag("Shield"))
         {
-            if(playerControll.GetNormal_Shild_Attack1()){
+            if(playerControll.GetNormal_Shild_Attack1())
+            {
+                //Effect
+                HitPost_Player = collision.ClosestPointOnBounds(this.transform.position);
+                CreateEffect_Player(HitPost_Player);
 
                 IsRepel = true;
             }
         }
     }
 
-    public bool GetIsHit()
+    void CreateEffect_Player(Vector3 Hit)
     {
-        return IsHit;
+        InstantEffect_Player = Instantiate(Effect_Player, Hit, Quaternion.identity);
+    }
+
+    void CreateEffect_Boss(Vector3 Hit)
+    {
+        InstantEffect_Boss = Instantiate(Effect_Boss, Hit, Quaternion.identity);
+    }
+
+    public bool GetIsRepal()
+    {
+        return IsRepel;
     }
 }

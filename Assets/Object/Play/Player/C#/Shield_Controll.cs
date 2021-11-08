@@ -4,20 +4,32 @@ using UnityEngine;
 
 public class Shield_Controll : MonoBehaviour
 {
-    GameObject Player;
-    PlayerControll playerControll;
-
+    bool IsHit = false;
    
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
-        playerControll = Player.GetComponent<PlayerControll>();
+
     }
 
    
-    void Update()
+    void LateUpdate()
     {
-
+        if (IsHit)
+        {
+            IsHit = false;
+        }
     }
 
+    private void OnTriggerEnter(Collider collision){
+ 
+        if (collision.CompareTag("Ball"))
+        {
+            IsHit = true;
+        }
+    }
+
+    public bool GetHit()
+    {
+        return IsHit;
+    }
 }

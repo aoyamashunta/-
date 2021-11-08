@@ -8,6 +8,8 @@ public class DiceValue : MonoBehaviour
     [SerializeField]private int Number = 0;
     [SerializeField]private bool IsRoll = false;
 
+    public bool IsConfirm = false;
+
     int X;
     int Y;
     int Z;
@@ -22,7 +24,7 @@ public class DiceValue : MonoBehaviour
 
     void Update()
     {
-        if(diceControll.flame == 1)
+        if(diceControll.flame == 1 && diceControll.IsStop)
         {
             IsRoll = true;
         }
@@ -42,47 +44,53 @@ public class DiceValue : MonoBehaviour
 
             if(Number == 1)
             {
-                X = 0;
-                Y = 180;
-                Z = 0;
+                Stop_Rotation(0, 180, 0);
             }
             else if(Number == 2)
             {
-                X = 0;
-                Y = 90;
-                Z = 0;
+                Stop_Rotation(0, 90, 0);
             }
             else if(Number == 3)
             {
-                X = 90;
-                Y = 0;
-                Z = 0;
+                Stop_Rotation(90, 0, 0);
             }
             else if(Number == 4)
             {
-                X = -90;
-                Y = 0;
-                Z = 0;
+                Stop_Rotation(-90, 0, 0);
             }
             else if(Number == 5)
             {
-                X = 0;
-                Y = -90;
-                Z = 0;
+                Stop_Rotation(0, -90, 0);
             }
             else if(Number == 6)
             {
-                X = 0;
-                Y = 0;
-                Z = 0;
+                Stop_Rotation(0, 0, 0);
             }
 
             this.gameObject.transform.rotation = Quaternion.Euler(X, Y, Z);
 
-            Debug.Log("Number:"+Number);
-
             IsRoll = false;
 
         }
+    }
+
+
+    void Stop_Rotation(int _X, int _Y, int _Z)
+    {
+        X = _X;
+        Y = _Y;
+        Z = _Z;
+
+        Debug.Log("Number:"+Number);
+    }
+
+    public void Ini_Number()
+    {
+        Number = 0;
+    }
+
+    public int GetNumber()
+    {
+        return Number;
     }
 }

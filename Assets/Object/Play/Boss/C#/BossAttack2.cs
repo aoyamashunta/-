@@ -75,6 +75,7 @@ public class BossAttack2 : MonoBehaviour
                 if(Num >= BulletMaxNum)
                 {
                     IsStart = false;
+                    Num = 0;
                 }
 
                 //ƒ^ƒCƒ€‚Ì‰Šú‰»

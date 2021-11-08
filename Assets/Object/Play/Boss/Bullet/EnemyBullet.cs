@@ -26,6 +26,8 @@ public class EnemyBullet : MonoBehaviour
     //É{ÉXópïœêî
     protected GameObject Boss;
 
+    //Player
+    protected GameObject Player;
 
     void Start()
     {
@@ -36,6 +38,8 @@ public class EnemyBullet : MonoBehaviour
         {
             forward = Boss.transform.forward;
         }
+
+        Player = GameObject.FindGameObjectWithTag("Player"); 
     }
 
     void Update()
@@ -51,6 +55,14 @@ public class EnemyBullet : MonoBehaviour
         if(time <= 0f)
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Player.GetComponent<PlayerControll>().Damage();
         }
     }
 
