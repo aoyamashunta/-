@@ -10,6 +10,7 @@ TagManager:
   - Ball
   - Boss_Body
   - Ground
+  - Dice
   layers:
   - Default
   - TransparentFX
