@@ -64,7 +64,7 @@ public class BossControll : MonoBehaviour
     void Update()
     {
         //サイコロ投法
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             IsDice = false;
         }

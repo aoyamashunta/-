@@ -299,7 +299,7 @@ public class PlayerControll : MonoBehaviour
         Jumping_Attack3 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack3");
         Jumping_Attack4 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack4");
 
-        Idel = anim.GetCurrentAnimatorStateInfo(0).IsName("Idel");
+        Idel = anim.GetCurrentAnimatorStateInfo(0).IsName("idel");
         Jump_Motion = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump");
 
         anim.SetBool("Walk", IsWalk);

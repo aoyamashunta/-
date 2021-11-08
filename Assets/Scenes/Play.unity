@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &100200934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 259920519043536123, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
+  m_PrefabInstance: {fileID: 3477499798347249959}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &315412697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,13 +1128,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 259920519043536122, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 259920519043536122, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550076167128342902, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301763913157188422, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
+      propertyPath: Effect
+      value: 
+      objectReference: {fileID: 3500249172224804993, guid: 0fc919db3ccc12540ac6265453f1044e, type: 3}
+    - target: {fileID: 3301763913157188422, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
+      propertyPath: MaxFlame
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301763913157188422, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
+      propertyPath: EffectPos
+      value: 
+      objectReference: {fileID: 100200934}
     - target: {fileID: 3477499797677976774, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3477499797677976774, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.7358794
+      value: -3.55
       objectReference: {fileID: 0}
     - target: {fileID: 3477499797677976774, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1137,7 +1166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3477499797677976774, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.895456
+      value: 16.52
       objectReference: {fileID: 0}
     - target: {fileID: 3477499797677976774, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1170,6 +1199,10 @@ PrefabInstance:
     - target: {fileID: 3477499797677976775, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
       propertyPath: m_Name
       value: Dice_Relationship
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171250869324349963, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c5a249ca6d959f41afbcf0c048b3146, type: 3}
