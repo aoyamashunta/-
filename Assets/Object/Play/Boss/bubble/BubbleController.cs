@@ -156,6 +156,7 @@ public class BubbleController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player.GetComponent<PlayerControll>().Damage();
+            Destroy(this.gameObject);
         }
     }
 

@@ -13,6 +13,8 @@ public class BossControll : MonoBehaviour
     BossAttack1 bossAttack1 = default;
     BossAttack2 bossAttack2 = default;
     BossAttack3 bossAttack3 = default;
+    BossAttack4 bossAttack4 = default;
+    BossAttack5 bossAttack5 = default;
 
     GameObject Dice = default;
     DiceValue diceValue = default;
@@ -36,6 +38,10 @@ public class BossControll : MonoBehaviour
     bool IsHit = false;
     bool IsWake_Up = false;
 
+    [Header("バリア")]
+    public GameObject Barrier = default;
+    GameObject InstantObject = default;
+
     [Header("ダメージ時の無敵")]
     float flame = 0f;
     public float Invincible_MaxFlame = 5f;
@@ -51,6 +57,8 @@ public class BossControll : MonoBehaviour
         bossAttack1 = this.GetComponent<BossAttack1>();
         bossAttack2 = this.GetComponent<BossAttack2>();
         bossAttack3 = this.GetComponent<BossAttack3>();
+        bossAttack4 = this.GetComponent<BossAttack4>();
+        bossAttack5 = this.GetComponent<BossAttack5>();
 
         Dice = GameObject.FindGameObjectWithTag("Dice");
         diceValue = Dice.GetComponent<DiceValue>();
@@ -58,32 +66,48 @@ public class BossControll : MonoBehaviour
         animator = this.GetComponent<Animator>();
 
         HP = MaxHP;
+
+        if(InstantObject == null)
+        {
+            InstantObject = Instantiate(Barrier, new Vector3(0,6,0),Quaternion.identity);
+        }
     }
 
 
     void Update()
     {
         //サイコロ投法
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Return) && !IsHit)
         {
             IsDice = false;
         }
 
         //攻撃パターン
-        if (diceValue.GetNumber() == 1 || diceValue.GetNumber() == 4)
+        if (diceValue.GetNumber() == 1 || diceValue.GetNumber() == 5)
         {
             bossAttack1.IsStart = true;
+            diceValue.Ini_Number();
         }
-        else if(diceValue.GetNumber() == 2 || diceValue.GetNumber() == 5)
+        else if(diceValue.GetNumber() == 2 || diceValue.GetNumber() == 6)
         {
             bossAttack2.IsStart = true;
+            diceValue.Ini_Number();
         }
-        else if(diceValue.GetNumber() == 3 || diceValue.GetNumber() == 6)
+        else if(diceValue.GetNumber() == 3)
         {
             bossAttack3.IsStart = true;
+            diceValue.Ini_Number();
+        }
+        else if (diceValue.GetNumber() == 4)
+        {
+            //bossAttack4.IsStart = true;
+            diceValue.Ini_Number();
         }
 
-        diceValue.Ini_Number();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //bossAttack5.IsStart = true;
+        }
 
         Fall_Down();
 
@@ -174,6 +198,12 @@ public class BossControll : MonoBehaviour
                 IsWake_Up = true;
                 Wake_Up_Time = 0;
             }
+
+            //InstantObjectを消さないと次回の生成ができない
+            if(InstantObject != null)
+            {
+                Destroy(InstantObject);
+            }
         }
     }
 
@@ -194,6 +224,17 @@ public class BossControll : MonoBehaviour
             IsWake_Up = false;
             IsHit = false;
             IsDamageable_State = false;
+
+            //InstantObjectがnullなのを確認して生成
+            Create_Barrier();
+        }
+    }
+
+    void Create_Barrier()
+    {
+        if(InstantObject == null){
+            Vector3 pos = new Vector3(0, 6, 0);
+            InstantObject = Instantiate(Barrier, pos, Quaternion.identity);
         }
     }
 
@@ -204,5 +245,10 @@ public class BossControll : MonoBehaviour
     public int GetCurrentHP()
     {
         return HP;
+    }
+
+    public bool GetIsHit()
+    {
+        return IsHit;
     }
 }

@@ -6,7 +6,7 @@ public class EnemyBullet : MonoBehaviour
 {
     //’e‘¬
     [Header("’e‘¬")]
-    [Range(1f, 10f)]public float Speed = 1f;
+    [Range(1f, 10f)]public float Speed = 7f;
 
 
     //Á–Åƒ^ƒCƒ€
@@ -44,6 +44,9 @@ public class EnemyBullet : MonoBehaviour
 
     void Update()
     {
+        //‰ñ“]
+        forward.x += Time.deltaTime;
+
         //ˆÚ“®
         rb.velocity = forwardAxis * forward * Speed;
 
