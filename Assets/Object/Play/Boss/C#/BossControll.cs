@@ -14,7 +14,7 @@ public class BossControll : MonoBehaviour
     BossAttack2 bossAttack2 = default;
     BossAttack3 bossAttack3 = default;
     BossAttack4 bossAttack4 = default;
-    BossAttack5 bossAttack5 = default;
+    //BossAttack5 bossAttack5 = default;
 
     GameObject Dice = default;
     DiceValue diceValue = default;
@@ -58,7 +58,7 @@ public class BossControll : MonoBehaviour
         bossAttack2 = this.GetComponent<BossAttack2>();
         bossAttack3 = this.GetComponent<BossAttack3>();
         bossAttack4 = this.GetComponent<BossAttack4>();
-        bossAttack5 = this.GetComponent<BossAttack5>();
+        //bossAttack5 = this.GetComponent<BossAttack5>();
 
         Dice = GameObject.FindGameObjectWithTag("Dice");
         diceValue = Dice.GetComponent<DiceValue>();
@@ -100,7 +100,7 @@ public class BossControll : MonoBehaviour
         }
         else if (diceValue.GetNumber() == 4)
         {
-            //bossAttack4.IsStart = true;
+            bossAttack4.IsStart = true;
             diceValue.Ini_Number();
         }
 

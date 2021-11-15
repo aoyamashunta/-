@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 455a96d3ebdb89b45a49ce27d7276638, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,9 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsHit: 0
-  L_R_Height: 20
-  Frame: 80
-  Center_Ratio: 0.6
+  L_R_Height: 30
+  Frame: 65
+  Center_Ratio: 0.9
   Effect_Player: {fileID: 8977368957349691538, guid: b445df1851d0bd349857ea16e83e37f9, type: 3}
   Effect_Boss: {fileID: 7690879241798256905, guid: 696f1498a11fb3e45afd692fa4cb4641, type: 3}
 --- !u!1 &5512437095984114995

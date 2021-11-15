@@ -1806,7 +1806,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6225015421646835572}
   serializedVersion: 2
-  m_Mass: 50
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -1827,13 +1827,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dush: 1
-  Min: 8
-  Max: 12
-  JumpPower: 700
+  Min: 5
+  Max: 9
+  JumpPower: 150
   Attack_PlayerUp: 1
   MaxHP: 20
-  WakeUp_MaxTime: 5
-  Invincible_MaxFlame: 5
+  WakeUp_MaxTime: 1
+  Invincible_MaxFlame: 20
   SordParticle: {fileID: 9161485103530870276}
   ShieldParticle: {fileID: 1518686136317485532}
   DushEffect: {fileID: 9134655361694970591, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
@@ -1849,7 +1849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6d8df73bd6de64b80416eb744e6e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 7833220752221043265, guid: 09d6304f2c6f6fc4798276f89ebbc91d, type: 3}
+  _slider: {fileID: 0}
+  _changeValueInterval: 0.5
 --- !u!1 &6225098340585854840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,11 +2607,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9134655361694970590, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9134655361694970590, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9134655361694970590, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
       propertyPath: m_LocalRotation.w

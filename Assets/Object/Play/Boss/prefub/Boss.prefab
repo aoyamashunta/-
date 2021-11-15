@@ -13801,6 +13801,8 @@ GameObject:
   - component: {fileID: 2714414462998180378}
   - component: {fileID: 2100852987990848949}
   - component: {fileID: 2100852987990848950}
+  - component: {fileID: 1379055359}
+  - component: {fileID: 1379055360}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -13863,7 +13865,8 @@ MonoBehaviour:
   UP_Fall: 3
   Down_Fall: 5
   MaxHP: 20
-  Invincible_MaxFlame: 5
+  Barrier: {fileID: 1071956662809644196, guid: 61702d17fd187034e8d8f057318baeba, type: 3}
+  Invincible_MaxFlame: 15
   Wake_Up_Time: 0
   Max_Wake_Time: 10
 --- !u!114 &1028933572838684248
@@ -13879,13 +13882,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsStart: 0
-  WaveMax: 3
+  WaveMax: 6
   bullet: {fileID: 1229592206266963593, guid: 812e3942a01b8774faa203987246387d, type: 3}
   Barrel: {fileID: 5236363312527321721}
-  BulletWayNum: 36
+  BulletWayNum: 30
   BulletWaySpace: 180
   BulletWayAxis: 180
-  time: 3
+  time: 2.5
   delayTime: 1
 --- !u!114 &8967464725345732712
 MonoBehaviour:
@@ -13903,13 +13906,13 @@ MonoBehaviour:
   Bubble1: {fileID: 8712628009908787682, guid: 24a80ae3f3410ec47ab5611c99a9bb9c, type: 3}
   Barrel: {fileID: 8632557430174856879}
   BulletWayNum: 1
-  BulletMaxNum: 5
+  BulletMaxNum: 12
   BulletWaySpace: 0
-  Min: -80
-  Max: 80
+  Min: -70
+  Max: 70
   BulletWayAxis: 180
   time: 0.1
-  delayTime: 1
+  delayTime: 2
 --- !u!114 &2714414462998180378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13958,6 +13961,37 @@ CapsuleCollider:
   m_Height: 1.44
   m_Direction: 1
   m_Center: {x: -0.03, y: 1.33, z: 0}
+--- !u!114 &1379055359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028069240210806640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9f360a7fc74e149a9902759c05edd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1379055360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028069240210806640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddaad96eb6be51b4c95f81f6eca5a630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsStart: 0
+  Rock: {fileID: 5022786900386749971, guid: e98e050b3b056eb4791da4b0d55af7ae, type: 3}
+  R: 10
+  CreateTime: 1
+  MaxNum: 16
+  Min_Y: 80
+  Max_Y: 140
 --- !u!1 &6048208500733107383
 GameObject:
   m_ObjectHideFlags: 0
