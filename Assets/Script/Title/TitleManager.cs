@@ -20,17 +20,20 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         menu.enabled = false;
+        sliderSound.value = 0.5f;
+        sliderSound.value = PlayerPrefs.GetFloat("BGMSlider");
     }
 
     // Update is called once per frame
     void Update()
     {
+        //gMana.StartSound(gMana.BGM[0]);
         // ê›íËâÊñ ÇÃï\é¶
-        if(Input.GetKeyDown(KeyCode.Q) && !isMenuFlag)
+        if ((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown("joystick button 6")) && !isMenuFlag)
         {
             isMenuFlag = true;
         }
-        else if(Input.GetKeyDown(KeyCode.Q)&& isMenuFlag)
+        else if((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown("joystick button 6")) && isMenuFlag)
         {
             isMenuFlag = false;
         }
@@ -39,6 +42,9 @@ public class TitleManager : MonoBehaviour
         if (isMenuFlag)
         {
             OpenConfig();
+
+            UpSound();
+            DownSound();
         }
     }
 
@@ -61,4 +67,27 @@ public class TitleManager : MonoBehaviour
         sliderSound.gameObject.SetActive(false);
     }
 
+    // âπó è„Ç∞ÇÈ
+    void UpSound()
+    {
+        if (Input.GetKey("joystick button 5"))
+        {
+            sliderSound.value += 0.01f;
+            gMana.BGM[0].volume = sliderSound.value;
+            PlayerPrefs.SetFloat("BGMVolume", gMana.BGM[0].volume);
+            PlayerPrefs.SetFloat("BGMSlider", sliderSound.value);
+        }
+    }
+
+    // âπó â∫Ç∞ÇÈ
+    void DownSound()
+    {
+        if (Input.GetKey("joystick button 4"))
+        {
+            sliderSound.value -= 0.01f;
+            gMana.BGM[0].volume = sliderSound.value;
+            PlayerPrefs.SetFloat("BGMVolume", gMana.BGM[0].volume);
+            PlayerPrefs.SetFloat("BGMSlider", sliderSound.value);
+        }
+    }
 }

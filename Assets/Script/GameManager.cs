@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,12 +11,15 @@ public class GameManager : MonoBehaviour
     public AudioSource[] BGM;
     public AudioSource[] SE;
 
+
     private void Start()
     {
         // FPSの固定
         // フルスクリーン
         Screen.SetResolution(1920, 1080, false);
         Application.targetFrameRate = 60;
+
+        BGM[0].volume = PlayerPrefs.GetFloat("BGMVolume");
     }
 
     private void Update()
@@ -26,6 +30,8 @@ public class GameManager : MonoBehaviour
         }
 
         ChangeScene();
+
+        BGM[0].volume = PlayerPrefs.GetFloat("BGMVolume");
     }
 
     // シーンの切り替え
@@ -34,7 +40,7 @@ public class GameManager : MonoBehaviour
         //タイトル
         if (SceneManager.GetActiveScene().name == "Title" && !titleM.isMenuFlag)
         {
-            if (Input.GetKey(KeyCode.Return))
+            if (Input.GetKey(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
             {
                 SceneManager.LoadScene("Play");
             }
@@ -69,5 +75,11 @@ public class GameManager : MonoBehaviour
     {
         string activeSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(activeSceneName);
+    }
+
+    // 音の再生
+    public void StartSound(AudioSource audio)
+    {
+        audio.Play();
     }
 }
