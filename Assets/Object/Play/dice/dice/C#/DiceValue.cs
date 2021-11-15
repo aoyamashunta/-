@@ -14,6 +14,8 @@ public class DiceValue : MonoBehaviour
     int Y;
     int Z;
 
+    int Old_Number = 0;
+
     DiceControll diceControll;
 
     void Start()
@@ -41,6 +43,15 @@ public class DiceValue : MonoBehaviour
         if (IsRoll)
         {
             Number = Random.Range(1, 7);
+
+            //“¯”ƒ‹[ƒv
+            if(Old_Number == Number)
+            {
+                while(Old_Number == Number)
+                {
+                    Number = Random.Range(1,7);
+                }
+            }
 
             if(Number == 1)
             {
@@ -80,12 +91,12 @@ public class DiceValue : MonoBehaviour
         X = _X;
         Y = _Y;
         Z = _Z;
-
-        Debug.Log("Number:"+Number);
     }
 
     public void Ini_Number()
     {
+
+        Old_Number = Number;
         Number = 0;
     }
 

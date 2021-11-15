@@ -24,7 +24,15 @@ public class PlayerControll : MonoBehaviour
     [Header("体力")]
     public int MaxHP = 20;
     int HP;
+    Player_Life player_Life = default;
+
+    //ダメージ
     bool IsDamage = false;
+    bool IsBlinking = false;
+
+    Transform child = default;
+    Material Player_Color = default;
+
 
     [Header("復帰")]
     public float WakeUp_MaxTime = 5f;
@@ -54,12 +62,12 @@ public class PlayerControll : MonoBehaviour
     //アニメーション再生フラグ
     bool Normal_Attack1 = false;
     bool Normal_Attack2 = false;
+    bool Normal_Attack3 = false;
+    bool Normal_Attack4 = false;
     bool Normal_Shild_Attack1 = false;
 
     bool Jumping_Attack1 = false;
     bool Jumping_Attack2 = false;
-    bool Jumping_Attack3 = false;
-    bool Jumping_Attack4 = false;
 
     bool Idel = false;
     bool Jump_Motion = false;
@@ -71,9 +79,19 @@ public class PlayerControll : MonoBehaviour
     bool IsJump = false;
     bool IsAttack_Motion = false;
  
+
+
+    private void Awake()
+    {
+        child = transform.Find("RPGHero");
+        Player_Color = child.GetComponent<Renderer>().material;
+    }
+
     void Start() {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+
+        player_Life = GetComponent<Player_Life>();
 
         HP = MaxHP;
     }
@@ -98,6 +116,7 @@ public class PlayerControll : MonoBehaviour
 
         //描画
         Effect();
+        Blinking();
     }
 
     void Move()
@@ -226,7 +245,7 @@ public class PlayerControll : MonoBehaviour
     {
 
         //剣エフェクト（開始時、終了時の区切りが悪い、改善）
-        if(Normal_Attack1 || Normal_Attack2 || Jumping_Attack1 || Jumping_Attack2 || Jumping_Attack3 || Jumping_Attack4)
+        if(Normal_Attack1 || Normal_Attack2 || Normal_Attack3 || Normal_Attack4 || Jumping_Attack1 || Jumping_Attack2)
         {
             SordParticle.Play(true);
             //Debug.Log("剣エフェクト発生");
@@ -250,14 +269,18 @@ public class PlayerControll : MonoBehaviour
 
     public void Damage()
     {
-        if(!IsInvincible)IsDamage = true;
-        if(IsDamage)HP = HP - 1;
+        if(!IsInvincible && !IsDamage){
+            IsDamage = true;
+            player_Life.Change(-0.1f);
+        }
     }
 
     void Wake_Up()
     {
         if (IsDamage)
         {
+            IsBlinking = true;
+
             WakeUp_Time += Time.deltaTime;
 
             moveSpeed = 0f;
@@ -281,8 +304,23 @@ public class PlayerControll : MonoBehaviour
             if(Invincible_Flame >= Invincible_MaxFlame)
             {
                 Invincible_Flame = 0f;
+                IsBlinking = false;
                 IsInvincible = false;
             }
+        }
+    }
+
+    void Blinking()
+    {
+        if(IsBlinking)
+        {
+            float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
+
+            Player_Color.color = new Color(level, 0.0f, 0.0f, 1.0f);
+        }
+        else if (!IsBlinking)
+        {
+            Player_Color.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         }
     }
 
@@ -292,12 +330,12 @@ public class PlayerControll : MonoBehaviour
         //アニメーション再生中フラグの代入
         Normal_Attack1          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1");
         Normal_Attack2          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack2");
+        Normal_Attack3          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack3");
+        Normal_Attack4          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack4");
         Normal_Shild_Attack1    = anim.GetCurrentAnimatorStateInfo(0).IsName("Shield_Attack1");
 
         Jumping_Attack1 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack1");
         Jumping_Attack2 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack2");
-        Jumping_Attack3 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack3");
-        Jumping_Attack4 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack4");
 
         Idel = anim.GetCurrentAnimatorStateInfo(0).IsName("idel");
         Jump_Motion = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump");
@@ -319,34 +357,30 @@ public class PlayerControll : MonoBehaviour
             IsAttack = false;
         }
         //通常攻撃時の移動速度の減少
-        if (Normal_Attack1 || Normal_Attack2 || Normal_Shild_Attack1)
+        if (Normal_Attack1 || Normal_Attack2 || Normal_Attack3 || Normal_Attack4 || Normal_Shild_Attack1)
         {
             moveSpeed = Dush;
 
             IsWalk = false;
             IsSprint = false;
         }
+
         //ジャンプ攻撃処理
-        if(AttackType != 0 && Jump_Motion)
-        {
-            AttackType = 0;
-            IsAttack = false;
-        }
         //攻撃時の移動速度の減少
-        else if(Jumping_Attack1 || Jumping_Attack2 || Jumping_Attack3 || Jumping_Attack4)
+        if (Jumping_Attack1 || Jumping_Attack2)
         {
             moveSpeed = Dush;
         }
 
 
         //ジャンプ攻撃時の上昇
-        if (Jumping_Attack1 || Jumping_Attack2 || Jumping_Attack3 || Jumping_Attack4)
+        if (Jumping_Attack1 || Jumping_Attack2)
         {
             rb.velocity = new Vector3(0, Attack_PlayerUp, 0);
         }
 
         //コンボ技が地面に接触しなきゃ再び使用できない
-        if (Jumping_Attack4)
+        if (Jumping_Attack2)
         {
             IsJumping_ComboStop = true;
         }
@@ -372,13 +406,31 @@ public class PlayerControll : MonoBehaviour
     {
         if (IsJump)
         {
-            if (other.gameObject.CompareTag("Ground"))
+            if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Ground_Rota"))
             {
                 IsJump = false;
                 IsJumping_ComboStop = false;
             }
         }
+
+        //回転
+        if(transform.parent == null && other.gameObject.CompareTag("Ground_Rota"))
+        {
+            var empthObject = new GameObject();
+            empthObject.transform.parent = other.gameObject.transform;
+            transform.parent = empthObject.transform;
+        }
     }
+
+    private void OnCollisionExit(Collision other)
+    {
+        //回転
+        if(transform.parent != null && other.gameObject.CompareTag("Ground_Rota"))
+        {
+            transform.parent = null;
+        }
+    }
+
 
     public bool GetNormal_Shild_Attack1()
     {
@@ -387,8 +439,9 @@ public class PlayerControll : MonoBehaviour
 
     public bool GetIsAttack_Motion()
     {
-        if(Normal_Attack1 || Normal_Attack2 || Normal_Shild_Attack1 || Jumping_Attack1 ||
-            Jumping_Attack2 || Jumping_Attack3 || Jumping_Attack4)
+        if(Normal_Attack1 || Normal_Attack2 || Normal_Attack3 || Normal_Attack4 ||
+            Normal_Shild_Attack1 || 
+            Jumping_Attack1 || Jumping_Attack2)
         {
             IsAttack_Motion = true;
         }

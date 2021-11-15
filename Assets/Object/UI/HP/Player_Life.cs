@@ -4,34 +4,46 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
+using DG.Tweening;  // DOTween を使うため
+
 public class Player_Life : MonoBehaviour
 {
+    //シリンダー
     public Slider _slider;
 
+    //体力
     int MaxLife;
     int CurrentLife;
 
+    //プレイヤーコンポーネント
     PlayerControll playerControll;
+
+    [SerializeField] float _changeValueInterval = 0.5f;
+
 
     void Start()
     {
         _slider.value = 1;
-
-        playerControll = GetComponent<PlayerControll>();
-
-        MaxLife = playerControll.MaxHP;
-        CurrentLife = MaxLife;
     }
 
 
-    void Update()
+    public void Change(float value)
     {
-        if (playerControll.GetIsDamage())
-        {
-            CurrentLife = playerControll.GetCurrentHP();
+        ChangeValue(_slider.value + value);
+    }
 
-            //反映
-            _slider.value = (float)CurrentLife / (float)MaxLife;
-        }
+    public void Fill()
+    {
+        ChangeValue(1f);
+    }
+
+    void ChangeValue(float value)
+    {
+        // DOTween.To() を使って連続的に変化させる
+        DOTween.To(() => _slider.value, // 連続的に変化させる対象の値
+            x => _slider.value = x, // 変化させた値 x をどう処理するかを書く
+            value, // x をどの値まで変化させるか指示する
+            _changeValueInterval);   // 何秒かけて変化させるか指示する
+            //.SetEase(Ease.InOutBounce);
     }
 }
