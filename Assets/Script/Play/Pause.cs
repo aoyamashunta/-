@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-
 public class Pause : MonoBehaviour
 {
     [SerializeField]
