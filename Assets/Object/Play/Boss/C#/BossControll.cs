@@ -77,7 +77,7 @@ public class BossControll : MonoBehaviour
     void Update()
     {
         //サイコロ投法
-        if (Input.GetKeyDown(KeyCode.Return) && !IsHit)
+        if (Input.GetKeyDown(KeyCode.Space) && !IsHit)
         {
             IsDice = false;
         }
@@ -104,10 +104,10 @@ public class BossControll : MonoBehaviour
             diceValue.Ini_Number();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //bossAttack5.IsStart = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    //bossAttack5.IsStart = true;
+        //}
 
         Fall_Down();
 

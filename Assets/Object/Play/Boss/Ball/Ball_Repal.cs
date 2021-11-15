@@ -157,6 +157,26 @@ public class Ball_Repal : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        //‰ñ“]
+        if(transform.parent == null && other.gameObject.CompareTag("Ground_Rota"))
+        {
+            var empthObject = new GameObject();
+            empthObject.transform.parent = other.gameObject.transform;
+            transform.parent = empthObject.transform;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        //‰ñ“]
+        if(transform.parent != null && other.gameObject.CompareTag("Ground_Rota"))
+        {
+            transform.parent = null;
+        }
+    }
+
     void CreateEffect_Player(Vector3 Hit)
     {
         InstantEffect_Player = Instantiate(Effect_Player, Hit, Quaternion.identity);
