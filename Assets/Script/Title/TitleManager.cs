@@ -11,6 +11,30 @@ public class TitleManager : MonoBehaviour
     public Image menu;
     public Image menuBack;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public Slider sliderSound;
     public Slider sliderLight;
 
@@ -20,14 +44,12 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         menu.enabled = false;
-        sliderSound.value = 0.5f;
         sliderSound.value = PlayerPrefs.GetFloat("BGMSlider");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //gMana.StartSound(gMana.BGM[0]);
         // ê›íËâÊñ ÇÃï\é¶
         if ((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown("joystick button 6")) && !isMenuFlag)
         {
@@ -68,7 +90,7 @@ public class TitleManager : MonoBehaviour
     }
 
     // âπó è„Ç∞ÇÈ
-    void UpSound()
+    public void UpSound()
     {
         if (Input.GetKey("joystick button 5"))
         {
@@ -80,7 +102,7 @@ public class TitleManager : MonoBehaviour
     }
 
     // âπó â∫Ç∞ÇÈ
-    void DownSound()
+    public void DownSound()
     {
         if (Input.GetKey("joystick button 4"))
         {
