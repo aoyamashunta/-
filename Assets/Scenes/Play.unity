@@ -1097,8 +1097,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.33
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1675,6 +1675,22 @@ PrefabInstance:
     - target: {fileID: 1991152656479936010, guid: 7ecee0fff0a29df4bbf8cb670057c7a7, type: 3}
       propertyPath: m_Name
       value: SkyBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991152656479936010, guid: 7ecee0fff0a29df4bbf8cb670057c7a7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991152657851872823, guid: 7ecee0fff0a29df4bbf8cb670057c7a7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190283036146116871, guid: 7ecee0fff0a29df4bbf8cb670057c7a7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8715984767146655149, guid: 7ecee0fff0a29df4bbf8cb670057c7a7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ecee0fff0a29df4bbf8cb670057c7a7, type: 3}
@@ -2823,6 +2839,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground1
       objectReference: {fileID: 0}
+    - target: {fileID: 7416371079131355669, guid: 13281fb2bb39cd147a69eee7b08fa934, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7650867970239353569, guid: 13281fb2bb39cd147a69eee7b08fa934, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7650867970462056844, guid: 13281fb2bb39cd147a69eee7b08fa934, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7901546439869366447, guid: 13281fb2bb39cd147a69eee7b08fa934, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2937,6 +2965,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground4
       objectReference: {fileID: 0}
+    - target: {fileID: 8166949979699777130, guid: d4209d25d1bc2e44ea6f9a2545e28489, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8799194817202738384, guid: d4209d25d1bc2e44ea6f9a2545e28489, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2980,6 +3012,14 @@ PrefabInstance:
     - target: {fileID: 8799194817202738384, guid: d4209d25d1bc2e44ea6f9a2545e28489, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049909155743114996, guid: d4209d25d1bc2e44ea6f9a2545e28489, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049909155912493761, guid: d4209d25d1bc2e44ea6f9a2545e28489, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9049909155912493767, guid: d4209d25d1bc2e44ea6f9a2545e28489, type: 3}
       propertyPath: m_Mesh
