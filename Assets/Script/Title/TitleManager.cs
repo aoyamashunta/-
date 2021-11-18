@@ -11,30 +11,6 @@ public class TitleManager : MonoBehaviour
     public Image menu;
     public Image menuBack;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public Slider sliderSound;
     public Slider sliderLight;
 

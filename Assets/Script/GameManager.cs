@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
             Boss = null;
             _bossControll = null;
 
-            if (Input.GetKey(KeyCode.Return))
+            if (Input.GetKey(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
             {
                 SceneManager.LoadScene("Title");
             }
