@@ -14,7 +14,7 @@ public class DiceValue : MonoBehaviour
     int Y;
     int Z;
 
-    int Old_Number = 0;
+    int Old_Number = 3;
 
     DiceControll diceControll;
 

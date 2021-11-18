@@ -56,6 +56,10 @@ public class PlayerControll : MonoBehaviour
     [Space]
     public ParticleSystem DushEffect = default;
 
+    [Header("接触攻撃")]
+    [SerializeField]Vector3 _damageRangeCenter = default;
+    [SerializeField]float _damageRangeRadius = 1f;
+
 
     Animator anim = default;
 
@@ -68,6 +72,7 @@ public class PlayerControll : MonoBehaviour
 
     bool Jumping_Attack1 = false;
     bool Jumping_Attack2 = false;
+    bool Jumping_Attack3 = false;
 
     bool Idel = false;
     bool Jump_Motion = false;
@@ -183,7 +188,7 @@ public class PlayerControll : MonoBehaviour
     }
     void Input_Attack()
     {
-        if(Input.GetKeyDown("joystick button 0"))
+        if(Input.GetKeyDown("joystick button 0") && !IsAttack)
         {
             IsAttack = true;
 
@@ -206,7 +211,7 @@ public class PlayerControll : MonoBehaviour
 
             //Debug.Log("剣");
         }
-        else if(Input.GetKeyDown("joystick button 1"))
+        else if(Input.GetKeyDown("joystick button 1") && !IsAttack)
         {
             IsAttack = true;
             AttackType = 2;
@@ -217,6 +222,7 @@ public class PlayerControll : MonoBehaviour
         {
             IsAttack = false;
         }
+
     }
 
     void Jump()
@@ -245,7 +251,7 @@ public class PlayerControll : MonoBehaviour
     {
 
         //剣エフェクト（開始時、終了時の区切りが悪い、改善）
-        if(Normal_Attack1 || Normal_Attack2 || Normal_Attack3 || Normal_Attack4 || Jumping_Attack1 || Jumping_Attack2)
+        if(Normal_Attack1 || Normal_Attack2 || Normal_Attack3 || Normal_Attack4 || Jumping_Attack1 || Jumping_Attack2 || Jumping_Attack3)
         {
             SordParticle.Play(true);
             //Debug.Log("剣エフェクト発生");
@@ -255,7 +261,7 @@ public class PlayerControll : MonoBehaviour
             SordParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
         }
 
-        //剣エフェクト（開始時、終了時の区切りが悪い、改善）
+        //盾エフェクト（開始時、終了時の区切りが悪い、改善）
         if(Normal_Shild_Attack1)
         {
             ShieldParticle.Play(true);
@@ -336,6 +342,7 @@ public class PlayerControll : MonoBehaviour
 
         Jumping_Attack1 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack1");
         Jumping_Attack2 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack2");
+        Jumping_Attack3 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack3");
 
         Idel = anim.GetCurrentAnimatorStateInfo(0).IsName("idel");
         Jump_Motion = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump");
@@ -351,7 +358,7 @@ public class PlayerControll : MonoBehaviour
 
 
         //通常攻撃処理
-        if (AttackType != 0 && Idel)
+        if (AttackType != 0 && (Idel || Jump_Motion))
         {
             AttackType = 0;
             IsAttack = false;
@@ -367,20 +374,20 @@ public class PlayerControll : MonoBehaviour
 
         //ジャンプ攻撃処理
         //攻撃時の移動速度の減少
-        if (Jumping_Attack1 || Jumping_Attack2)
+        if (Jumping_Attack1 || Jumping_Attack2 || Jumping_Attack3)
         {
             moveSpeed = Dush;
         }
 
 
         //ジャンプ攻撃時の上昇
-        if (Jumping_Attack1 || Jumping_Attack2)
+        if (Jumping_Attack1 || Jumping_Attack2 || Jumping_Attack3)
         {
             rb.velocity = new Vector3(0, Attack_PlayerUp, 0);
         }
 
         //コンボ技が地面に接触しなきゃ再び使用できない
-        if (Jumping_Attack2)
+        if (Jumping_Attack2 | Jumping_Attack3)
         {
             IsJumping_ComboStop = true;
         }
@@ -441,7 +448,7 @@ public class PlayerControll : MonoBehaviour
     {
         if(Normal_Attack1 || Normal_Attack2 || Normal_Attack3 || Normal_Attack4 ||
             Normal_Shild_Attack1 || 
-            Jumping_Attack1 || Jumping_Attack2)
+            Jumping_Attack1 || Jumping_Attack2 || Jumping_Attack3)
         {
             IsAttack_Motion = true;
         }
@@ -461,4 +468,37 @@ public class PlayerControll : MonoBehaviour
     {
         return HP;
     }
+
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(GetDamageRangeCenter(), _damageRangeRadius);
+    }
+
+    //範囲計算
+    Vector3 GetDamageRangeCenter()
+    {
+        Vector3 center = this.transform.position + this.transform.forward * _damageRangeCenter.z
+            + this.transform.up * _damageRangeCenter.y
+            + this.transform.right * _damageRangeCenter.x;
+        return center;
+    }
+
+    void Sword_Attack()
+    {
+        //範囲内にコライダー入っているか
+        var cols = Physics.OverlapSphere(GetDamageRangeCenter(), _damageRangeRadius);
+    
+        foreach (var c in cols)
+        {
+            BossControll _bossControll = c.GetComponent<BossControll>();
+
+            if (_bossControll)
+            {
+                _bossControll.Damage();
+            }
+        }
+    }
+
 }

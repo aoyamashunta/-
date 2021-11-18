@@ -17,6 +17,9 @@ public class Rock_Control : MonoBehaviour
 
     private GameObject InstantObject = default;
 
+    float time = 0f;
+    float Max_time = 8f;
+
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -26,6 +29,12 @@ public class Rock_Control : MonoBehaviour
     void Update()
     {
         Delete();
+
+        time += Time.deltaTime;
+        if(time >= Max_time)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void Delete()

@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsHit: 0
   L_R_Height: 30
-  Frame: 65
+  Frame: 80
   Center_Ratio: 0.9
   Effect_Player: {fileID: 8977368957349691538, guid: b445df1851d0bd349857ea16e83e37f9, type: 3}
   Effect_Boss: {fileID: 7690879241798256905, guid: 696f1498a11fb3e45afd692fa4cb4641, type: 3}

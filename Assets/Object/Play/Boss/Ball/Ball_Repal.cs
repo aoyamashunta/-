@@ -40,6 +40,7 @@ public class Ball_Repal : MonoBehaviour
     GameObject InstantEffect_Boss = default;
     Vector3 HitPos_Boss = default;
 
+
     void Start()
     {
         Shield = GameObject.FindGameObjectWithTag("Shield");

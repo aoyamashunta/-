@@ -111,10 +111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Reserve_Speed: 10
-  TopSpeed: 2
-  Homing_Speed: 5
+  TopSpeed: 3.5
+  Homing_Speed: 5.5
   dis: 10
-  time: 10
+  time: 20
 --- !u!54 &8712628009908786712
 Rigidbody:
   m_ObjectHideFlags: 0

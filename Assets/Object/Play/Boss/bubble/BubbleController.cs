@@ -85,7 +85,7 @@ public class BubbleController : MonoBehaviour
     //€”õ
     void Reserve()
     {
-        float minus = Random.Range(0.1f, 0.25f);
+        float minus = Random.Range(0.05f, 0.15f);
 
         if (Reserve_Speed >= 0f && ChangeFlame < 50)
         {
