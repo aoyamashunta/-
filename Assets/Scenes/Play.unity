@@ -2628,6 +2628,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5857016395540968799, guid: 9dd6bb5be9c6e3143b74f28f32950914, type: 3}
+      propertyPath: MaxHP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857016395540968799, guid: 9dd6bb5be9c6e3143b74f28f32950914, type: 3}
       propertyPath: vCamera
       value: 
       objectReference: {fileID: 1812511570}
@@ -2909,11 +2913,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8483596359222895239, guid: 7da9af2cb4504d54b9578fd62eb0cd6b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0057543395
+      value: 0.005754266
       objectReference: {fileID: 0}
     - target: {fileID: 8483596359222895239, guid: 7da9af2cb4504d54b9578fd62eb0cd6b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0017812271
+      value: -0.0017812044
       objectReference: {fileID: 0}
     - target: {fileID: 8483596359222895239, guid: 7da9af2cb4504d54b9578fd62eb0cd6b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

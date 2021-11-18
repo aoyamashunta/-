@@ -11,21 +11,26 @@ public class Player_Life : MonoBehaviour
     //シリンダー
     public Slider _slider;
 
-    //体力
-    int MaxLife;
-    int CurrentLife;
-
     //プレイヤーコンポーネント
     PlayerControll playerControll;
 
     [SerializeField] float _changeValueInterval = 0.5f;
 
 
+    public bool IsDead = false;
+
     void Start()
     {
         _slider.value = 1;
     }
 
+    private void Update()
+    {
+        if(_slider.value <= 0)
+        {
+            IsDead = true;
+        }
+    }
 
     public void Change(float value)
     {
@@ -36,6 +41,8 @@ public class Player_Life : MonoBehaviour
     {
         ChangeValue(1f);
     }
+
+
 
     void ChangeValue(float value)
     {

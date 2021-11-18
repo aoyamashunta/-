@@ -58,7 +58,8 @@ public class BossControll : MonoBehaviour
 
     //死亡
     public bool IsDead = false;
-    float Camera_Change = 0f;
+    public float Camera_Change = 0f;
+    public bool IsChange_Scene = false;
 
     [Header("専用カメラ")]
     public CinemachineVirtualCamera vCamera = default;
@@ -91,16 +92,16 @@ public class BossControll : MonoBehaviour
     {
         if(!IsDead){
             //ダイスロール
-            //if (!IsHit && IsDice)
-            //{
-            //    time += Time.deltaTime;
+            if (!IsHit && IsDice)
+            {
+                time += Time.deltaTime;
 
-            //    if (time >= Roll_Interval)
-            //    {
-            //        IsDice = false;
-            //        time = 0f;
-            //    }
-            //}
+                if (time >= Roll_Interval)
+                {
+                    IsDice = false;
+                    time = 0f;
+                }
+            }
 
             //攻撃パターン
             if (diceValue.GetNumber() == 1 || diceValue.GetNumber() == 6)
@@ -216,12 +217,13 @@ public class BossControll : MonoBehaviour
             Destroy(InstantObject);
             vCamera.Priority = 15;
 
-            if(Camera_Change < 4f){
+            if(Camera_Change <= 5f){
                 Camera_Change += Time.deltaTime;
             }
             else if(Camera_Change >= 2.5f)
             {
                 vCamera.Priority = 5;
+                IsChange_Scene = true;
             }
         }
     }

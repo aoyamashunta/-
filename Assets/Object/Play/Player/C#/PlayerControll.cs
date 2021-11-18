@@ -281,6 +281,7 @@ public class PlayerControll : MonoBehaviour
         }
     }
 
+
     void Wake_Up()
     {
         if (IsDamage)

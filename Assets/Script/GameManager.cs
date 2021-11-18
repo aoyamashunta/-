@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
     public AudioSource[] BGM;
     public AudioSource[] SE;
 
+    private GameObject Player = default;
+    private Player_Life _playerControll = default;
+
+    private GameObject Boss = default;
+    private BossControll _bossControll = default;
+
 
     private void Start()
     {
@@ -49,13 +55,22 @@ public class GameManager : MonoBehaviour
         //ƒvƒŒƒC
         if (SceneManager.GetActiveScene().name == "Play")
         {
+            if(Player == null && _playerControll == null){
+                Player = GameObject.FindGameObjectWithTag("Player");
+                _playerControll = Player.GetComponent<Player_Life>();
+            }
+            else if(Boss == null && _bossControll == null){
+                Boss = GameObject.FindGameObjectWithTag("Boss");
+                _bossControll = Boss.GetComponent<BossControll>();
+            }
 
-            if (Input.GetKey(KeyCode.Return))
+
+            if (_bossControll != null && _bossControll.IsChange_Scene)
             {
                 SceneManager.LoadScene("Clear");
             }
 
-            if (Input.GetKey(KeyCode.Backspace))
+            if (_playerControll != null && _playerControll.IsDead)
             {
                 SceneManager.LoadScene("Over");
             }
@@ -63,6 +78,11 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Clear" || SceneManager.GetActiveScene().name == "Over")
         {
+            Player = null;
+            _playerControll = null;
+            Boss = null;
+            _bossControll = null;
+
             if (Input.GetKey(KeyCode.Return))
             {
                 SceneManager.LoadScene("Title");
