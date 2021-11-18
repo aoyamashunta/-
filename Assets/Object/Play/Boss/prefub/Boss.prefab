@@ -13871,7 +13871,7 @@ MonoBehaviour:
   Invincible_MaxFlame: 15
   Wake_Up_Time: 0
   Max_Wake_Time: 10
-  Roll_Interval: 5
+  Roll_Interval: 10
   IsDead: 0
   vCamera: {fileID: 0}
 --- !u!114 &1028933572838684248
@@ -13890,11 +13890,11 @@ MonoBehaviour:
   WaveMax: 6
   bullet: {fileID: 1229592206266963593, guid: 812e3942a01b8774faa203987246387d, type: 3}
   Barrel: {fileID: 5236363312527321721}
-  BulletWayNum: 30
+  BulletWayNum: 60
   BulletWaySpace: 180
   BulletWayAxis: 180
   time: 2.5
-  delayTime: 1
+  delayTime: 0.5
 --- !u!114 &8967464725345732712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13931,10 +13931,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 5512437095312566514, guid: 61b5f3b9926b385459ac978967241b61, type: 3}
-  Barrel: {fileID: 8632557430174856879}
+  Barrel: {fileID: 8160478480079715336}
   _speedRange: 500
-  _speedMin: 400
-  _speedMax: 550
+  _speedMin: 350
+  _speedMax: 600
   IsStart: 0
   BallNum: 0
   BallMaxNum: 1
@@ -13966,10 +13966,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 770fdac23d5c0f04495c08d979cb840d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.31
-  m_Height: 1.44
+  m_Radius: 0.42
+  m_Height: 1.86
   m_Direction: 1
-  m_Center: {x: -0.03, y: 1.33, z: 0}
+  m_Center: {x: -0.03, y: 1.07, z: 0}
 --- !u!114 &1379055359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13983,10 +13983,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsStart: 0
-  Niddle: {fileID: 0}
+  Niddle: {fileID: 4359021214589570481, guid: 29a640f5d8d92c9438e0fc48a2fb46c4, type: 3}
   R: 15
   CreateTime: 1
-  MaxNum: 1
+  MaxNum: 3
 --- !u!114 &1379055360
 MonoBehaviour:
   m_ObjectHideFlags: 0

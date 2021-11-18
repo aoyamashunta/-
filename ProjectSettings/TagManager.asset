@@ -12,6 +12,8 @@ TagManager:
   - Ground
   - Dice
   - Ground_Rota
+  - Niddle
+  - Rock
   layers:
   - Default
   - TransparentFX

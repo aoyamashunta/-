@@ -1829,14 +1829,16 @@ MonoBehaviour:
   Dush: 1
   Min: 5
   Max: 9
-  JumpPower: 150
-  Attack_PlayerUp: 1
+  JumpPower: 125
+  Attack_PlayerUp: 0.1
   MaxHP: 20
   WakeUp_MaxTime: 1
   Invincible_MaxFlame: 20
   SordParticle: {fileID: 9161485103530870276}
   ShieldParticle: {fileID: 1518686136317485532}
-  DushEffect: {fileID: 9134655361694970591, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
+  DushEffect: {fileID: 2543335054315627798}
+  _damageRangeCenter: {x: 0, y: 1, z: 1}
+  _damageRangeRadius: 1
 --- !u!114 &2224470243551011482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2251,7 +2253,6 @@ GameObject:
   - component: {fileID: 6230229601760249200}
   - component: {fileID: 6202512159846676882}
   - component: {fileID: 6211869556404854108}
-  - component: {fileID: 535106140967739137}
   - component: {fileID: 2504521513943299913}
   m_Layer: 0
   m_Name: Sword
@@ -2325,18 +2326,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &535106140967739137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6225636334624509454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebfc1521fdb99c649a9cae3e56146c09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2504521513943299913
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2503,6 +2492,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
+      propertyPath: ShapeModule.type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
+      propertyPath: ShapeModule.m_Position.z
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.16862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
 --- !u!4 &1518686136317485530 stripped
@@ -2522,6 +2539,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6230229601760249200}
     m_Modifications:
+    - target: {fileID: 6583758234745778531, guid: 2814a931fd0032641b76892cb881d20e, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.15686275
+      objectReference: {fileID: 0}
     - target: {fileID: 6583758234745778532, guid: 2814a931fd0032641b76892cb881d20e, type: 3}
       propertyPath: m_Icon
       value: 
@@ -2576,14 +2597,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2814a931fd0032641b76892cb881d20e, type: 3}
---- !u!198 &9161485103530870276 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6583758234745778531, guid: 2814a931fd0032641b76892cb881d20e, type: 3}
-  m_PrefabInstance: {fileID: 2628438698868258663}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9161485103530870274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6583758234745778533, guid: 2814a931fd0032641b76892cb881d20e, type: 3}
+  m_PrefabInstance: {fileID: 2628438698868258663}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &9161485103530870276 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6583758234745778531, guid: 2814a931fd0032641b76892cb881d20e, type: 3}
   m_PrefabInstance: {fileID: 2628438698868258663}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6741727455578036169
@@ -2646,5 +2667,10 @@ PrefabInstance:
 --- !u!4 &2543335054315627799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9134655361694970590, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
+  m_PrefabInstance: {fileID: 6741727455578036169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2543335054315627798 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9134655361694970591, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
   m_PrefabInstance: {fileID: 6741727455578036169}
   m_PrefabAsset: {fileID: 0}
