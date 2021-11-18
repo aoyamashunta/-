@@ -8202,6 +8202,7 @@ Transform:
   - {fileID: 7222623266523056288}
   - {fileID: 8758457943250575196}
   - {fileID: 4130094179134095187}
+  - {fileID: 5140181575212666239}
   m_Father: {fileID: 4148790555008506249}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13825,7 +13826,7 @@ Transform:
   - {fileID: 8861756434349303460}
   - {fileID: 305779762214811733}
   - {fileID: 7240065404739862363}
-  - {fileID: 5140181575212666239}
+  - {fileID: 1753908795739383332}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -13865,10 +13866,14 @@ MonoBehaviour:
   UP_Fall: 3
   Down_Fall: 5
   MaxHP: 20
+  HP: 0
   Barrier: {fileID: 1071956662809644196, guid: 61702d17fd187034e8d8f057318baeba, type: 3}
   Invincible_MaxFlame: 15
   Wake_Up_Time: 0
   Max_Wake_Time: 10
+  Roll_Interval: 5
+  IsDead: 0
+  vCamera: {fileID: 0}
 --- !u!114 &1028933572838684248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13927,10 +13932,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ball: {fileID: 5512437095312566514, guid: 61b5f3b9926b385459ac978967241b61, type: 3}
   Barrel: {fileID: 8632557430174856879}
-  Speed: 1000
+  _speedRange: 500
+  _speedMin: 400
+  _speedMax: 550
   IsStart: 0
   BallNum: 0
   BallMaxNum: 1
+  _vectorMin: -1
+  _vectorMax: 1
 --- !u!54 &2100852987990848949
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13973,6 +13982,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f9f360a7fc74e149a9902759c05edd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsStart: 0
+  Niddle: {fileID: 0}
+  R: 15
+  CreateTime: 1
+  MaxNum: 1
 --- !u!114 &1379055360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16844,12 +16858,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7155699086290782000}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.027, y: 1.445, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.12581965, y: -0, z: -0, w: 0.99205315}
+  m_LocalPosition: {x: 0, y: 0.004351043, z: -0.0005516578}
+  m_LocalScale: {x: 0.010000001, y: 0.0100000035, z: 0.010000001}
   m_Children: []
-  m_Father: {fileID: 6405193604511894986}
-  m_RootOrder: 4
+  m_Father: {fileID: 6499728521111346288}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &2100852987214190457
 SphereCollider:
@@ -19794,6 +19808,36 @@ Transform:
   m_Father: {fileID: 3402660048055372336}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8160478480079715336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1753908795739383332}
+  m_Layer: 0
+  m_Name: barrel3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1753908795739383332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160478480079715336}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.171, y: 1.204, z: 0.828}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6405193604511894986}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &8163918328638056288
 GameObject:
   m_ObjectHideFlags: 0

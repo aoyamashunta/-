@@ -91,16 +91,16 @@ public class BossControll : MonoBehaviour
     {
         if(!IsDead){
             //ダイスロール
-            if (!IsHit && IsDice)
-            {
-                time += Time.deltaTime;
+            //if (!IsHit && IsDice)
+            //{
+            //    time += Time.deltaTime;
 
-                if (time >= Roll_Interval)
-                {
-                    IsDice = false;
-                    time = 0f;
-                }
-            }
+            //    if (time >= Roll_Interval)
+            //    {
+            //        IsDice = false;
+            //        time = 0f;
+            //    }
+            //}
 
             //攻撃パターン
             if (diceValue.GetNumber() == 1 || diceValue.GetNumber() == 6)
