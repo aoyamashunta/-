@@ -41,6 +41,7 @@ public class BossAttack2 : MonoBehaviour
     //現在のタイム
     float NowTime = 0f;
 
+    GameObject[] tagObject = default;
 
     void Start()
     {
@@ -53,6 +54,7 @@ public class BossAttack2 : MonoBehaviour
     {
         if(IsStart)
         {
+
             //タイム管理
             NowTime -= Time.deltaTime;
 
@@ -66,6 +68,9 @@ public class BossAttack2 : MonoBehaviour
 
                 //生成
                 CreateShotObject(BulletWaySpace - BulletWaySpeceSplit + BulletWayAxis - transform.localEulerAngles.y);
+
+                tagObject = GameObject.FindGameObjectsWithTag("Bubble");
+                //Debug.Log("Bubble数:"+tagObject.Length);
 
                 //角度調整
                 BulletWaySpeceSplit += (BulletWaySpace / (BulletWayNum - 1)) * 2;
@@ -98,5 +103,19 @@ public class BossAttack2 : MonoBehaviour
         //角度変更
         BulletObject.SetForwardAxis(Quaternion.AngleAxis(axis, Vector3.up));
 
+    }
+
+    public void Delete()
+    {
+        IsStart = false;
+
+        if(tagObject != null){
+            for(int i = 0; i < tagObject.Length;i++){
+                Destroy(tagObject[i]);
+            }
+        }
+
+        Num = 0;
+        NowTime = time;
     }
 }

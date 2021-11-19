@@ -46,6 +46,7 @@ public class BossAttack1 : MonoBehaviour
     //現在のタイム
     float NowTime = 0f;
 
+    GameObject[] tagObject = default;
 
     void Start()
     {
@@ -74,6 +75,9 @@ public class BossAttack1 : MonoBehaviour
                 {
                     //生成
                     CreateShotObject(BulletWaySpace - BulletWaySpeceSplit + BulletWayAxis - transform.localEulerAngles.y);
+
+                    tagObject = GameObject.FindGameObjectsWithTag("Bullet");
+                    Debug.Log("Bullet数:"+tagObject.Length);
 
                     //角度調整
                     BulletWaySpeceSplit += (BulletWaySpace / (BulletWayNum - 1)) * 2;
@@ -124,5 +128,21 @@ public class BossAttack1 : MonoBehaviour
 
         //角度変更
         BulletObject.SetForwardAxis(Quaternion.AngleAxis(axis, Vector3.up));
+    }
+
+    public void Delete()
+    {
+        IsStart = false;
+
+        if(tagObject != null){
+            for(int i = 0; i < tagObject.Length;i++){
+                Destroy(tagObject[i]);
+            }
+        }
+
+        IsChange = false;
+        BulletWayAxis = 180f;
+        NowTime = time;
+        WaveNumber = 0;
     }
 }

@@ -35,6 +35,8 @@ public class BossAttack4 : MonoBehaviour
     //プレイヤーを中心
     GameObject Player = default;
 
+    GameObject[] tagObject = default;
+
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -50,6 +52,9 @@ public class BossAttack4 : MonoBehaviour
 
     void Create()
     {
+        tagObject = GameObject.FindGameObjectsWithTag("Rock");
+        //Debug.Log("Rock数:"+tagObject.Length);
+
         time = time + Time.deltaTime;
 
         if (Num >= MaxNum)
@@ -77,4 +82,14 @@ public class BossAttack4 : MonoBehaviour
         z = Random.Range(Player.transform.position.z - R, Player.transform.position.z + R);
     }
 
+    public void Delete()
+    {
+        IsStart = false;
+        time = 0;
+        Num = 0;
+
+        for(int i = 0; i < tagObject.Length;i++){
+            Destroy(tagObject[i]);
+        }
+    }
 }

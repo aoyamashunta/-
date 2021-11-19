@@ -104,4 +104,11 @@ public class DiceValue : MonoBehaviour
     {
         return Number;
     }
+
+    public void Delete()
+    {
+        Old_Number = Number;
+        Number = 0;
+        IsRoll = false;
+    }
 }

@@ -50,13 +50,13 @@ public class BossAttack5 : MonoBehaviour
         {
             Create();
         }
-
-        tagObject = GameObject.FindGameObjectsWithTag("Niddle");
-        //Debug.Log("Niddle”:"+tagObject.Length);
     }
 
     void Create()
     {
+        tagObject = GameObject.FindGameObjectsWithTag("Niddle");
+        //Debug.Log("Niddle”:"+tagObject.Length);
+
         time = time + Time.deltaTime;
 
         if (Num >= MaxNum)
@@ -70,7 +70,6 @@ public class BossAttack5 : MonoBehaviour
         {
             Distance();
             InstantObject = Instantiate(Niddle, new Vector3(x, y - 20f, z), Niddle.transform.rotation);
-
             Num++;
 
             time = 0;
@@ -82,5 +81,16 @@ public class BossAttack5 : MonoBehaviour
         x = Random.Range(Player.transform.position.x - R, Player.transform.position.x + R);
         y = Parent.transform.position.y;
         z = Random.Range(Player.transform.position.z - R, Player.transform.position.z + R);
+    }
+
+    public void Delete()
+    {
+        IsStart = false;
+        time = 0;
+        Num = 0;
+
+        for(int i = 0; i < tagObject.Length;i++){
+            Destroy(tagObject[i]);
+        }
     }
 }

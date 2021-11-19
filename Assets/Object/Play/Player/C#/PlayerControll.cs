@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Cinemachine;
 public class PlayerControll : MonoBehaviour
 {
     float Horizontal;
@@ -83,7 +84,12 @@ public class PlayerControll : MonoBehaviour
     bool IsAttack = false;
     bool IsJump = false;
     bool IsAttack_Motion = false;
+
+    //カメラ
+    //[Header("カメラ")]
+    //[SerializeField] private CinemachineVirtualCamera vCamera = default;
  
+    //GameObject Boss = default;
 
 
     private void Awake()
@@ -99,11 +105,12 @@ public class PlayerControll : MonoBehaviour
         player_Life = GetComponent<Player_Life>();
 
         HP = MaxHP;
+
+        //Boss = GameObject.FindGameObjectWithTag("Boss");
     }
  
     void Update() {
         //移動
-
         if(!IsAttack){
             Move();
             Sprint();
@@ -118,6 +125,28 @@ public class PlayerControll : MonoBehaviour
         //ダメージ後の処理
         Wake_Up();
         Invincible();
+
+        //カメラ変更(Protype)
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    if(vCamera.Priority == 5){
+        //        vCamera.Priority = 11;
+
+        //        // 対象物と自分自身の座標からベクトルを算出
+		      //  Vector3 vector3 = Boss.transform.position - this.transform.position;
+		      //  // もし上下方向の回転はしないようにしたければ以下のようにする。
+		      //   vector3.y = 0f;
+
+		      //  // Quaternion(回転値)を取得
+		      //  Quaternion quaternion = Quaternion.LookRotation(vector3);
+		      //  // 算出した回転値をこのゲームオブジェクトのrotationに代入
+		      //  this.transform.rotation = quaternion;
+        //    }
+        //    else if(vCamera.Priority == 11)
+        //    {
+        //        vCamera.Priority = 5;
+        //    }
+        //}
 
         //描画
         Effect();
@@ -280,7 +309,6 @@ public class PlayerControll : MonoBehaviour
             player_Life.Change(-0.1f);
         }
     }
-
 
     void Wake_Up()
     {

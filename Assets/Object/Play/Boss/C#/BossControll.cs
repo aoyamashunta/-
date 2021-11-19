@@ -19,6 +19,7 @@ public class BossControll : MonoBehaviour
     BossAttack5 bossAttack5 = default;
 
     GameObject Dice = default;
+    DiceControll diceControll = default;
     DiceValue diceValue = default;
 
     Animator animator = default;
@@ -73,6 +74,7 @@ public class BossControll : MonoBehaviour
         bossAttack5 = this.GetComponent<BossAttack5>();
 
         Dice = GameObject.FindGameObjectWithTag("Dice");
+        diceControll = Dice.GetComponent<DiceControll>();
         diceValue = Dice.GetComponent<DiceValue>();
 
         animator = this.GetComponent<Animator>();
@@ -247,6 +249,8 @@ public class BossControll : MonoBehaviour
     {
         if(IsHit && IsDamageable_State && !IsWake_Up)
         {
+            Down();
+
             Wake_Up_Time += Time.deltaTime;
 
             if(Wake_Up_Time >= Max_Wake_Time)
@@ -261,6 +265,15 @@ public class BossControll : MonoBehaviour
                 Destroy(InstantObject);
             }
         }
+    }
+
+    void Down()
+    {
+        bossAttack1.Delete();
+        bossAttack2.Delete();
+
+        diceControll.Delete();
+        diceValue.Delete();
     }
 
     //‹N‚«‚é

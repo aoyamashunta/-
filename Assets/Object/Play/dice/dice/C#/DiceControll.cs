@@ -164,4 +164,14 @@ public class DiceControll : MonoBehaviour
     {
         Destroy(InstantEffect);
     }
+
+    public void Delete()
+    {
+        IsStop = false;
+        bossControll.IsDice = true;
+        flame = 0f;
+        this.gameObject.transform.rotation = Quaternion.Euler(0,0,0);
+
+        IsChange = false;
+    }
 }
