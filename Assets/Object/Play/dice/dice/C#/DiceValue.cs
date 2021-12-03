@@ -14,13 +14,22 @@ public class DiceValue : MonoBehaviour
     int Y;
     int Z;
 
-    int Old_Number = 3;
+    //int Old_Number = 3;
+    int[] Old_Numbers = new int[6];
+    int array = -1;
 
     DiceControll diceControll;
+
+    GameObject Player = default;
+
+    Vector3 vector3 = default;
+    Quaternion quaternion = default;
 
     void Start()
     {
         diceControll = this.gameObject.GetComponent<DiceControll>();
+
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
 
@@ -43,13 +52,17 @@ public class DiceValue : MonoBehaviour
         if (IsRoll)
         {
             Number = Random.Range(1, 7);
+            array += 1;
+            //Debug.Log(array);
 
             //“¯”ƒ‹[ƒv
-            if(Old_Number == Number)
+            for (int i = 0; i < 6; i++)
             {
-                while(Old_Number == Number)
-                {
-                    Number = Random.Range(1,7);
+                if(Old_Numbers[i] == Number){
+                    while(Old_Numbers[i] == Number)
+                    {
+                        Number = Random.Range(1, 7);
+                    }
                 }
             }
 
@@ -78,7 +91,12 @@ public class DiceValue : MonoBehaviour
                 Stop_Rotation(0, 0, 0);
             }
 
-            this.gameObject.transform.rotation = Quaternion.Euler(X, Y, Z);
+            vector3 = Player.transform.position - this.transform.position;
+            vector3.y = 0f;
+            quaternion = Quaternion.LookRotation(-vector3);
+
+
+            this.gameObject.transform.rotation = quaternion * Quaternion.Euler(X, Y, Z);
 
             IsRoll = false;
 
@@ -95,8 +113,18 @@ public class DiceValue : MonoBehaviour
 
     public void Ini_Number()
     {
+        //Debug.Log("Number:"+Number);
+        Old_Numbers[array] = Number;
 
-        Old_Number = Number;
+        if(array == 5)
+        {
+            for(int i = 0; i < 6; i++)
+            {
+                Old_Numbers[i] = 0;
+            }
+            array = -1;
+        }
+
         Number = 0;
     }
 
@@ -107,7 +135,14 @@ public class DiceValue : MonoBehaviour
 
     public void Delete()
     {
-        Old_Number = Number;
+        Old_Numbers[array] = Number;
+
+        for(int i = 0; i < 6; i++)
+        {
+            Old_Numbers[i] = 0;
+        }
+        array = -1;
+
         Number = 0;
         IsRoll = false;
     }

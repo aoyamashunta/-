@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class Ball_Repal : MonoBehaviour
 {
-    GameObject Shield = default;
-    Shield_Controll shield_Controll = default;
+    [Header("Tutorial(ON) or Play(Off)")]
+    [SerializeField]private bool IsTutorial = false;
 
-    GameObject Boss = default;
+    //GameObject Shield = default;
+    //Shield_Controll shield_Controll = default;
+
+    //ボス中心
+    GameObject Boss_Center = default;
+    //ボス自身(コンポーネント用)
     GameObject BOSS = default;
 
+    //TUtorial
+    //中心
+    GameObject Box_Center = default;
+    //コンポーネント用
+    GameObject Box = default;
+
+    //Player
     GameObject Player = default;
     PlayerControll playerControll = default;
 
@@ -17,7 +29,10 @@ public class Ball_Repal : MonoBehaviour
     public bool IsHit = false;
 
     Vector3 Ball_Pos = default;
+
     Vector3 Boss_Pos = default;
+    Vector3 Box_Pos = default;
+
     Vector3 Player_Pos = default;
 
     bool IsRepel = false;
@@ -40,14 +55,22 @@ public class Ball_Repal : MonoBehaviour
     GameObject InstantEffect_Boss = default;
     Vector3 HitPos_Boss = default;
 
+    GameObject empthObject = default;
 
     void Start()
     {
-        Shield = GameObject.FindGameObjectWithTag("Shield");
-        shield_Controll = Shield.GetComponent<Shield_Controll>();
+        //Shield = GameObject.FindGameObjectWithTag("Shield");
+        //shield_Controll = Shield.GetComponent<Shield_Controll>();
 
-        Boss = GameObject.FindGameObjectWithTag("Boss_Body");
-        BOSS = GameObject.FindGameObjectWithTag("Boss");
+        if(!IsTutorial){
+            Boss_Center = GameObject.FindGameObjectWithTag("Boss_Body");
+            BOSS = GameObject.FindGameObjectWithTag("Boss");
+        }
+        else if (IsTutorial){
+            Box = GameObject.FindGameObjectWithTag("Box");
+            Box_Center = GameObject.FindGameObjectWithTag("Head_Center");
+        }
+
 
         Player = GameObject.FindGameObjectWithTag("Player");
         playerControll = Player.GetComponent<PlayerControll>();
@@ -60,34 +83,36 @@ public class Ball_Repal : MonoBehaviour
         {
             PlayerAngle = Player.transform.eulerAngles.y * (Mathf.PI / 180.0f);
 
-            //Debug.Log("Angle:"+PlayerAngle);
-
             if(PlayerAngle >= 0 && PlayerAngle <= 3.14)
             {
-                //Debug.Log("右");
                 IsTurn = false;
             }
             else if(PlayerAngle >= 3.14 && PlayerAngle <= 6.3)
             {
-                //Debug.Log("左");
                 IsTurn = true;
             }
 
             IsThrow = true;
 
             Ball_Pos = this.transform.position;
-            Boss_Pos = Boss.transform.position;
+
+            if(!IsTutorial)     Boss_Pos = Boss_Center.transform.position;
+            else if(IsTutorial) Box_Pos = Box_Center.transform.position;
+
             Player_Pos = Player.transform.position;
         }
 
         if (IsThrow)
         {
-            StartThrow(this.gameObject, L_R_Height, Ball_Pos, Boss_Pos, Frame);
+            if(!IsTutorial)     StartThrow(this.gameObject, L_R_Height, Ball_Pos, Boss_Pos, Frame);
+            else if(IsTutorial) StartThrow(this.gameObject, L_R_Height, Ball_Pos, Box_Pos, Frame);
         }
 
         if (IsHit)
         {
-            BOSS.GetComponent<BossControll>().Hit();
+            if(!IsTutorial)     BOSS.GetComponent<BossControll>().Hit();
+            //else if(IsTutorial) Box.GetComponent<Gate_Control>().IsStart = true;
+
             Destroy(this.gameObject);
         }
     }
@@ -135,8 +160,16 @@ public class Ball_Repal : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision){
  
-        //SphereがPlaneと衝突している場合
         if (collision.gameObject.name == "Boss_Body_Cen")
+        {
+            //Effect
+            HitPos_Boss = collision.ClosestPointOnBounds(this.transform.position);
+            CreateEffect_Boss(HitPos_Boss);
+
+            IsHit = true;
+        }
+
+        if (collision.gameObject.CompareTag("Box"))
         {
             //Effect
             HitPos_Boss = collision.ClosestPointOnBounds(this.transform.position);
@@ -163,7 +196,7 @@ public class Ball_Repal : MonoBehaviour
         //回転
         if(transform.parent == null && other.gameObject.CompareTag("Ground_Rota"))
         {
-            var empthObject = new GameObject();
+            empthObject = new GameObject();
             empthObject.transform.parent = other.gameObject.transform;
             transform.parent = empthObject.transform;
         }
@@ -175,6 +208,7 @@ public class Ball_Repal : MonoBehaviour
         if(transform.parent != null && other.gameObject.CompareTag("Ground_Rota"))
         {
             transform.parent = null;
+            Destroy(empthObject);
         }
     }
 
@@ -188,8 +222,4 @@ public class Ball_Repal : MonoBehaviour
         InstantEffect_Boss = Instantiate(Effect_Boss, Hit, Quaternion.identity);
     }
 
-    public bool GetIsRepal()
-    {
-        return IsRepel;
-    }
 }

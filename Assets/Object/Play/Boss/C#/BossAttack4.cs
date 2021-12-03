@@ -13,7 +13,7 @@ public class BossAttack4 : MonoBehaviour
     [SerializeField] private float R = 15f;
 
     [Header("ê∂ê¨ä‘äu(S)")]
-    [SerializeField] private int CreateTime = 1;
+    [SerializeField] private float CreateTime = 1;
 
     [Header("ê∂ê¨ëçêî")]
     [SerializeField] private int MaxNum = 1;
@@ -68,7 +68,7 @@ public class BossAttack4 : MonoBehaviour
         {
             Distance();
 
-            Instantiate(Rock, new Vector3(x, y, z), Rock.transform.rotation);
+            Instantiate(Rock, new Vector3(x, y, z), Quaternion.identity);
             Num++;
 
             time = 0;
@@ -88,8 +88,10 @@ public class BossAttack4 : MonoBehaviour
         time = 0;
         Num = 0;
 
-        for(int i = 0; i < tagObject.Length;i++){
-            Destroy(tagObject[i]);
+        if(tagObject != null){
+            for(int i = 0; i < tagObject.Length;i++){
+                Destroy(tagObject[i]);
+            }
         }
     }
 }

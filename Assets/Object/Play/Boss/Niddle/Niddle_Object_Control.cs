@@ -7,8 +7,6 @@ public class Niddle_Object_Control : MonoBehaviour
     GameObject Player = default;
     PlayerControll playerControll = default;
 
-    bool IsNoDamage = false;
-
     RaycastHit hit;
 
     bool IsHit = false;
@@ -19,6 +17,9 @@ public class Niddle_Object_Control : MonoBehaviour
 
     private GameObject InstantObject = default;
 
+    bool IsDamage = false;
+
+    GameObject empthObject = default;
 
     void Start()
     {
@@ -50,7 +51,8 @@ public class Niddle_Object_Control : MonoBehaviour
         {
             this.transform.position = new Vector3(transform.position.x, hit.transform.position.y - 2.5f, transform.position.z);
             isEnable = false;
-            var empthObject = new GameObject();
+
+            empthObject = new GameObject();
             empthObject.transform.parent = hit.collider.gameObject.transform;
             transform.parent = empthObject.transform;
         }
@@ -58,20 +60,27 @@ public class Niddle_Object_Control : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision){
 
-        if (collision.CompareTag("Shield") && IsNoDamage)
+        if (collision.CompareTag("Shield"))
         {
             if(playerControll.GetNormal_Shild_Attack1())
             {
                 Destroy(this.gameObject);
+                Destroy(empthObject);
                 InstantObject = Instantiate(Effect, transform.position, Quaternion.identity);
             }
         }
     }
 
-    public void Damage_On()
+    void DamageOn()
     {
-        IsNoDamage = true;
+        IsDamage = true;
     }
+
+    public bool GetDamageOn()
+    {
+        return IsDamage;
+    }
+
 
     //IsNoDamageがオフの間Shield接触コライダーとは別のコライダーをOnにしといて頭上のGroundを取得して高さ判定
     //IsNoDamageがオフの時にGizmosを使い頭上に接触したGroundを取得し高さ調整(上だと無駄なコンポーネントを作りInspectorをわかりにくくするためしたので検討すべき)

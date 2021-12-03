@@ -20,6 +20,11 @@ public class BubbleController : MonoBehaviour
     [Header("消滅タイム")]
     [Range(1f, 50f)]public float time = 5f;
 
+    [Header("Effect")]
+    [SerializeField]private GameObject Bubble_Effect = default;
+
+    private GameObject InstantObject = default;
+
 
     //進行方向
     protected Vector3 forward = new Vector3(1, 1, 1);
@@ -155,6 +160,7 @@ public class BubbleController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            InstantObject = Instantiate(Bubble_Effect, transform.position, Quaternion.identity);
             Player.GetComponent<PlayerControll>().Damage();
             Destroy(this.gameObject);
         }

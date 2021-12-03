@@ -22,8 +22,8 @@ public class BossAttack2 : MonoBehaviour
     //’e‚ÌŠÔŠu
     [Header("”­Ë’e‚Ì”­Ë•")]
     public float BulletWaySpace = 0f;
-    [Range(-80f, 10f)]public float Min = -50f;
-    [Range(10f, 80f)] public float Max =  50f;
+    [Range(-180f, 10f)]public float Min = -180f;
+    [Range(10f, 180f)] public float Max =  180f;
 
     //Šp“x
     [Header("”­Ë’e‚ÌŠp“x")]

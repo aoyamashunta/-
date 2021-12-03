@@ -5,8 +5,9 @@ using UnityEngine;
 using Cinemachine;
 public class PlayerControll : MonoBehaviour
 {
-    float Horizontal;
-    float Vertical;
+    public float Horizontal = 0f;
+    public float Vertical = 0f;
+    public bool IsStick = false;
     Rigidbody rb = default;
 
     [Space]
@@ -85,11 +86,7 @@ public class PlayerControll : MonoBehaviour
     bool IsJump = false;
     bool IsAttack_Motion = false;
 
-    //カメラ
-    //[Header("カメラ")]
-    //[SerializeField] private CinemachineVirtualCamera vCamera = default;
- 
-    //GameObject Boss = default;
+    GameObject empthObject = default;
 
 
     private void Awake()
@@ -105,8 +102,6 @@ public class PlayerControll : MonoBehaviour
         player_Life = GetComponent<Player_Life>();
 
         HP = MaxHP;
-
-        //Boss = GameObject.FindGameObjectWithTag("Boss");
     }
  
     void Update() {
@@ -116,8 +111,7 @@ public class PlayerControll : MonoBehaviour
             Sprint();
         }
 
-        Attack();
-        //shield_Attack();
+        Input_Attack();
 
         Jump();
 
@@ -125,37 +119,11 @@ public class PlayerControll : MonoBehaviour
         //ダメージ後の処理
         Wake_Up();
         Invincible();
-
-        //カメラ変更(Protype)
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    if(vCamera.Priority == 5){
-        //        vCamera.Priority = 11;
-
-        //        // 対象物と自分自身の座標からベクトルを算出
-		      //  Vector3 vector3 = Boss.transform.position - this.transform.position;
-		      //  // もし上下方向の回転はしないようにしたければ以下のようにする。
-		      //   vector3.y = 0f;
-
-		      //  // Quaternion(回転値)を取得
-		      //  Quaternion quaternion = Quaternion.LookRotation(vector3);
-		      //  // 算出した回転値をこのゲームオブジェクトのrotationに代入
-		      //  this.transform.rotation = quaternion;
-        //    }
-        //    else if(vCamera.Priority == 11)
-        //    {
-        //        vCamera.Priority = 5;
-        //    }
-        //}
-
-        //描画
-        Effect();
-        Blinking();
     }
 
     void Move()
     {
-        if(!GetIsAttack_Motion() && !IsDamage)    
+        if(!GetIsAttack_Motion() && !IsDamage && !IsStick)    
         {
             Horizontal = Input.GetAxisRaw("L_Stick_H");
             Vertical = Input.GetAxisRaw("L_Stick_V");
@@ -211,10 +179,6 @@ public class PlayerControll : MonoBehaviour
         }
     }
  
-    void Attack()
-    {
-        Input_Attack();
-    }
     void Input_Attack()
     {
         if(Input.GetKeyDown("joystick button 0") && !IsAttack)
@@ -359,33 +323,8 @@ public class PlayerControll : MonoBehaviour
         }
     }
 
-    //アニメ―ション
-    void LateUpdate()
+    void Animation()
     {
-        //アニメーション再生中フラグの代入
-        Normal_Attack1          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1");
-        Normal_Attack2          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack2");
-        Normal_Attack3          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack3");
-        Normal_Attack4          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack4");
-        Normal_Shild_Attack1    = anim.GetCurrentAnimatorStateInfo(0).IsName("Shield_Attack1");
-
-        Jumping_Attack1 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack1");
-        Jumping_Attack2 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack2");
-        Jumping_Attack3 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack3");
-
-        Idel = anim.GetCurrentAnimatorStateInfo(0).IsName("idel");
-        Jump_Motion = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump");
-
-        anim.SetBool("Walk", IsWalk);
-        anim.SetBool("Sprint", IsSprint);
-
-        anim.SetBool("Jump", IsJump);
-
-        //アニメーションのトリガー
-        if(IsAttack)anim.SetTrigger("Attack");
-        anim.SetInteger("AttackType", AttackType);
-
-
         //通常攻撃処理
         if (AttackType != 0 && (Idel || Jump_Motion))
         {
@@ -422,6 +361,39 @@ public class PlayerControll : MonoBehaviour
         }
     }
 
+    //アニメ―ション
+    void LateUpdate()
+    {
+        //アニメーション再生中フラグの代入
+        Normal_Attack1          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1");
+        Normal_Attack2          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack2");
+        Normal_Attack3          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack3");
+        Normal_Attack4          = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack4");
+        Normal_Shild_Attack1    = anim.GetCurrentAnimatorStateInfo(0).IsName("Shield_Attack1");
+
+        Jumping_Attack1 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack1");
+        Jumping_Attack2 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack2");
+        Jumping_Attack3 = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump_Attack3");
+
+        Idel = anim.GetCurrentAnimatorStateInfo(0).IsName("idel");
+        Jump_Motion = anim.GetCurrentAnimatorStateInfo(0).IsName("Jump");
+
+        anim.SetBool("Walk", IsWalk);
+        anim.SetBool("Sprint", IsSprint);
+
+        anim.SetBool("Jump", IsJump);
+
+        Effect();
+        Blinking();
+
+        //アニメーションのトリガー
+        if(IsAttack)anim.SetTrigger("Attack");
+        anim.SetInteger("AttackType", AttackType);
+
+
+        Animation();
+    }
+
     void FixedUpdate() {
         // カメラの方向から、X-Z平面の単位ベクトルを取得
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
@@ -440,13 +412,10 @@ public class PlayerControll : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (IsJump)
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Ground_Rota"))
         {
-            if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Ground_Rota"))
-            {
-                IsJump = false;
-                IsJumping_ComboStop = false;
-            }
+            IsJump = false;
+            IsJumping_ComboStop = false;
         }
 
         //回転
@@ -464,6 +433,7 @@ public class PlayerControll : MonoBehaviour
         if(transform.parent != null && other.gameObject.CompareTag("Ground_Rota"))
         {
             transform.parent = null;
+            Destroy(empthObject);
         }
     }
 
@@ -487,15 +457,6 @@ public class PlayerControll : MonoBehaviour
         }
 
         return IsAttack_Motion;
-    }
-
-    public bool GetIsDamage()
-    {
-        return IsDamage;
-    }
-    public int GetCurrentHP()
-    {
-        return HP;
     }
 
 

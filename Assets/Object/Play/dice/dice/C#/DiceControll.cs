@@ -42,9 +42,14 @@ public class DiceControll : MonoBehaviour
 
     GameObject InstantEffect = default;
 
-    GameObject Boss;
-    BossControll bossControll;
+    GameObject Boss = default;
+    BossControll bossControll = default;
 
+    Rigidbody rb = default;
+    BoxCollider coll = default;
+    bool IsDead = false;
+
+    AudioSource _audio = default;
 
     void Start()
     {
@@ -55,11 +60,17 @@ public class DiceControll : MonoBehaviour
         Boss = GameObject.FindGameObjectWithTag("Boss");
         bossControll = Boss.GetComponent<BossControll>();
 
+        //IsNormal = bossControll.IsDice;
+
+        rb = this.GetComponent<Rigidbody>();
+        coll = this.GetComponent<BoxCollider>();
+
+        _audio = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        IsNormal = bossControll.IsDice;
+       //IsNormal = bossControll.IsDice;
 
         Normal();
         Throw();
@@ -77,7 +88,7 @@ public class DiceControll : MonoBehaviour
             FixedSpeed         = NormalFixedSpeed;
 
             //ã‰º‰^“®
-            transform.position = new Vector3(transform.position.x, nowPosi + Mathf.PingPong(Time.time/3, 0.3f), transform.position.z);
+            if(!IsDead)transform.position = new Vector3(transform.position.x, nowPosi + Mathf.PingPong(Time.time/3, 0.3f), transform.position.z);
         }
     }
 
@@ -89,12 +100,16 @@ public class DiceControll : MonoBehaviour
 
             FixedSpeed          = ThrowFixedSpeed;
 
+            if(flame == 1)_audio.Play();
+
             //ã‰º‰^“®
-            transform.position = new Vector3(transform.position.x, nowPosi + Mathf.PingPong(Time.time/3, 0.3f), transform.position.z);
+            if(!IsDead)transform.position = new Vector3(transform.position.x, nowPosi + Mathf.PingPong(Time.time/3, 0.3f), transform.position.z);
 
             //’âŽ~
             if(flame >= StopFlame)
             {
+                _audio.Stop();
+
                 flame = 0f;
                 CreateEffect();
                 IsStop = true;
@@ -113,7 +128,7 @@ public class DiceControll : MonoBehaviour
                 DeleteEffect();
 
                 IsStop = false;
-                bossControll.IsDice = true;
+                //bossControll.IsDice = true;
 
                 flame = 0f;
 
@@ -167,11 +182,18 @@ public class DiceControll : MonoBehaviour
 
     public void Delete()
     {
+        IsDead = true;
         IsStop = false;
         bossControll.IsDice = true;
         flame = 0f;
         this.gameObject.transform.rotation = Quaternion.Euler(0,0,0);
 
         IsChange = false;
+
+        if (bossControll.IsDead)
+        {
+            rb.useGravity = true;
+            coll.isTrigger = false;
+        }
     }
 }

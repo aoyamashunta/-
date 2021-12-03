@@ -9,6 +9,9 @@ public class Niddle_Control : MonoBehaviour
 
     [SerializeField]float Power = 15f;
 
+    GameObject Niddle = default;
+    Niddle_Object_Control niddle_Object_Control = default;
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -24,6 +27,12 @@ public class Niddle_Control : MonoBehaviour
         return center;
     }
 
+    void Start()
+    {
+        Niddle = GameObject.FindGameObjectWithTag("Niddle");
+        niddle_Object_Control = Niddle.GetComponent<Niddle_Object_Control>();
+    }
+
     void Update()
     {
         //範囲内にコライダー入っているか
@@ -36,7 +45,7 @@ public class Niddle_Control : MonoBehaviour
             Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
             Vector3 up = c.transform.up;
 
-            if (playerControll)
+            if (playerControll && niddle_Object_Control.GetDamageOn())
             {
                 //Debug.Log("NiddleDamage");
                 rb.velocity = up * Power;

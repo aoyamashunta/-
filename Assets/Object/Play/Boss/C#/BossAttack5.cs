@@ -89,8 +89,10 @@ public class BossAttack5 : MonoBehaviour
         time = 0;
         Num = 0;
 
-        for(int i = 0; i < tagObject.Length;i++){
-            Destroy(tagObject[i]);
+        if(tagObject != null){
+            for(int i = 0; i < tagObject.Length;i++){
+                Destroy(tagObject[i]);
+            }
         }
     }
 }

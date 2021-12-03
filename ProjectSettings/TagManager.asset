@@ -16,6 +16,11 @@ TagManager:
   - Rock
   - Bubble
   - Bullet
+  - Dice_Center
+  - Wall
+  - Head_Center
+  - Box
+  - PlayerHP
   layers:
   - Default
   - TransparentFX

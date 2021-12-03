@@ -48,6 +48,7 @@ public class BossAttack1 : MonoBehaviour
 
     GameObject[] tagObject = default;
 
+
     void Start()
     {
         //É^ÉCÉÄÇÃèâä˙âª
@@ -77,7 +78,7 @@ public class BossAttack1 : MonoBehaviour
                     CreateShotObject(BulletWaySpace - BulletWaySpeceSplit + BulletWayAxis - transform.localEulerAngles.y);
 
                     tagObject = GameObject.FindGameObjectsWithTag("Bullet");
-                    Debug.Log("Bulletêî:"+tagObject.Length);
+                    //Debug.Log("Bulletêî:"+tagObject.Length);
 
                     //äpìxí≤êÆ
                     BulletWaySpeceSplit += (BulletWaySpace / (BulletWayNum - 1)) * 2;

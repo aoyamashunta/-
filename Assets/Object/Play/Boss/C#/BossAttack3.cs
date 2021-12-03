@@ -5,7 +5,14 @@ using UnityEngine;
 public class BossAttack3 : MonoBehaviour
 {
     public GameObject Ball = default;
+    public GameObject Bomb = default;
     public GameObject Barrel = default;
+
+    GameObject Instant_Ball = default;
+    GameObject Instant_Bomb = default;
+
+    Rigidbody Rigid_Ball = default;
+    Rigidbody Rigid_Bomb = default;
 
     public float _speedRange = 500f;
     [Range(350f, 450f)]public float _speedMin =  400f;
@@ -44,9 +51,17 @@ public class BossAttack3 : MonoBehaviour
             _vectorRange = new Vector3(Random.Range(_vectorMin, _vectorMax+0.1f)+deviation, 1, 0);
             _speedRange = Random.Range(_speedMin, _speedMax+1);
 
-            GameObject ballInstans =  (GameObject)Instantiate(Ball, Barrel.transform.position, Quaternion.identity);
-            Rigidbody ballRigidbody = ballInstans.GetComponent<Rigidbody>();
-            ballRigidbody.AddForce((transform.forward + _vectorRange) * _speedRange);
+            if(BallNum == 1){
+                Instant_Ball =  (GameObject)Instantiate(Ball, Barrel.transform.position, Quaternion.identity);
+                Rigid_Ball = Instant_Ball.GetComponent<Rigidbody>();
+                Rigid_Ball.AddForce((transform.forward + _vectorRange) * _speedRange);
+            }
+            else if(BallNum > 1)
+            {
+                Instant_Bomb =  (GameObject)Instantiate(Bomb, Barrel.transform.position, Quaternion.identity);
+                Rigid_Bomb = Instant_Bomb.GetComponent<Rigidbody>();
+                Rigid_Bomb.AddForce((transform.forward + _vectorRange) * _speedRange);
+            }
         }
         else if(BallNum >= BallMaxNum)
         {

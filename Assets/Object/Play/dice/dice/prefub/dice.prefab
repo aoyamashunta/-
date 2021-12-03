@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6867848711682204966}
   m_Layer: 0
   m_Name: dice
-  m_TagString: Untagged
+  m_TagString: Dice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +136,10 @@ MonoBehaviour:
   NormalFixedSpeed: 8
   ThrowFixedSpeed: 22
   flame: 0
-  Maxflame: 100
+  MaxFlame: 100
+  StopFlame: 100
+  Effect: {fileID: 3500249172224804993, guid: 9682410ce9476644c808f93d18c65986, type: 3}
+  EffectPos: {fileID: 3736267993264805495, guid: 769ad0fd547f11444ad77d8e7e5d2ad2, type: 3}
 --- !u!114 &6867848711682204966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,3 +154,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Number: 0
   IsRoll: 0
+  IsConfirm: 0

@@ -1826,6 +1826,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5d4c46dd3692e49aacf59c979e90d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Horizontal: 0
+  Vertical: 0
+  IsStick: 0
   Dush: 1
   Min: 5
   Max: 9
@@ -1851,7 +1854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6d8df73bd6de64b80416eb744e6e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 0}
+  _slider: {fileID: 7833220752221043265, guid: 09d6304f2c6f6fc4798276f89ebbc91d, type: 3}
   _changeValueInterval: 0.5
   IsDead: 0
 --- !u!1 &6225098340585854840
@@ -2622,6 +2625,10 @@ PrefabInstance:
     - target: {fileID: 9134655361694970401, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
       propertyPath: m_Name
       value: DushEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 9134655361694970401, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9134655361694970590, guid: 7f3480738dbe22e4f9f269ca8d179a78, type: 3}
       propertyPath: m_RootOrder

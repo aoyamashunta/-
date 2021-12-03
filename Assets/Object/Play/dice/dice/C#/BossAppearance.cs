@@ -112,15 +112,15 @@ public class BossAppearance : MonoBehaviour
     //キャラストップ
     public void PlayerMoveStop()
     {
-        //playerControll.IsStick = true;
-        //playerControll.Horizontal = 0f;
-        //playerControll.Vertical = 0f;
+        playerControll.IsStick = true;
+        playerControll.Horizontal = 0f;
+        playerControll.Vertical = 0f;
     }
 
     //キャラスタート
     public void PlayerMoveStart()
     {
-        //playerControll.IsStick = false;
+        playerControll.IsStick = false;
     }
 
 }

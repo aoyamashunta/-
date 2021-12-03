@@ -12,6 +12,8 @@ public class Rock_Control : MonoBehaviour
     GameObject Player = default;
     PlayerControll playerControll = default;
 
+    GameObject Boss = default;
+
     [Header("Effect")]
     [SerializeField]private GameObject Rock_Effect = default;
 
@@ -24,6 +26,8 @@ public class Rock_Control : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         playerControll = Player.GetComponent<PlayerControll>();
+
+        Boss = GameObject.FindGameObjectWithTag("Boss");
     }
 
     void Update()
@@ -61,6 +65,11 @@ public class Rock_Control : MonoBehaviour
             {
                 playerControll.Damage();
                 IsContact = true;
+            }
+            else if (other.gameObject.CompareTag("Boss"))
+            {
+                IsContact = true;
+                Boss.GetComponent<BossControll>().Hit();
             }
         }
     }

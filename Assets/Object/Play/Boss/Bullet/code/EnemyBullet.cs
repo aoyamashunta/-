@@ -44,7 +44,7 @@ public class EnemyBullet : MonoBehaviour
 
     void Update()
     {
-        //‰ñ“]
+        //‰¡ˆÚ“®
         forward.x += Time.deltaTime;
 
         //ˆÚ“®

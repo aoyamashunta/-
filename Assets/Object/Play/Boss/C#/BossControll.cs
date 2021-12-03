@@ -17,6 +17,7 @@ public class BossControll : MonoBehaviour
     BossAttack3 bossAttack3 = default;
     BossAttack4 bossAttack4 = default;
     BossAttack5 bossAttack5 = default;
+    BossAttack6 bossAttack6 = default;
 
     GameObject Dice = default;
     DiceControll diceControll = default;
@@ -59,11 +60,20 @@ public class BossControll : MonoBehaviour
 
     //死亡
     public bool IsDead = false;
-    public float Camera_Change = 0f;
+    float Camera_Change = 0f;
     public bool IsChange_Scene = false;
 
     [Header("専用カメラ")]
     public CinemachineVirtualCamera vCamera = default;
+    CinemachineVirtualCamera InstantCamera = default;
+    float ChangeTime = 0f;
+    [SerializeField]private float MaxChangeTime = 2f;
+
+    GameObject Player = default;
+
+    //方向
+    Vector3 vector3 = default;
+    Quaternion quaternion = default;
 
     void Start()
     {
@@ -72,6 +82,7 @@ public class BossControll : MonoBehaviour
         bossAttack3 = this.GetComponent<BossAttack3>();
         bossAttack4 = this.GetComponent<BossAttack4>();
         bossAttack5 = this.GetComponent<BossAttack5>();
+        bossAttack6 = this.GetComponent<BossAttack6>();
 
         Dice = GameObject.FindGameObjectWithTag("Dice");
         diceControll = Dice.GetComponent<DiceControll>();
@@ -86,15 +97,28 @@ public class BossControll : MonoBehaviour
             InstantObject = Instantiate(Barrier, new Vector3(0,6,0),Quaternion.identity);
         }
 
-        time = Roll_Interval / 2f;
+        time = -5f;
+
+        InstantCamera = Instantiate(vCamera, new Vector3(-0.2773962f, 11.5f, -16.49009f), Quaternion.identity);
+        InstantCamera.LookAt = this.gameObject.transform;
+        //vCamera = CinemachineVirtualCamera.;
+
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
 
     void Update()
     {
         if(!IsDead){
+
+            //プレイヤーの向き
+            vector3 = Player.transform.position - this.transform.position;
+            vector3.y = 0f;
+            quaternion = Quaternion.LookRotation(vector3);
+            this.transform.rotation = quaternion;
+
             //ダイスロール
-            if (!IsHit && IsDice)
+            if (!IsHit && IsDice && IsAttack)
             {
                 time += Time.deltaTime;
 
@@ -106,39 +130,11 @@ public class BossControll : MonoBehaviour
             }
 
             //攻撃パターン
-            if (diceValue.GetNumber() == 1 || diceValue.GetNumber() == 6)
-            {
-                bossAttack1.IsStart = true;
-                diceValue.Ini_Number();
-            }
-            else if(diceValue.GetNumber() == 2)
-            {
-                bossAttack2.IsStart = true;
-                diceValue.Ini_Number();
-            }
-            else if(diceValue.GetNumber() == 3)
-            {
-                bossAttack3.IsStart = true;
-                diceValue.Ini_Number();
-            }
-            else if (diceValue.GetNumber() == 4)
-            {
-                bossAttack4.IsStart = true;
-                diceValue.Ini_Number();
-            }
-            else if(diceValue.GetNumber() == 5)
-            {
-                bossAttack5.IsStart = true;
-                diceValue.Ini_Number();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                bossAttack3.IsStart = true;
-            }
+            Attack_Pattern();
 
             //Barrier消失時の落下
             Fall_Down();
+            CameraChange();
             //落下時間
             Down_Time();
             //起き上がり
@@ -168,40 +164,7 @@ public class BossControll : MonoBehaviour
         IsHit = true;
     }
 
-    public bool GetHit()
-    {
-        return IsHit;
-    }
-
-    //落下
-    void Fall_Down()
-    {
-        if (IsHit)
-        {
-            vCamera.Priority = 15;
-
-            Transform myTransform = this.transform;
-
-            // 座標を取得
-            Vector3 pos = myTransform.position;
-
-            if (pos.y <= -Down_Fall)
-            {
-                pos.y = -Down_Fall;
-
-                IsDamageable_State = true;
-                vCamera.Priority = 5;
-            }
-            else if (pos.y > -Down_Fall)
-            {
-                pos.y -= 0.1f;
-            }
-
-            myTransform.position = pos;  // 座標を設定
-        }
-    }
-
-        //ダメージ計算
+    //ダメージ計算
     public void Damage()
     {
         if(IsHit && IsDamageable_State && !IsDamage) IsDamage = true;
@@ -212,20 +175,143 @@ public class BossControll : MonoBehaviour
         //Debug.Log("BossHP:"+HP);
     }
 
+    //攻撃パターン
+    void Attack_Pattern()
+    {
+        if (diceValue.GetNumber() == 1)
+        {
+            bossAttack1.IsStart = true;
+            diceValue.Ini_Number();
+        }
+        else if(diceValue.GetNumber() == 2)
+        {
+            bossAttack2.IsStart = true;
+            diceValue.Ini_Number();
+        }
+        else if(diceValue.GetNumber() == 3)
+        {
+            bossAttack3.IsStart = true;
+            diceValue.Ini_Number();
+        }
+        else if (diceValue.GetNumber() == 4)
+        {
+            bossAttack4.IsStart = true;
+            diceValue.Ini_Number();
+        }
+        else if(diceValue.GetNumber() == 5)
+        {
+            bossAttack5.IsStart = true;
+            diceValue.Ini_Number();
+        }
+        else if(diceValue.GetNumber() == 6)
+        {
+            bossAttack6.IsStart = true;
+            diceValue.Ini_Number();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            bossAttack2.IsStart = true;
+        }
+    }
+
+    //落下
+    void Fall_Down()
+    {
+        if (IsHit)
+        {
+            Transform myTransform = this.transform;
+
+            // 座標を取得
+            Vector3 pos = myTransform.position;
+
+            if (pos.y <= -Down_Fall)
+            {
+                pos.y = -Down_Fall;
+
+                IsDamageable_State = true;
+            }
+            else if (pos.y > -Down_Fall)
+            {
+                pos.y -= 0.1f;
+            }
+
+            myTransform.position = pos;  // 座標を設定
+        }
+    }
+
+    //起きる
+    void Wake_Up()
+    {
+        if (IsWake_Up && IsHit && IsDamageable_State)
+        {
+            Transform myTransform = this.transform;
+
+            // 座標を取得
+            Vector3 pos = myTransform.position;
+
+            if (pos.y >= -UP_Fall)
+            {
+                pos.y = -UP_Fall;
+
+                IsWake_Up = false;
+                IsHit = false;
+                ChangeTime = 0f;
+                IsDamageable_State = false;
+
+                //InstantObjectがnullなのを確認して生成
+                Create_Barrier();
+            }
+            else if (pos.y < -UP_Fall)
+            {
+                pos.y += 0.25f;
+            }
+
+            myTransform.position = pos;  // 座標を設定
+        }
+    }
+
+     //ダウン時のみ（死亡は違う）
+    void CameraChange()
+    {
+        if (IsHit)
+        {
+            if(ChangeTime < MaxChangeTime)
+            {
+                InstantCamera.Priority = 15;
+                ChangeTime += Time.deltaTime;
+            }
+            else if(ChangeTime >= MaxChangeTime)
+            {
+                InstantCamera.Priority = 5;
+                ChangeTime = MaxChangeTime;
+            }
+        }
+    }
+
+    //ダウン時のみ
     void Dead()
     {
         if (IsDead)
         {
+            //Barrier
             Destroy(InstantObject);
-            vCamera.Priority = 15;
+            Down();
+            Dead_Object();
 
-            if(Camera_Change <= 5f){
+            //カメラ登場、位置修正
+            InstantCamera.Priority = 15;
+            Transform myTransform = this.transform;
+            Vector3 pos = myTransform.position;
+            pos.y = -UP_Fall;
+            myTransform.position = pos;  // 座標を設定
+
+            if(Camera_Change < 4f){
                 Camera_Change += Time.deltaTime;
             }
             else if(Camera_Change >= 2.5f)
             {
-                vCamera.Priority = 5;
-                IsChange_Scene = true;
+                InstantCamera.Priority = 5;
             }
         }
     }
@@ -276,27 +362,11 @@ public class BossControll : MonoBehaviour
         diceValue.Delete();
     }
 
-    //起きる
-    void Wake_Up()
+    //その他
+    void Dead_Object()
     {
-        if (IsWake_Up && IsHit && IsDamageable_State)
-        {
-            Transform myTransform = this.transform;
-
-            // 座標を取得
-            Vector3 pos = myTransform.position;
-
-            pos.y = -UP_Fall;
-
-            myTransform.position = pos;  // 座標を設定
-
-            IsWake_Up = false;
-            IsHit = false;
-            IsDamageable_State = false;
-
-            //InstantObjectがnullなのを確認して生成
-            Create_Barrier();
-        }
+        bossAttack4.Delete();
+        bossAttack5.Delete();
     }
 
     void Create_Barrier()
@@ -305,15 +375,6 @@ public class BossControll : MonoBehaviour
             Vector3 pos = new Vector3(0, 6, 0);
             InstantObject = Instantiate(Barrier, pos, Quaternion.identity);
         }
-    }
-
-    public bool GetIsDamage()
-    {
-        return IsDamage;
-    }
-    public int GetCurrentHP()
-    {
-        return HP;
     }
 
     public bool GetIsHit()
