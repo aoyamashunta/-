@@ -61,7 +61,7 @@ Shader "Unlit/Manto"
 				specular = pow(specular, 50);
 				specular = smoothstep(0.8,0.85, specular);
 
-				fixed4 ads = (ambient + diffuse + specular);
+				fixed4 ads = (ambient + diffuse);
 				return ads;
 			}
 			ENDCG

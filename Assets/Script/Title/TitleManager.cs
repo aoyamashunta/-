@@ -31,8 +31,14 @@ public class TitleManager : MonoBehaviour
     public Image startText;
     public Image configText;
 
+    // ピエロの顔
+    public Image face;
+
     // 大きくなってるか
     bool isBig = false;
+
+    byte a = 255;
+    bool isactive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +47,8 @@ public class TitleManager : MonoBehaviour
         sliderSe.value = PlayerPrefs.GetFloat("SESlider");
         dice.transform.localPosition = new Vector3(-514.0f, -178.0f, -8.0f);
         startText.transform.localScale += new Vector3(0.5f, 0.2f, 0.0f);
+
+        
     }
 
     // Update is called once per frame
@@ -110,6 +118,28 @@ public class TitleManager : MonoBehaviour
         {
             isMenuFlag = true;
         }
+
+
+        // ピエロの目を光らせる
+        if (isactive)
+        {
+            a -= 5;
+        }
+        else
+        {
+            a += 5;
+        }
+
+        if (a == 255)
+        {
+            isactive = true;
+        }
+        else if (a == 0)
+        {
+            isactive = false;
+        }
+
+        face.color = (new Color32(255, 255, 255, a));
 
         // メニュー画面関係
         CloseConfig();
