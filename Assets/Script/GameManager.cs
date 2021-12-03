@@ -11,11 +11,11 @@ public class GameManager : MonoBehaviour
     public AudioSource[] BGM;
     public AudioSource[] SE;
 
-    private GameObject Player = default;
-    private Player_Life _playerControll = default;
+    //private GameObject Player = default;
+    //private Player_Life _playerControll = default;
 
-    private GameObject Boss = default;
-    private BossControll _bossControll = default;
+    //private GameObject Boss = default;
+    //private BossControll _bossControll = default;
 
 
     private void Start()
@@ -26,68 +26,19 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
 
         BGM[0].volume = PlayerPrefs.GetFloat("BGMVolume");
+        SE[0].volume = PlayerPrefs.GetFloat("SEVolume");
     }
 
     private void Update()
     {
-        if (Mathf.Approximately(Time.timeScale, 0f))
-        {
-            return;
-        }
-
-        ChangeScene();
-
         BGM[0].volume = PlayerPrefs.GetFloat("BGMVolume");
+
     }
 
-    // シーンの切り替え
-    void ChangeScene()
+    //次のシーンへ
+    public void ChangeScene2(string nextScene)
     {
-        //タイトル
-        if (SceneManager.GetActiveScene().name == "Title" && !titleM.isMenuFlag)
-        {
-            if (Input.GetKey(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
-            {
-                SceneManager.LoadScene("Play");
-            }
-        }
-
-        //プレイ
-        if (SceneManager.GetActiveScene().name == "Play")
-        {
-            if(Player == null && _playerControll == null){
-                Player = GameObject.FindGameObjectWithTag("Player");
-                _playerControll = Player.GetComponent<Player_Life>();
-            }
-            else if(Boss == null && _bossControll == null){
-                Boss = GameObject.FindGameObjectWithTag("Boss");
-                _bossControll = Boss.GetComponent<BossControll>();
-            }
-
-
-            if (_bossControll != null && _bossControll.IsChange_Scene)
-            {
-                SceneManager.LoadScene("Clear");
-            }
-
-            if (_playerControll != null && _playerControll.IsDead)
-            {
-                SceneManager.LoadScene("Over");
-            }
-        }
-
-        if (SceneManager.GetActiveScene().name == "Clear" || SceneManager.GetActiveScene().name == "Over")
-        {
-            Player = null;
-            _playerControll = null;
-            Boss = null;
-            _bossControll = null;
-
-            if (Input.GetKey(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
-            {
-                SceneManager.LoadScene("Title");
-            }
-        }
+        SceneManager.LoadScene(nextScene);
     }
 
     // シーンのリセット
