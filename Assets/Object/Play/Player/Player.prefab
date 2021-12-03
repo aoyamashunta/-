@@ -1853,6 +1853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slider: {fileID: 0}
   _changeValueInterval: 0.5
+  IsDead: 0
 --- !u!1 &6225098340585854840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,6 +2512,10 @@ PrefabInstance:
     - target: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
       propertyPath: ShapeModule.m_Position.z
       value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2251378424661600469, guid: 3db5c4f40ee27714a862b68ce8e01c61, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a

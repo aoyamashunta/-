@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &33620889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 33620890}
+  - component: {fileID: 33620891}
+  m_Layer: 0
+  m_Name: Boss_Body_Cen
+  m_TagString: Boss_Body
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &33620890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33620889}
+  m_LocalRotation: {x: -0.12581965, y: -0, z: -0, w: 0.99205315}
+  m_LocalPosition: {x: -0.028, y: 1.414, z: -0.163}
+  m_LocalScale: {x: 0.010000001, y: 0.0100000035, z: 0.010000001}
+  m_Children: []
+  m_Father: {fileID: 6820665863865297332}
+  m_RootOrder: 52
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &33620891
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33620889}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &17092108993039627
 GameObject:
   m_ObjectHideFlags: 0
@@ -15940,7 +15984,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6191341023715832590}
-  m_LocalRotation: {x: -0.00040525632, y: 0.99783975, z: -0.065402105, w: -0.006183116}
+  m_LocalRotation: {x: -0.00040522512, y: 0.99783975, z: -0.0654019, w: -0.006182538}
   m_LocalPosition: {x: -0.2830196, y: -2, z: -0.048921227}
   m_LocalScale: {x: 8, y: 7, z: 8}
   m_Children:
@@ -15996,9 +16040,10 @@ Transform:
   - {fileID: 6425904437867080038}
   - {fileID: 6425904436567880160}
   - {fileID: 6425904436707319235}
+  - {fileID: 33620890}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 7.5, y: 180.71, z: 0}
 --- !u!54 &6425904437993540875
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16062,9 +16107,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDice: 1
   IsAttack: 0
-  UP_Fall: 2
+  UP_Fall: 3
   Down_Fall: 5
-  MaxHP: 40
+  MaxHP: 30
   HP: 0
   Barrier: {fileID: 1071956662809644196, guid: 61702d17fd187034e8d8f057318baeba, type: 3}
   Invincible_MaxFlame: 15
@@ -16138,11 +16183,11 @@ MonoBehaviour:
   Ball: {fileID: 5512437095312566514, guid: 61b5f3b9926b385459ac978967241b61, type: 3}
   Barrel: {fileID: 6425904436707319244}
   _speedRange: 500
-  _speedMin: 400
-  _speedMax: 550
+  _speedMin: 350
+  _speedMax: 600
   IsStart: 0
   BallNum: 0
-  BallMaxNum: 5
+  BallMaxNum: 1
   _vectorMin: -1
   _vectorMax: 1
 --- !u!114 &6425904437993540877
