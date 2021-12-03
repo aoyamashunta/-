@@ -8,7 +8,7 @@ public class DiceControll : MonoBehaviour
     float nowPosi;
 
     [Header("通常時モード")]
-    public bool IsNormal = false;
+    public bool IsNormal = true;
 
     [Header("停止")]
     public bool IsStop = false;
@@ -19,7 +19,6 @@ public class DiceControll : MonoBehaviour
     [SerializeField] private float MinusSpeed = 0f;
     [SerializeField] private bool IsChange = false;
     private float SpeedMax;
-    //private bool Trigger = false;
 
     [Header("ノーマル回転速度(固定速度、速度")]
     [SerializeField] private float NormalFixedSpeed = 8f;
@@ -60,8 +59,6 @@ public class DiceControll : MonoBehaviour
         Boss = GameObject.FindGameObjectWithTag("Boss");
         bossControll = Boss.GetComponent<BossControll>();
 
-        //IsNormal = bossControll.IsDice;
-
         rb = this.GetComponent<Rigidbody>();
         coll = this.GetComponent<BoxCollider>();
 
@@ -70,7 +67,7 @@ public class DiceControll : MonoBehaviour
 
     void Update()
     {
-       //IsNormal = bossControll.IsDice;
+       IsNormal = bossControll.IsDice;
 
         Normal();
         Throw();
@@ -128,7 +125,7 @@ public class DiceControll : MonoBehaviour
                 DeleteEffect();
 
                 IsStop = false;
-                //bossControll.IsDice = true;
+                bossControll.IsDice = true;
 
                 flame = 0f;
 

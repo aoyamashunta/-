@@ -34,14 +34,6 @@ public class PlayManager : MonoBehaviour
     void Update()
     {
 
-
-
-
-
-
-
-
-
         // シーン遷移(クリア)
         if (_bossControll != null && _bossControll.IsChange_Scene || Input.GetKey(KeyCode.Return))
         {

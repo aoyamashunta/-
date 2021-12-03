@@ -89,9 +89,11 @@ public class BossAppearance : MonoBehaviour
                 if(flame >= AppearanceFlame){
 
                     Instant_Boss = Instantiate(Boss, new Vector3(0f, -2f, 0f), Quaternion.identity);
-                    Instant_Dice = Instantiate(Dice, new Vector3(0f, 9.8f, 0f), Quaternion.identity);
+                    
 
                     bossControll.IsAttack = true;
+
+                    Instant_Dice = Instantiate(Dice, new Vector3(0f, 9.8f, 0f), Quaternion.identity);
                     flame = 0f;
                 }
             }

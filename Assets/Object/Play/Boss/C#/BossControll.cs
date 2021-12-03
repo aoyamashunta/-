@@ -94,7 +94,7 @@ public class BossControll : MonoBehaviour
 
         if(InstantObject == null)
         {
-            InstantObject = Instantiate(Barrier, new Vector3(0,6,0),Quaternion.identity);
+            //InstantObject = Instantiate(Barrier, new Vector3(0,6,0),Quaternion.identity);
         }
 
         time = -5f;
@@ -260,7 +260,7 @@ public class BossControll : MonoBehaviour
                 IsDamageable_State = false;
 
                 //InstantObject‚ªnull‚È‚Ì‚ğŠm”F‚µ‚Ä¶¬
-                Create_Barrier();
+                //Create_Barrier();
             }
             else if (pos.y < -UP_Fall)
             {
@@ -373,7 +373,7 @@ public class BossControll : MonoBehaviour
     {
         if(InstantObject == null){
             Vector3 pos = new Vector3(0, 6, 0);
-            InstantObject = Instantiate(Barrier, pos, Quaternion.identity);
+            //InstantObject = Instantiate(Barrier, pos, Quaternion.identity);
         }
     }
 
