@@ -237,6 +237,7 @@ MonoBehaviour:
   handSe: {fileID: 795664462}
   startText: {fileID: 1725960837}
   configText: {fileID: 1152951639}
+  face: {fileID: 279174128}
 --- !u!4 &104819693
 Transform:
   m_ObjectHideFlags: 0
@@ -689,7 +690,7 @@ RectTransform:
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 2002438844}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1546,7 +1547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &811477504
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1556,10 +1557,10 @@ RectTransform:
   m_GameObject: {fileID: 811477503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 9}
-  m_LocalScale: {x: 6.5754004, y: 3, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 2002438844}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2768,8 +2769,8 @@ RectTransform:
   - {fileID: 1725960836}
   - {fileID: 1152951638}
   - {fileID: 106003609}
-  - {fileID: 279174127}
   - {fileID: 811477504}
+  - {fileID: 279174127}
   - {fileID: 1365710393}
   m_Father: {fileID: 0}
   m_RootOrder: 4
