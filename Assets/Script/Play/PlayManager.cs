@@ -25,15 +25,14 @@ public class PlayManager : MonoBehaviour
         _playerControll = Player.GetComponent<Player_Life>();
 
         // ボス
-        Boss = GameObject.FindGameObjectWithTag("Boss");
-        _bossControll = Boss.GetComponent<BossControll>();
+        //Boss = GameObject.FindGameObjectWithTag("Boss");
+        //_bossControll = Boss.GetComponent<BossControll>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
         // シーン遷移(クリア)
         if (_bossControll != null && _bossControll.IsChange_Scene || Input.GetKey(KeyCode.Return))
         {

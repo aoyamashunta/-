@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Prime31.TransitionKit;
 
 public class TitleManager : MonoBehaviour
 {
@@ -47,8 +48,6 @@ public class TitleManager : MonoBehaviour
         sliderSe.value = PlayerPrefs.GetFloat("SESlider");
         dice.transform.localPosition = new Vector3(-514.0f, -178.0f, -8.0f);
         startText.transform.localScale += new Vector3(0.5f, 0.2f, 0.0f);
-
-        
     }
 
     // Update is called once per frame
@@ -102,6 +101,15 @@ public class TitleManager : MonoBehaviour
         if ((Input.GetKeyDown("joystick button 0")) && !isMenuFlag && isSelect)
         {
             gMana.ChangeScene2("Play");
+            var fishEye = new FishEyeTransition()
+            {
+                duration = 2.0f,
+                size = 0.2f,
+                zoom = 100.0f,
+                colorSeparation = 0.1f
+            };
+            TransitionKit.instance.transitionWithDelegate(fishEye);
+
         }
 
         // ê›íËâÊñ ÇÃï\é¶

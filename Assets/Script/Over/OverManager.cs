@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Prime31.TransitionKit;
 
 public class OverManager : MonoBehaviour
 {
     // Gマネージャー
     public GameManager gMana;
+
+    // マスク画像
+    public Texture2D maskTexture;
 
     // タイトルの文字
     public Image titleText;
@@ -106,12 +110,31 @@ public class OverManager : MonoBehaviour
             if ((Input.GetKeyDown("joystick button 0")) && !isSelect)
             {
                 gMana.ChangeScene2("Play");
+                var mask = new ImageMaskTransition()
+                {
+                    maskTexture = maskTexture,
+                    backgroundColor = Color.red,
+                };
+                TransitionKit.instance.transitionWithDelegate(mask);
             }
 
             // デバック用
             if (Input.GetKey(KeyCode.Return) || Input.GetKeyDown("joystick button 0") && isSelect)
             {
                 gMana.ChangeScene2("Title");
+                var squares = new SquaresTransition()
+                {
+                    //nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
+                    // 間隔
+                    duration = 1.0f,
+                    // 大きさ
+                    squareSize = new Vector2(64f, 45f),
+                    // 色
+                    squareColor = Color.black,
+                    // 滑らかさ
+                    smoothness = 0.6f
+                };
+                TransitionKit.instance.transitionWithDelegate(squares);
             }
         }
     }

@@ -701,6 +701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gMana: {fileID: 468581224}
+  maskTexture: {fileID: 2800000, guid: fc2f101e26188244cb3fb9c6645492af, type: 3}
   titleText: {fileID: 803835993}
   continueText: {fileID: 1377348825}
   dice: {fileID: 446426157}
