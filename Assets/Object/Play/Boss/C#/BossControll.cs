@@ -94,7 +94,7 @@ public class BossControll : MonoBehaviour
 
         if(InstantObject == null)
         {
-            //InstantObject = Instantiate(Barrier, new Vector3(0,6,0),Quaternion.identity);
+            InstantObject = Instantiate(Barrier, new Vector3(0,6,0),Quaternion.identity);
         }
 
         time = -5f;
