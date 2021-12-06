@@ -21,6 +21,7 @@ TagManager:
   - Head_Center
   - Box
   - PlayerHP
+  - SE
   layers:
   - Default
   - TransparentFX

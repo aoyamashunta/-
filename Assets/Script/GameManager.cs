@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public AudioSource[] BGM;
     public AudioSource[] SE;
 
+    public GameObject[] BGMgameObjects;
+    public GameObject[] SEgameObjects;
+
     //private GameObject Player = default;
     //private Player_Life _playerControll = default;
 
@@ -24,15 +27,47 @@ public class GameManager : MonoBehaviour
         // フルスクリーン
         Screen.SetResolution(1920, 1080, false);
         Application.targetFrameRate = 60;
-
-        BGM[0].volume = PlayerPrefs.GetFloat("BGMVolume");
-        SE[0].volume = PlayerPrefs.GetFloat("SEVolume");
     }
 
     private void Update()
     {
-        BGM[0].volume = PlayerPrefs.GetFloat("BGMVolume");
 
+      
+        BGM[0].volume = PlayerPrefs.GetFloat("BGMVolume");
+        
+        for (int i = 0; i < BGMgameObjects.Length; i++)
+        {
+            BGMgameObjects[i].GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("BGMVolume");
+        }
+        //.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("SEVolume");
+
+        for (int i = 0; i <SE.Length; i++)
+        {
+            if (SE[i])
+            {
+                SE[i].volume = PlayerPrefs.GetFloat("SEVolume");
+            }
+        }
+
+        for (int i = 0; i < SEgameObjects.Length; i++)
+        {
+            if (SEgameObjects[i])
+            {
+                if(SEgameObjects[i].transform.Find("Dice_Relationship/dice"))
+                {
+                    SEgameObjects[i].transform.Find("Dice_Relationship/dice").GetComponent<AudioSource>().volume = SE[0].volume;
+                }
+                else if(SEgameObjects[i].transform.Find("kemurin"))
+                {
+                    SEgameObjects[i].transform.Find("kemurin").GetComponent<AudioSource>().volume = SE[0].volume;
+                }
+
+                else
+                {
+                    SEgameObjects[i].GetComponent<AudioSource>().volume = SE[0].volume;
+                }
+            }
+        }
     }
 
     //次のシーンへ

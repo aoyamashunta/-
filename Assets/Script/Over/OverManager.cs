@@ -71,6 +71,8 @@ public class OverManager : MonoBehaviour
             // 選択移動
             if (horizontal == 1 && isSelect)
             {
+                gMana.SE[1].Play();
+
                 // 選択しているフォントがでかくなっているか
                 isBig = true;
                 // コンフィグ選択
@@ -82,6 +84,8 @@ public class OverManager : MonoBehaviour
             }
             else if (horizontal == -1 && !isSelect)
             {
+                gMana.SE[1].Play();
+
                 // 選択しているフォントがでかくなっているか
                 isBig = true;
                 // スタート選択

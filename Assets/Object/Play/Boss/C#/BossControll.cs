@@ -209,10 +209,25 @@ public class BossControll : MonoBehaviour
             diceValue.Ini_Number();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            bossAttack1.IsStart = true;
+        } if (Input.GetKeyDown(KeyCode.B))
         {
             bossAttack2.IsStart = true;
-        }
+        } if (Input.GetKeyDown(KeyCode.C))
+        {
+            bossAttack3.IsStart = true;
+        } if (Input.GetKeyDown(KeyCode.D))
+        {
+            bossAttack4.IsStart = true;
+        } if (Input.GetKeyDown(KeyCode.E))
+        {
+            bossAttack5.IsStart = true;
+        } if (Input.GetKeyDown(KeyCode.F))
+        {
+            bossAttack6.IsStart = true;
+        } 
     }
 
     //—Ž‰º

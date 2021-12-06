@@ -39,6 +39,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 224170916195183815}
     m_Modifications:
+    - target: {fileID: -563787068216259125, guid: ba979a8abdc1c5048afa807de1411a35, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3236630257471715802, guid: ba979a8abdc1c5048afa807de1411a35, type: 3}
       propertyPath: m_Name
       value: kemurin

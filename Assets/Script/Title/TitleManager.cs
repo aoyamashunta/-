@@ -41,6 +41,8 @@ public class TitleManager : MonoBehaviour
     byte a = 255;
     bool isactive = true;
 
+   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,10 +60,14 @@ public class TitleManager : MonoBehaviour
         {
             Vertical = Input.GetAxisRaw("L_Stick_V");
         }
-
+      
         // 選択移動
         if (Vertical == -1 && isSelect)
         {
+            // GameObject selectClone = Instantiate(select, new Vector3(0, 0, 0), Quaternion.identity);
+
+            gMana.SE[0].Play();
+
             // 選択しているフォントがでかくなっているか
             isBig = true;
             // コンフィグ選択
@@ -73,6 +79,10 @@ public class TitleManager : MonoBehaviour
         }
         else if (Vertical == 1 && !isSelect)
         {
+            //GameObject selectClone = Instantiate(select, new Vector3(0, 0, 0), Quaternion.identity);
+
+            gMana.SE[0].Play();
+
             // 選択しているフォントがでかくなっているか
             isBig = true;
             // スタート選択
@@ -82,6 +92,9 @@ public class TitleManager : MonoBehaviour
             // 選択アイコンのサイコロの回転
             dice.transform.Rotate(0, 0, 90);
         }
+    
+
+        
 
         // 選択しているフォント拡大
         if (isSelect && isBig)
@@ -116,17 +129,12 @@ public class TitleManager : MonoBehaviour
         if ((Input.GetKeyDown("joystick button 0")) && !isMenuFlag && !isSelect)
         {
             isMenuFlag = true;
+            gMana.SE[1].Play();
         }
         else if ((Input.GetKeyDown("joystick button 0")) && isMenuFlag && !isSelect)
         {
             isMenuFlag = false;
         }
-
-        if(Input.GetKey(KeyCode.B))
-        {
-            isMenuFlag = true;
-        }
-
 
         // ピエロの目を光らせる
         if (isactive)
@@ -153,8 +161,9 @@ public class TitleManager : MonoBehaviour
         CloseConfig();
         if (isMenuFlag)
         {
+           
             OpenConfig();
-
+            
             // BGM上げ下げ
             if (Input.GetKey("joystick button 5"))
             {
@@ -222,7 +231,10 @@ public class TitleManager : MonoBehaviour
     public void UpSe()
     {
         sliderSe.value += 0.01f;
-        gMana.SE[0].volume = sliderSe.value;
+       // for (int i = 0; i < gMana.SE.Length; i++)
+        {
+            gMana.SE[0].volume = sliderSe.value;
+        }
         PlayerPrefs.SetFloat("SEVolume", gMana.SE[0].volume);
         PlayerPrefs.SetFloat("SESlider", sliderSe.value);
         if (sliderSe.value < 1)

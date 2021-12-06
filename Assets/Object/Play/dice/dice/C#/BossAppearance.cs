@@ -5,6 +5,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Playables;  
 using UnityEngine.UI;
+using UnityEditor;
 
 public class BossAppearance : MonoBehaviour
 {
@@ -89,11 +90,12 @@ public class BossAppearance : MonoBehaviour
                 if(flame >= AppearanceFlame){
 
                     Instant_Boss = Instantiate(Boss, new Vector3(0f, -2f, 0f), Quaternion.identity);
-                    
+                    //PrefabUtility.InstantiatePrefab(Boss);
 
                     bossControll.IsAttack = true;
 
                     Instant_Dice = Instantiate(Dice, new Vector3(0f, 9.8f, 0f), Quaternion.identity);
+                    //Instant_Dice = PrefabUtility.InstantiatePrefab(Dice);
                     flame = 0f;
                 }
             }

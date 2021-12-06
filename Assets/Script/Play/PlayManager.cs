@@ -21,8 +21,8 @@ public class PlayManager : MonoBehaviour
     {
         // 初期化処理
         // プレイヤー
-        Player = GameObject.FindGameObjectWithTag("Player");
-        _playerControll = Player.GetComponent<Player_Life>();
+        //Player = GameObject.FindGameObjectWithTag("Player");
+        //_playerControll = Player.GetComponent<Player_Life>();
 
         // ボス
         //Boss = GameObject.FindGameObjectWithTag("Boss");

@@ -50,6 +50,8 @@ public class DiceControll : MonoBehaviour
 
     AudioSource _audio = default;
 
+   
+   
     void Start()
     {
         SpeedMax = 8f;
@@ -68,6 +70,8 @@ public class DiceControll : MonoBehaviour
     void Update()
     {
        IsNormal = bossControll.IsDice;
+
+       
 
         Normal();
         Throw();
@@ -91,13 +95,18 @@ public class DiceControll : MonoBehaviour
 
     void Throw()
     {
-        if(!IsNormal && !IsStop)
+        
+        if (!IsNormal && !IsStop)
         {
+            
             flame++;
 
             FixedSpeed          = ThrowFixedSpeed;
 
-            if(flame == 1)_audio.Play();
+            if (flame == 1)
+            {
+                _audio.Play();
+            }
 
             //ã‰º‰^“®
             if(!IsDead)transform.position = new Vector3(transform.position.x, nowPosi + Mathf.PingPong(Time.time/3, 0.3f), transform.position.z);
@@ -106,7 +115,6 @@ public class DiceControll : MonoBehaviour
             if(flame >= StopFlame)
             {
                 _audio.Stop();
-
                 flame = 0f;
                 CreateEffect();
                 IsStop = true;
@@ -138,6 +146,7 @@ public class DiceControll : MonoBehaviour
     {
         if(!IsStop)
         {
+          
             //ƒ‰ƒ“ƒ_ƒ€‰ñ“]
 
             //Normal 8,8.1
