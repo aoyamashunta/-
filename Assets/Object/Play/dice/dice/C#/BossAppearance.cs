@@ -48,6 +48,11 @@ public class BossAppearance : MonoBehaviour
     BossControll bossControll = default;
     PlayerControll playerControll = default;
 
+    [Header("Timeline")]
+    [SerializeField]private GameObject BossDeadCut = null;
+
+    public bool IsOn = false;
+
 
 
     void Start()
@@ -90,12 +95,12 @@ public class BossAppearance : MonoBehaviour
                 if(flame >= AppearanceFlame){
 
                     Instant_Boss = Instantiate(Boss, new Vector3(0f, -2f, 0f), Quaternion.identity);
-                    //PrefabUtility.InstantiatePrefab(Boss);
+                    Instant_Dice = Instantiate(Dice, new Vector3(0f, 9.8f, 0f), Quaternion.identity);
+
+                    Instantiate(BossDeadCut, new Vector3(-0.2f, -0.1f, -22.88f), Quaternion.identity);
 
                     bossControll.IsAttack = true;
-
-                    Instant_Dice = Instantiate(Dice, new Vector3(0f, 9.8f, 0f), Quaternion.identity);
-                    //Instant_Dice = PrefabUtility.InstantiatePrefab(Dice);
+                    IsOn = true;
                     flame = 0f;
                 }
             }

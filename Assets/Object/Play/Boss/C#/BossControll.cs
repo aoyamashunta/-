@@ -148,7 +148,6 @@ public class BossControll : MonoBehaviour
                 IsDead = true;
             }
         }
-        Dead();
     }
 
     void LateUpdate()
@@ -275,7 +274,7 @@ public class BossControll : MonoBehaviour
                 IsDamageable_State = false;
 
                 //InstantObjectがnullなのを確認して生成
-                //Create_Barrier();
+                Create_Barrier();
             }
             else if (pos.y < -UP_Fall)
             {
@@ -305,30 +304,14 @@ public class BossControll : MonoBehaviour
     }
 
     //ダウン時のみ
-    void Dead()
+    public void Dead_Process()
     {
-        if (IsDead)
-        {
-            //Barrier
-            Destroy(InstantObject);
-            Down();
-            Dead_Object();
+        StopCut();
 
-            //カメラ登場、位置修正
-            InstantCamera.Priority = 15;
-            Transform myTransform = this.transform;
-            Vector3 pos = myTransform.position;
-            pos.y = -UP_Fall;
-            myTransform.position = pos;  // 座標を設定
-
-            if(Camera_Change < 4f){
-                Camera_Change += Time.deltaTime;
-            }
-            else if(Camera_Change >= 2.5f)
-            {
-                InstantCamera.Priority = 5;
-            }
-        }
+        //Barrier
+        Destroy(InstantObject);
+        Down();
+        Dead_Object();
     }
 
     void Invincible()
@@ -388,12 +371,19 @@ public class BossControll : MonoBehaviour
     {
         if(InstantObject == null){
             Vector3 pos = new Vector3(0, 6, 0);
-            //InstantObject = Instantiate(Barrier, pos, Quaternion.identity);
+            InstantObject = Instantiate(Barrier, pos, Quaternion.identity);
         }
     }
 
     public bool GetIsHit()
     {
         return IsHit;
+    }
+
+    //討伐カットシーン
+    //停止
+    void StopCut()
+    {
+        Time.timeScale = 0.7f;
     }
 }

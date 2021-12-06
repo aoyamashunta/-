@@ -25,6 +25,7 @@ public class P_Player_Manager : MonoBehaviour
     [SerializeField] PlayableDirector StartingCutScene = null;
     p_GameState state = p_GameState.None;
     
+    public bool IsOn = false;
 
     private void Awake()
     {
@@ -81,6 +82,8 @@ public class P_Player_Manager : MonoBehaviour
         GameProgress.SetActive(true);
 
         cameraControll.enabled = true;
+
+        IsOn = true;
     }
 }
 

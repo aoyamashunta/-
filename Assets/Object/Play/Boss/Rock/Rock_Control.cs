@@ -19,6 +19,13 @@ public class Rock_Control : MonoBehaviour
 
     private GameObject InstantObject = default;
 
+    //‰e
+    [Header("‰e")]
+    RaycastHit hit = default;
+    bool IsHit = false;
+    [SerializeField] private GameObject Shadow = null;
+    GameObject InstantShadow = null;
+
     float time = 0f;
     float Max_time = 8f;
 
@@ -32,12 +39,33 @@ public class Rock_Control : MonoBehaviour
 
     void Update()
     {
+        IsHit = Physics.Raycast(transform.position, Vector3.down, out hit, 200);
+
+        if (IsHit)
+        {
+            RayContact("Ground");
+            RayContact("Ground_Rota");
+        }
+
         Delete();
 
         time += Time.deltaTime;
         if(time >= Max_time)
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    void RayContact( string name)
+    {
+        if(InstantShadow == null)
+        {
+            InstantShadow = Instantiate(Shadow, this.transform.position, Quaternion.identity);
+        }
+
+        if (hit.collider.CompareTag(name))
+        {
+            InstantShadow.transform.position = new Vector3(transform.position.x, hit.transform.position.y - 0.9f, transform.position.z);
         }
     }
 
@@ -48,6 +76,7 @@ public class Rock_Control : MonoBehaviour
             InstantObject = Instantiate(Rock_Effect, transform.position, Quaternion.identity);
 
             Destroy(this.gameObject);
+            Destroy(InstantShadow);
         }
     }
 

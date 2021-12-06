@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rock_Effect: {fileID: 772197490662856063, guid: ac02e6cf9ab35de44900d446bbcf49c6, type: 3}
+  Shadow: {fileID: 830573525697628212, guid: 348303944aabedf41b677187a26b3954, type: 3}
 --- !u!82 &3162695677731036479
 AudioSource:
   m_ObjectHideFlags: 0

@@ -135,14 +135,6 @@ public class DiceValue : MonoBehaviour
 
     public void Delete()
     {
-        Old_Numbers[array] = Number;
-
-        for(int i = 0; i < 6; i++)
-        {
-            Old_Numbers[i] = 0;
-        }
-        array = -1;
-
         Number = 0;
         IsRoll = false;
     }
