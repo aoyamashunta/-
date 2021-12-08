@@ -111,7 +111,7 @@ public class Ball_Repal : MonoBehaviour
         if (IsHit)
         {
             if(!IsTutorial)     BOSS.GetComponent<BossControll>().Hit();
-            //else if(IsTutorial) Box.GetComponent<Gate_Control>().IsStart = true;
+            else if(IsTutorial) Box.GetComponent<Gate_Control>().IsStart = true;
 
             Destroy(this.gameObject);
         }
