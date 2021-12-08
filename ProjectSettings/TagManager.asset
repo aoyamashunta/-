@@ -26,6 +26,7 @@ TagManager:
   - PlayerDeadCut
   - PlayerManager
   - GameProcess
+  - Gate
   layers:
   - Default
   - TransparentFX

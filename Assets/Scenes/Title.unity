@@ -238,6 +238,7 @@ MonoBehaviour:
   startText: {fileID: 1725960837}
   configText: {fileID: 1152951639}
   face: {fileID: 279174128}
+  maskTexture: {fileID: 2800000, guid: fc2f101e26188244cb3fb9c6645492af, type: 3}
 --- !u!4 &104819693
 Transform:
   m_ObjectHideFlags: 0

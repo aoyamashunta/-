@@ -41,6 +41,7 @@ public class TitleManager : MonoBehaviour
     byte a = 255;
     bool isactive = true;
 
+    public Texture2D maskTexture;
    
 
     // Start is called before the first frame update
@@ -110,19 +111,16 @@ public class TitleManager : MonoBehaviour
             startText.transform.localScale -= new Vector3(0.5f, 0.2f, 0.0f);
         }
 
-        // シーンPlayへ移動
+        // シーンTutorialへ移動
         if ((Input.GetKeyDown("joystick button 0")) && !isMenuFlag && isSelect)
         {
-            gMana.ChangeScene2("Play");
-            var fishEye = new FishEyeTransition()
+            gMana.ChangeScene2("Tutorial");
+            var mask = new ImageMaskTransition()
             {
-                duration = 2.0f,
-                size = 0.2f,
-                zoom = 100.0f,
-                colorSeparation = 0.1f
+                maskTexture = maskTexture,
+                backgroundColor = Color.black,
             };
-            TransitionKit.instance.transitionWithDelegate(fishEye);
-
+            TransitionKit.instance.transitionWithDelegate(mask);
         }
 
         // 設定画面の表示
@@ -173,6 +171,11 @@ public class TitleManager : MonoBehaviour
             if (Input.GetKey("joystick button 4"))
             {
                 DownBgm();
+            }
+
+            if(Input.GetKey(KeyCode.Escape))
+            {
+                PlayerPrefs.DeleteAll();
             }
 
             // LT,RTの入力(InputManagerにある)

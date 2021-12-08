@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using Prime31.TransitionKit;
 
 public class Tutorial_Manager : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class Tutorial_Manager : MonoBehaviour
     [Header("TimeLine")]
     [SerializeField] PlayableDirector StartingCutScene = null;
     GameState state = GameState.None;
+
+    GameObject[] tagObject = null;
+    public GameManager gMana;
+   
     
 
     private void Awake()
@@ -33,6 +38,8 @@ public class Tutorial_Manager : MonoBehaviour
         Niddle_prefab2.SetActive(false);
         Niddle_prefab3.SetActive(false);
         UI.SetActive(false);
+
+
 
         cameraControll = VCamera.GetComponent<CameraControll>();
         cameraControll.enabled = false;
@@ -67,6 +74,26 @@ public class Tutorial_Manager : MonoBehaviour
                     state = GameState.InGame;
                 }
                 break;
+        }
+
+        tagObject = GameObject.FindGameObjectsWithTag("Gate");
+
+        // ÉVÅ[Éìà⁄ìÆ
+        // íÜêgÇ™Ç†ÇÈÇ∆Ç´ÇÃÇ›
+        if (tagObject.Length == 1)
+        {
+            if (tagObject[0].GetComponent<GateColision>().isGateOpen)
+            {
+                gMana.ChangeScene2("Play");
+                var fishEye = new FishEyeTransition()
+                {
+                    duration = 2.0f,
+                    size = 0.2f,
+                    zoom = 100.0f,
+                    colorSeparation = 0.1f
+                };
+                TransitionKit.instance.transitionWithDelegate(fishEye);
+            }
         }
     }
 
