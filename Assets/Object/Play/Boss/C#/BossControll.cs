@@ -75,6 +75,8 @@ public class BossControll : MonoBehaviour
     Vector3 vector3 = default;
     Quaternion quaternion = default;
 
+    AudioSource audio;
+
     void Start()
     {
         bossAttack1 = this.GetComponent<BossAttack1>();
@@ -104,6 +106,8 @@ public class BossControll : MonoBehaviour
         //vCamera = CinemachineVirtualCamera.;
 
         Player = GameObject.FindGameObjectWithTag("Player");
+
+        audio = this.GetComponent<AudioSource>();
     }
 
 
@@ -177,10 +181,18 @@ public class BossControll : MonoBehaviour
     //çUåÇÉpÉ^Å[Éì
     void Attack_Pattern()
     {
+        if (!bossAttack1.IsStart)
+        {
+            audio.Stop();
+        }
+
         if (diceValue.GetNumber() == 1)
         {
             bossAttack1.IsStart = true;
             diceValue.Ini_Number();
+
+            // âäÇÃâπ
+            audio.Play();
         }
         else if(diceValue.GetNumber() == 2)
         {
@@ -208,25 +220,22 @@ public class BossControll : MonoBehaviour
             diceValue.Ini_Number();
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKey(KeyCode.A))
         {
             bossAttack1.IsStart = true;
-        } if (Input.GetKeyDown(KeyCode.B))
+            //diceValue.Ini_Number();
+            // âäÇÃâπ
+            audio.Play();
+        }
+
+        if (Input.GetKey(KeyCode.B))
         {
             bossAttack2.IsStart = true;
-        } if (Input.GetKeyDown(KeyCode.C))
-        {
-            bossAttack3.IsStart = true;
-        } if (Input.GetKeyDown(KeyCode.D))
-        {
-            bossAttack4.IsStart = true;
-        } if (Input.GetKeyDown(KeyCode.E))
-        {
-            bossAttack5.IsStart = true;
-        } if (Input.GetKeyDown(KeyCode.F))
-        {
-            bossAttack6.IsStart = true;
-        } 
+            //diceValue.Ini_Number();
+            // âäÇÃâπ
+           
+        }
+
     }
 
     //óéâ∫

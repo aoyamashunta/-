@@ -48,7 +48,7 @@ public class TitleManager : MonoBehaviour
     {
         sliderBgm.value = PlayerPrefs.GetFloat("BGMSlider");
         sliderSe.value = PlayerPrefs.GetFloat("SESlider");
-        dice.transform.localPosition = new Vector3(-514.0f, -178.0f, -8.0f);
+        dice.transform.localPosition = new Vector3(-445f, -177.0f, -7.0f);
         startText.transform.localScale += new Vector3(0.5f, 0.2f, 0.0f);
     }
 
@@ -73,7 +73,7 @@ public class TitleManager : MonoBehaviour
             // コンフィグ選択
             isSelect = false;
             // 選択アイコンのサイコロの位置
-            dice.transform.localPosition = new Vector3(-363.0f, -347.0f, -8.0f);
+            dice.transform.localPosition = new Vector3(-363.0f, -313.0f, -8.0f);
             // 選択アイコンのサイコロの回転
             dice.transform.Rotate(0, 0, 90);
         }

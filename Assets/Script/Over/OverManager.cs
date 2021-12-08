@@ -128,7 +128,7 @@ public class OverManager : MonoBehaviour
                 gMana.ChangeScene2("Title");
                 var squares = new SquaresTransition()
                 {
-                    //nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
+                  
                     // ŠÔŠu
                     duration = 1.0f,
                     // ‘å‚«‚³
