@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &5512437095312566286
 Transform:
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1cf51a643d00346aa7a0efba06678e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTutorial: 0
   IsHit: 0
   L_R_Height: 30
   Frame: 80
@@ -148,7 +149,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 0
 --- !u!4 &5512437095984115020
 Transform:

@@ -10,7 +10,7 @@ public class BossControll : MonoBehaviour
     [Header("Dice投げフラグ")]
     public bool IsDice = true;
     [Header("攻撃")]
-    public bool IsAttack = false;
+    public bool IsAttack = true;
 
     BossAttack1 bossAttack1 = default;
     BossAttack2 bossAttack2 = default;
@@ -60,8 +60,7 @@ public class BossControll : MonoBehaviour
 
     //死亡
     public bool IsDead = false;
-    float Camera_Change = 0f;
-    public bool IsChange_Scene = false;
+    //public bool IsChange_Scene = false;
 
     [Header("専用カメラ")]
     public CinemachineVirtualCamera vCamera = default;

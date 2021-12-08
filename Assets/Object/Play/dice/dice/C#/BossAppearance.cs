@@ -41,7 +41,7 @@ public class BossAppearance : MonoBehaviour
     public float Appearance_Distance = 32f;
 
     [Header("イベントカメラ")]
-    //public CinemachineVirtualCamera vCamera = default;
+    public GameObject vcamera = null;
     public PlayableDirector _director = default;
 
 
@@ -130,6 +130,8 @@ public class BossAppearance : MonoBehaviour
     public void PlayerMoveStart()
     {
         playerControll.IsStick = false;
+
+        Destroy(vcamera);
     }
 
 }

@@ -23,6 +23,7 @@ public class P_Player_Manager : MonoBehaviour
 
     [Header("TimeLine")]
     [SerializeField] PlayableDirector StartingCutScene = null;
+    [SerializeField] GameObject StaringCutScene = null;
     p_GameState state = p_GameState.None;
     
     public bool IsOn = false;
@@ -82,6 +83,8 @@ public class P_Player_Manager : MonoBehaviour
         GameProgress.SetActive(true);
 
         cameraControll.enabled = true;
+
+        Destroy(StaringCutScene);
 
         IsOn = true;
     }

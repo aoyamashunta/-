@@ -14,9 +14,7 @@ public class DiceValue : MonoBehaviour
     int Y;
     int Z;
 
-    //int Old_Number = 3;
-    int[] Old_Numbers = new int[6];
-    int array = -1;
+    int ThrowNumbers = 0;
 
     DiceControll diceControll;
 
@@ -52,43 +50,40 @@ public class DiceValue : MonoBehaviour
         if (IsRoll)
         {
             Number = Random.Range(1, 7);
-            array += 1;
-            //Debug.Log(array);
+            ThrowNumbers++;
 
-            //“¯”ƒ‹[ƒv
-            for (int i = 0; i < 6; i++)
-            {
-                if(Old_Numbers[i] == Number){
-                    while(Old_Numbers[i] == Number)
-                    {
-                        Number = Random.Range(1, 7);
-                    }
+            if(ThrowNumbers != 4){
+                if(Number == 1)
+                {
+                    Stop_Rotation(0, 180, 0);
+                }
+                else if(Number == 2)
+                {
+                    Stop_Rotation(0, 90, 0);
+                }
+                else if(Number == 3)
+                {
+                    Stop_Rotation(90, 0, 0);
+                    ThrowNumbers = 0;
+                }
+                else if(Number == 4)
+                {
+                    Stop_Rotation(-90, 0, 0);
+                }
+                else if(Number == 5)
+                {
+                    Stop_Rotation(0, -90, 0);
+                }
+                else if(Number == 6)
+                {
+                    Stop_Rotation(0, 0, 0);
                 }
             }
-
-            if(Number == 1)
+            else if(ThrowNumbers == 4)
             {
-                Stop_Rotation(0, 180, 0);
-            }
-            else if(Number == 2)
-            {
-                Stop_Rotation(0, 90, 0);
-            }
-            else if(Number == 3)
-            {
+                Number = 3;
                 Stop_Rotation(90, 0, 0);
-            }
-            else if(Number == 4)
-            {
-                Stop_Rotation(-90, 0, 0);
-            }
-            else if(Number == 5)
-            {
-                Stop_Rotation(0, -90, 0);
-            }
-            else if(Number == 6)
-            {
-                Stop_Rotation(0, 0, 0);
+                ThrowNumbers = 0;
             }
 
             vector3 = Player.transform.position - this.transform.position;
@@ -113,18 +108,6 @@ public class DiceValue : MonoBehaviour
 
     public void Ini_Number()
     {
-        //Debug.Log("Number:"+Number);
-        Old_Numbers[array] = Number;
-
-        if(array == 5)
-        {
-            for(int i = 0; i < 6; i++)
-            {
-                Old_Numbers[i] = 0;
-            }
-            array = -1;
-        }
-
         Number = 0;
     }
 

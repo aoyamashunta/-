@@ -16063,7 +16063,7 @@ MonoBehaviour:
   IsAttack: 1
   UP_Fall: 2
   Down_Fall: 5
-  MaxHP: 1
+  MaxHP: 30
   HP: 0
   Barrier: {fileID: 1071956662809644196, guid: 61702d17fd187034e8d8f057318baeba, type: 3}
   Invincible_MaxFlame: 15
@@ -16071,7 +16071,6 @@ MonoBehaviour:
   Max_Wake_Time: 10
   Roll_Interval: 5
   IsDead: 0
-  IsChange_Scene: 0
   vCamera: {fileID: 8483596359222895238, guid: 7da9af2cb4504d54b9578fd62eb0cd6b, type: 3}
   MaxChangeTime: 1
 --- !u!114 &6425904437993540873
@@ -16093,7 +16092,7 @@ MonoBehaviour:
   _speedMax: 550
   IsStart: 0
   BallNum: 0
-  BallMaxNum: 5
+  BallMaxNum: 6
   _vectorMin: -1
   _vectorMax: 1
 --- !u!114 &6425904437993540872
@@ -16127,8 +16126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   Rock: {fileID: 5022786900386749971, guid: e98e050b3b056eb4791da4b0d55af7ae, type: 3}
-  R: 15
-  CreateTime: 1
+  R: 5
+  CreateTime: 0.5
   MaxNum: 16
   Min_Y: 80
   Max_Y: 140
@@ -16171,10 +16170,10 @@ MonoBehaviour:
   Bubble1: {fileID: 8712628009908787682, guid: 24a80ae3f3410ec47ab5611c99a9bb9c, type: 3}
   Barrel: {fileID: 6425904436567880161}
   BulletWayNum: 1
-  BulletMaxNum: 16
+  BulletMaxNum: 32
   BulletWaySpace: 0
-  Min: -50
-  Max: 50
+  Min: -180
+  Max: 180
   BulletWayAxis: 180
   time: 0.1
   delayTime: 2
@@ -16197,7 +16196,7 @@ MonoBehaviour:
   BulletWayNum: 60
   BulletWaySpace: 180
   BulletWayAxis: 180
-  time: 2.5
+  time: 2
   delayTime: 0.5
 --- !u!82 &3010306055345589051
 AudioSource:
@@ -16211,7 +16210,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7924a1ab9518b1148b286fadeec8f339, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.21000001
   m_Pitch: 1
   Loop: 0
   Mute: 0

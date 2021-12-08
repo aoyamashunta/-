@@ -84,7 +84,7 @@ public class PlayManager : MonoBehaviour
         }
 
         // シーン遷移(クリア)
-        if (_bossControll != null && _bossControll.IsChange_Scene || Input.GetKey(KeyCode.Return))
+        if (_bossControll != null && _bossControll.IsDead)
         {
             GameClear = true;
         }
