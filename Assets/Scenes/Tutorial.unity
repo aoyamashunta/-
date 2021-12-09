@@ -2964,6 +2964,14 @@ PrefabInstance:
       propertyPath: field of view
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 2328287232389528092, guid: 414fb3d2e91dae440b0a1c36b6fba70c, type: 3}
+      propertyPath: m_DefaultBlend.m_Time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2328287232389528092, guid: 414fb3d2e91dae440b0a1c36b6fba70c, type: 3}
+      propertyPath: m_DefaultBlend.m_Style
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2328287232389528093, guid: 414fb3d2e91dae440b0a1c36b6fba70c, type: 3}
       propertyPath: m_RootOrder
       value: 7

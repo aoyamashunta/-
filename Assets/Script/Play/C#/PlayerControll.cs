@@ -32,8 +32,23 @@ public class PlayerControll : MonoBehaviour
     bool IsDamage = false;
     bool IsBlinking = false;
 
-    //Transform child = default;
-    //Material Player_Color = default;
+    //色
+    //ズボン
+    Transform Pants = default;
+    Material Pants_Color = default;
+
+    //アウター
+    Transform Outer = default;
+    Material Outer_Color = default;
+
+    //体
+    Transform Body = default;
+    Material Body_Color = default;
+
+    //ヘルメット
+    Transform Helmet = default;
+    Material Helmet_Color = default;
+
 
 
     [Header("復帰")]
@@ -91,8 +106,17 @@ public class PlayerControll : MonoBehaviour
 
     private void Awake()
     {
-        //child = transform.Find("RPGHero");
-        //Player_Color = child.GetComponent<Renderer>().material;
+        Pants = transform.Find("pants");
+        Pants_Color = Pants.GetComponent<Renderer>().material;
+
+        Outer = transform.Find("outer");
+        Outer_Color = Outer.GetComponent<Renderer>().material;
+        
+        Body = transform.Find("mainbody");
+        Body_Color = Body.GetComponent<Renderer>().material;
+        
+        Helmet = transform.Find("Helmet");
+        Helmet_Color = Helmet.GetComponent<Renderer>().material;
     }
 
     void Start() {
@@ -315,11 +339,17 @@ public class PlayerControll : MonoBehaviour
         {
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
 
-            //Player_Color.color = new Color(level, 0.0f, 0.0f, 1.0f);
+            Pants_Color.color = new Color(level, 0.0f, 0.0f, 1.0f);
+            Outer_Color.color = new Color(level, 0.0f, 0.0f, 0.0f);
+            Body_Color.color = new Color(level, 0.0f, 0.0f, 1.0f);
+            Helmet_Color.color = new Color(level, 0.0f, 0.0f, 1.0f);
         }
         else if (!IsBlinking)
         {
-            //Player_Color.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+            Pants_Color.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+            Outer_Color.color = new Color(0.187287f, 0.3443431f, 0.489f, 1.0f);
+            Body_Color.color = new Color(0.9150943f, 0.6001748f, 0.366901f, 1.0f);
+            Helmet_Color.color = new Color(0.5882353f, 0.6039216f, 0.5960785f, 1.0f);
         }
     }
 
