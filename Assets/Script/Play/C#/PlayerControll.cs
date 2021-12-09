@@ -32,8 +32,8 @@ public class PlayerControll : MonoBehaviour
     bool IsDamage = false;
     bool IsBlinking = false;
 
-    Transform child = default;
-    Material Player_Color = default;
+    //Transform child = default;
+    //Material Player_Color = default;
 
 
     [Header("•œ‹A")]
@@ -91,8 +91,8 @@ public class PlayerControll : MonoBehaviour
 
     private void Awake()
     {
-        child = transform.Find("RPGHero");
-        Player_Color = child.GetComponent<Renderer>().material;
+        //child = transform.Find("RPGHero");
+        //Player_Color = child.GetComponent<Renderer>().material;
     }
 
     void Start() {
@@ -315,11 +315,11 @@ public class PlayerControll : MonoBehaviour
         {
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
 
-            Player_Color.color = new Color(level, 0.0f, 0.0f, 1.0f);
+            //Player_Color.color = new Color(level, 0.0f, 0.0f, 1.0f);
         }
         else if (!IsBlinking)
         {
-            Player_Color.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+            //Player_Color.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         }
     }
 

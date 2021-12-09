@@ -63,13 +63,13 @@ public class Tutorial_Manager : MonoBehaviour
                 if(StartingCutScene && StartingCutScene.state != PlayState.Playing)
                 {
                     StartingCutScene.gameObject.SetActive(false);
-                    Instantiate(Player_Prefab, new Vector3(0.1262228f, 0.5f, -29.80061f), Player_Prefab.transform.rotation);
+                    Instantiate(Player_Prefab, new Vector3(0.1262228f, 0.5f, -26.80061f), Player_Prefab.transform.rotation);
                     ActiveOn();
                     state = GameState.InGame;
                 }
                 else if (!StartingCutScene)
                 {
-                    Instantiate(Player_Prefab, new Vector3(0.1262228f, 0.5f, -29.80061f), Player_Prefab.transform.rotation);
+                    Instantiate(Player_Prefab, new Vector3(0.1262228f, 0.5f, -26.80061f), Player_Prefab.transform.rotation);
                     ActiveOn();
                     state = GameState.InGame;
                 }

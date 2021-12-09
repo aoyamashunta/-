@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400000, guid: 33012e8e8b4934b4b8cf34ee4d541068, type: 3}
-  m_Position: {x: -1, y: -5, z: 1.27}
+  m_Position: {x: -1, y: -5, z: 3.6}
   m_EulerAngles: {x: 0, y: 0, z: 0}
   m_UseTrackMatchFields: 1
   m_MatchTargetFields: 63

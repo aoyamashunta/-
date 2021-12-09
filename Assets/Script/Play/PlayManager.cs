@@ -73,7 +73,7 @@ public class PlayManager : MonoBehaviour
         {
             Boss = GameObject.FindGameObjectWithTag("Boss");
             _bossControll = Boss.GetComponent<BossControll>();
-            Debug.Log("ボス取得");
+            //Debug.Log("ボス取得");
 
             BossManager = GameObject.FindGameObjectWithTag("BossDeadCut");
             BossDead = BossManager.GetComponent<PlayableDirector>();
