@@ -27,6 +27,7 @@ TagManager:
   - PlayerManager
   - GameProcess
   - Gate
+  - bossHP
   layers:
   - Default
   - TransparentFX

@@ -16063,7 +16063,7 @@ MonoBehaviour:
   IsAttack: 1
   UP_Fall: 2
   Down_Fall: 5
-  MaxHP: 30
+  MaxHP: 40
   HP: 0
   Barrier: {fileID: 1071956662809644196, guid: 61702d17fd187034e8d8f057318baeba, type: 3}
   Invincible_MaxFlame: 15
@@ -16210,7 +16210,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7924a1ab9518b1148b286fadeec8f339, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.9499994
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

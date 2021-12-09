@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;  // DOTween を使うため
 
 using Cinemachine;
 
@@ -76,6 +78,8 @@ public class BossControll : MonoBehaviour
 
     AudioSource audio;
 
+    GameObject Hpslider;
+
     void Start()
     {
         bossAttack1 = this.GetComponent<BossAttack1>();
@@ -107,11 +111,17 @@ public class BossControll : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
 
         audio = this.GetComponent<AudioSource>();
+
+        Hpslider = GameObject.FindGameObjectWithTag("bossHP");
+
+        Hpslider.GetComponent<Slider>().value = (float)HP / MaxHP;
     }
 
 
     void Update()
     {
+
+       
         if(!IsDead){
 
             //プレイヤーの向き
@@ -169,10 +179,19 @@ public class BossControll : MonoBehaviour
     //ダメージ計算
     public void Damage()
     {
+
         if(IsHit && IsDamageable_State && !IsDamage) IsDamage = true;
         if(IsDamage)
         {
-            HP = HP - 1;
+            HP -= 1;
+           
+
+            //Hpslider.GetComponent<Slider>().value = -0.5f;
+
+            DOTween.To(() => Hpslider.GetComponent<Slider>().value, // 連続的に変化させる対象の値
+              x => Hpslider.GetComponent<Slider>().value = x, // 変化させた値 x をどう処理するかを書く
+             (float)HP / MaxHP, // x をどの値まで変化させるか指示する
+              0.5f);   // 何秒かけて変化させるか指示する
         }
         //Debug.Log("BossHP:"+HP);
     }

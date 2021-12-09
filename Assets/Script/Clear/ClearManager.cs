@@ -17,7 +17,7 @@ public class ClearManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKey(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
+        if (Input.GetKeyDown("joystick button 0"))
         {
             gMana.ChangeScene2("Title");
         }

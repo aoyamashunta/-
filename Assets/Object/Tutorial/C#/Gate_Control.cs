@@ -32,10 +32,6 @@ public class Gate_Control : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            IsStart = true;
-        }
 
         if (IsOpen)
         {
