@@ -351,7 +351,7 @@ public class PlayerControll : MonoBehaviour
         //ジャンプ攻撃時の上昇
         if (Jumping_Attack1 || Jumping_Attack2 || Jumping_Attack3)
         {
-            rb.velocity = new Vector3(0, Attack_PlayerUp, 0);
+            rb.velocity = new Vector3(0,-5f, 0);
         }
 
         //コンボ技が地面に接触しなきゃ再び使用できない

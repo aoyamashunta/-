@@ -21,15 +21,15 @@ public class Player_Life : MonoBehaviour
 
     void Start()
     {
-        _slider.value = 1;
+        //_slider.value = 1;
     }
 
     private void Update()
     {
-        if(_slider.value <= 0)
-        {
-            IsDead = true;
-        }
+        //if(_slider.value <= 0)
+        //{
+        //    IsDead = true;
+        //}
     }
 
     public void Change(float value)

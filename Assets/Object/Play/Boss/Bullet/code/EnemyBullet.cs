@@ -66,6 +66,7 @@ public class EnemyBullet : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player.GetComponent<PlayerControll>().Damage();
+            Destroy(this.gameObject);
         }
     }
 
