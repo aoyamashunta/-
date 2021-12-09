@@ -1634,6 +1634,7 @@ MonoBehaviour:
   - {fileID: 2788468595249019364, guid: 1ac96d86093ab9c488a4ef0ba81a4b27, type: 3}
   SEgameObjects:
   - {fileID: 6216416787754838664, guid: 3a314acf3750dbc43895b05becfcedc7, type: 3}
+  - {fileID: 680386373870803973, guid: b09a33421035ecc40afa1034e082ca94, type: 3}
 --- !u!4 &937399036
 Transform:
   m_ObjectHideFlags: 0
