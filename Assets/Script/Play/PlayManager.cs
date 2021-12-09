@@ -102,7 +102,7 @@ public class PlayManager : MonoBehaviour
             BossDead.Play();
 
 
-            if(boss_flame >= 570){
+            if(BossDead.time >= BossDead.duration){
                 gMana.ChangeScene2("Clear");
                 Player = null;
                 _playerControll = null;
@@ -129,7 +129,7 @@ public class PlayManager : MonoBehaviour
             PlayerDeadScene.transform.position = new Vector3(0, 5.5f, -48f);
             PlayerDeadScene.Play();
 
-            if(player_flame >= 400){
+            if(PlayerDeadScene.time >= PlayerDeadScene.duration){
                 gMana.ChangeScene2("Over");
                 Player = null;
                 _playerControll = null;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Cinemachine;
+
 public class CameraControll : MonoBehaviour
 {
     GameObject targetObj;
@@ -9,12 +11,22 @@ public class CameraControll : MonoBehaviour
 
     public float angleSpeed = 200f;
  
+    private CinemachineVirtualCamera vCamera = null;
+
     void Start () {
         targetObj = GameObject.FindGameObjectWithTag("Player");
         targetPos = targetObj.transform.position;
+
+        vCamera = this.gameObject.GetComponent<CinemachineVirtualCamera>();
+        vCamera.LookAt = targetObj.transform;
     }
- 
-    void Update() {
+
+    void Update()
+    {
+        
+    }
+
+    void LateUpdate() {
         // targetの移動量分、自分（カメラ）も移動する
         transform.position += targetObj.transform.position - targetPos;
         targetPos = targetObj.transform.position;
