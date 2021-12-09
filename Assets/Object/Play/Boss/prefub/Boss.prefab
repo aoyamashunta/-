@@ -16170,7 +16170,7 @@ MonoBehaviour:
   Bubble1: {fileID: 8712628009908787682, guid: 24a80ae3f3410ec47ab5611c99a9bb9c, type: 3}
   Barrel: {fileID: 6425904436567880161}
   BulletWayNum: 1
-  BulletMaxNum: 32
+  BulletMaxNum: 30
   BulletWaySpace: 0
   Min: -180
   Max: 180
@@ -16210,7 +16210,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7924a1ab9518b1148b286fadeec8f339, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.21000001
+  m_Volume: 0.9499994
   m_Pitch: 1
   Loop: 0
   Mute: 0

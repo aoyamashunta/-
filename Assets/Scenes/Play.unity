@@ -2213,7 +2213,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3854464247426561681, guid: 9f1d030bda829ce48a0d538b738988b3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3854464248722237972, guid: 9f1d030bda829ce48a0d538b738988b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0000051259995
+      objectReference: {fileID: 0}
+    - target: {fileID: 3854464248722237972, guid: 9f1d030bda829ce48a0d538b738988b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -25.297848
+      objectReference: {fileID: 0}
+    - target: {fileID: 3854464248722237972, guid: 9f1d030bda829ce48a0d538b738988b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -22.460003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3854464248722237972, guid: 9f1d030bda829ce48a0d538b738988b3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0041041574
+      objectReference: {fileID: 0}
+    - target: {fileID: 3854464248722237972, guid: 9f1d030bda829ce48a0d538b738988b3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00022284787
+      objectReference: {fileID: 0}
+    - target: {fileID: 3854464248722237972, guid: 9f1d030bda829ce48a0d538b738988b3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9985207
+      objectReference: {fileID: 0}
+    - target: {fileID: 3854464248722237972, guid: 9f1d030bda829ce48a0d538b738988b3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.05421776
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3854464247426561681, guid: 9f1d030bda829ce48a0d538b738988b3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9f1d030bda829ce48a0d538b738988b3, type: 3}
 --- !u!1 &1802798189
 GameObject:
@@ -2651,6 +2684,8 @@ MonoBehaviour:
   - {fileID: 6191341023715832590, guid: e2bc6e4d35c9e9a4c85385c164dd9e8a, type: 3}
   - {fileID: 680386373870803973, guid: b09a33421035ecc40afa1034e082ca94, type: 3}
   - {fileID: 8315441693127455453, guid: e7488060cd75767448648314b7ed74b9, type: 3}
+  - {fileID: 1307331357776437893, guid: 0c3f48261a5bcc54c862fd74dddfff2b, type: 3}
+  - {fileID: 1452982288004511396, guid: 62f8040fe1e7fcb46a06a6a2a8b04e50, type: 3}
 --- !u!4 &2106456775
 Transform:
   m_ObjectHideFlags: 0

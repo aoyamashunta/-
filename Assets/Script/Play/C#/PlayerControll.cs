@@ -103,6 +103,11 @@ public class PlayerControll : MonoBehaviour
 
     GameObject empthObject = default;
 
+    AudioSource attackAudio;
+
+    GameObject[] tagObject;
+
+    int hitcount = 0;
 
     private void Awake()
     {
@@ -126,16 +131,42 @@ public class PlayerControll : MonoBehaviour
         player_Life = GetComponent<Player_Life>();
 
         HP = MaxHP;
+
+        attackAudio = GetComponent<AudioSource>();
     }
  
     void Update() {
+
+        tagObject = GameObject.FindGameObjectsWithTag("Boss");
+
         //移動
-        if(!IsAttack){
+        if (!IsAttack){
             Move();
             Sprint();
         }
 
         Input_Attack();
+
+        if (tagObject.Length > 0)
+        {
+            tagObject[0].GetComponent<BossControll>();
+            if (tagObject[0].GetComponent<BossControll>().GetIsDamage() == true && hitcount == 0)
+            {
+                hitcount = 1;
+                anim.speed = 0.5f;
+            }
+
+            if (hitcount != 0 && hitcount < 10)
+            {
+                hitcount++;
+            }
+            else
+            {
+                hitcount = 0;
+                anim.speed = 1.0f;
+            }
+
+        }
 
         Jump();
 
@@ -212,11 +243,13 @@ public class PlayerControll : MonoBehaviour
             if(!IsJump)//通常
             {
                 AttackType = 1;
+                attackAudio.Play();
             }
             else if(IsJump)//空中
             {
+                attackAudio.Play();
                 //制限
-                if(!IsJumping_ComboStop)
+                if (!IsJumping_ComboStop)
                 {
                     AttackType = 3;
                 }
@@ -272,6 +305,7 @@ public class PlayerControll : MonoBehaviour
         {
             SordParticle.Play(true);
             //Debug.Log("剣エフェクト発生");
+
         }
         else
         {

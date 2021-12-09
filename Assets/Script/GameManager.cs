@@ -61,7 +61,10 @@ public class GameManager : MonoBehaviour
                 {
                     SEgameObjects[i].transform.Find("kemurin").GetComponent<AudioSource>().volume = SE[0].volume;
                 }
-
+                else if(SEgameObjects[i].transform.Find("BossCutScene"))
+                {
+                    SEgameObjects[i].transform.Find("BossCutScene").GetComponent<AudioSource>().volume = SE[0].volume;
+                }
                 else
                 {
                     SEgameObjects[i].GetComponent<AudioSource>().volume = SE[0].volume;

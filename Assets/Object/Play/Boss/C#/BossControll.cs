@@ -219,22 +219,6 @@ public class BossControll : MonoBehaviour
             diceValue.Ini_Number();
         }
 
-        if(Input.GetKey(KeyCode.A))
-        {
-            bossAttack1.IsStart = true;
-            //diceValue.Ini_Number();
-            // ‰Š‚Ì‰¹
-            audio.Play();
-        }
-
-        if (Input.GetKey(KeyCode.B))
-        {
-            bossAttack2.IsStart = true;
-            //diceValue.Ini_Number();
-            // ‰Š‚Ì‰¹
-           
-        }
-
     }
 
     //—Ž‰º
@@ -393,5 +377,10 @@ public class BossControll : MonoBehaviour
     void StopCut()
     {
         Time.timeScale = 0.7f;
+    }
+
+    public bool GetIsDamage()
+    {
+        return IsDamage;
     }
 }
