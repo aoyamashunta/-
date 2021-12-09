@@ -115,12 +115,12 @@ public class TitleManager : MonoBehaviour
         if ((Input.GetKeyDown("joystick button 0")) && !isMenuFlag && isSelect)
         {
             gMana.ChangeScene2("Tutorial");
-            var mask = new ImageMaskTransition()
-            {
-                maskTexture = maskTexture,
-                backgroundColor = Color.black,
-            };
-            TransitionKit.instance.transitionWithDelegate(mask);
+            //var mask = new ImageMaskTransition()
+            //{
+            //    maskTexture = maskTexture,
+            //    backgroundColor = Color.black,
+            //};
+            //TransitionKit.instance.transitionWithDelegate(mask);
         }
 
         // ê›íËâÊñ ÇÃï\é¶

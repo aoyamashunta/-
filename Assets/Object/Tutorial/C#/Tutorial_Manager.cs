@@ -85,14 +85,14 @@ public class Tutorial_Manager : MonoBehaviour
             if (tagObject[0].GetComponent<GateColision>().isGateOpen)
             {
                 gMana.ChangeScene2("Play");
-                var fishEye = new FishEyeTransition()
-                {
-                    duration = 2.0f,
-                    size = 0.2f,
-                    zoom = 100.0f,
-                    colorSeparation = 0.1f
-                };
-                TransitionKit.instance.transitionWithDelegate(fishEye);
+                //var fishEye = new FishEyeTransition()
+                //{
+                //    duration = 2.0f,
+                //    size = 0.2f,
+                //    zoom = 100.0f,
+                //    colorSeparation = 0.1f
+                //};
+                //TransitionKit.instance.transitionWithDelegate(fishEye);
             }
         }
     }

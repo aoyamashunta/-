@@ -16151,7 +16151,7 @@ MonoBehaviour:
   _speedMax: 600
   IsStart: 0
   BallNum: 0
-  BallMaxNum: 1
+  BallMaxNum: 6
   _vectorMin: -1
   _vectorMax: 1
 --- !u!114 &6425904437993540877

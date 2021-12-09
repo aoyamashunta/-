@@ -114,31 +114,31 @@ public class OverManager : MonoBehaviour
             if ((Input.GetKeyDown("joystick button 0")) && !isSelect)
             {
                 gMana.ChangeScene2("Play");
-                var mask = new ImageMaskTransition()
-                {
-                    maskTexture = maskTexture,
-                    backgroundColor = Color.red,
-                };
-                TransitionKit.instance.transitionWithDelegate(mask);
+                //var mask = new ImageMaskTransition()
+                //{
+                //    maskTexture = maskTexture,
+                //    backgroundColor = Color.red,
+                //};
+                //TransitionKit.instance.transitionWithDelegate(mask);
             }
 
             // デバック用
             if (Input.GetKey(KeyCode.Return) || Input.GetKeyDown("joystick button 0") && isSelect)
             {
                 gMana.ChangeScene2("Title");
-                var squares = new SquaresTransition()
-                {
+                //var squares = new SquaresTransition()
+                //{
                   
-                    // 間隔
-                    duration = 1.0f,
-                    // 大きさ
-                    squareSize = new Vector2(64f, 45f),
-                    // 色
-                    squareColor = Color.black,
-                    // 滑らかさ
-                    smoothness = 0.6f
-                };
-                TransitionKit.instance.transitionWithDelegate(squares);
+                //    // 間隔
+                //    duration = 1.0f,
+                //    // 大きさ
+                //    squareSize = new Vector2(64f, 45f),
+                //    // 色
+                //    squareColor = Color.black,
+                //    // 滑らかさ
+                //    smoothness = 0.6f
+                //};
+                //TransitionKit.instance.transitionWithDelegate(squares);
             }
         }
     }
