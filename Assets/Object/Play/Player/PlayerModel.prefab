@@ -16715,7 +16715,6 @@ MonoBehaviour:
   Invincible_MaxFlame: 20
   SordParticle: {fileID: 8595871853507963506}
   ShieldParticle: {fileID: 496729795041087739}
-  DushEffect: {fileID: 2543335054315627798, guid: da608601999cd5b45bd7c60c6bf8da90, type: 3}
   _damageRangeCenter: {x: 0, y: 1, z: 1}
   _damageRangeRadius: 1
 --- !u!114 &1256457644427359523
@@ -16762,7 +16761,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!82 &-6392768582423595539
 AudioSource:
   m_ObjectHideFlags: 0

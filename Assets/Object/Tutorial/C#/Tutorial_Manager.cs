@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-using Prime31.TransitionKit;
+
 
 public class Tutorial_Manager : MonoBehaviour
 {

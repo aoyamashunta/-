@@ -70,9 +70,6 @@ public class PlayerControll : MonoBehaviour
     [Space]
     public ParticleSystem ShieldParticle = default;
 
-    [Space]
-    public ParticleSystem DushEffect = default;
-
     [Header("ê⁄êGçUåÇ")]
     [SerializeField]Vector3 _damageRangeCenter = default;
     [SerializeField]float _damageRangeRadius = 1f;
@@ -215,23 +212,6 @@ public class PlayerControll : MonoBehaviour
         {
             IsSprint = false;
         }
-
-        if (IsSprint)
-        {
-            //DushEffectçƒê∂
-            if (!DushEffect.isEmitting)
-            {
-                DushEffect.Play();
-            }
-        }
-        else if(!IsSprint)
-        {
-            //DushEffectí‚é~
-            if (DushEffect.isEmitting)
-            {
-                DushEffect.Stop();
-            }
-        }
     }
  
     void Input_Attack()
@@ -286,12 +266,6 @@ public class PlayerControll : MonoBehaviour
 
         if (IsJump)
         {
-            //DushEffectí‚é~
-            if (DushEffect.isEmitting)
-            {
-                DushEffect.Stop();
-            }
-
             IsWalk = false;
             IsSprint = false;
         }

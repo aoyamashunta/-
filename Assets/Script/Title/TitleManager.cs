@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Prime31.TransitionKit;
+
 
 public class TitleManager : MonoBehaviour
 {

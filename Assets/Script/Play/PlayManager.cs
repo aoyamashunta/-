@@ -31,8 +31,6 @@ public class PlayManager : MonoBehaviour
 
     GameObject Dice = null;
 
-    float boss_flame = 0;
-
 
     private GameObject GameProcess = default;
     BossAppearance bossAppearance = default;
@@ -91,8 +89,6 @@ public class PlayManager : MonoBehaviour
 
         if (GameClear)
         {
-            boss_flame++;
-
             _bossControll.Dead_Process();
             Boss.SetActive(false);
             Player.SetActive(false);
@@ -103,13 +99,14 @@ public class PlayManager : MonoBehaviour
 
 
             if(BossDead.time >= BossDead.duration){
+
                 gMana.ChangeScene2("Clear");
+                Time.timeScale = 1.0f;
                 Player = null;
                 _playerControll = null;
                 Boss = null;
                 _bossControll = null;
                 GameClear = false;
-                boss_flame = 0;
             }
         }
 
@@ -122,8 +119,6 @@ public class PlayManager : MonoBehaviour
 
         if (GameOver)
         {
-            player_flame++;
-
             Player.SetActive(false);
             PlayerDead.SetActive(true);
             PlayerDeadScene.transform.position = new Vector3(0, 5.5f, -48f);
@@ -136,7 +131,6 @@ public class PlayManager : MonoBehaviour
                 Boss = null;
                 _bossControll = null;
                 GameOver = false;
-                player_flame = 0;
             }
         }
     }

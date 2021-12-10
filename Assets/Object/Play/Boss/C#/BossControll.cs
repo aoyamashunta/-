@@ -392,7 +392,7 @@ public class BossControll : MonoBehaviour
     }
 
     //討伐カットシーン
-    //停止
+    //低速
     void StopCut()
     {
         Time.timeScale = 0.7f;
